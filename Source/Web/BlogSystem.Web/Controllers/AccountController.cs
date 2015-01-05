@@ -5,7 +5,7 @@
     using System.Web;
     using System.Web.Mvc;
     using BlogSystem.Data.Models;
-    using BlogSystem.Web.Models;
+    using BlogSystem.Web.ViewModels.Account;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
@@ -73,7 +73,7 @@
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await this.SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await this.SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -146,7 +146,7 @@
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await this.UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -195,8 +195,12 @@
         {
             if (ModelState.IsValid)
             {
-                var user = await this.UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await this.UserManager.IsEmailConfirmedAsync(user.Id)))
+                // search for user by username first
+                var user = await this.UserManager.FindByNameAsync(model.UserName);
+
+                // check email address
+                if (user == null || !(await this.UserManager.IsEmailConfirmedAsync(user.Id))
+                    || (await this.UserManager.GetEmailAsync(user.Id)) != model.Email)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return this.View("ForgotPasswordConfirmation");
