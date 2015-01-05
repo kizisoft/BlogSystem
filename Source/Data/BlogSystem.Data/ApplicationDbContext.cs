@@ -3,9 +3,11 @@
     using System;
     using System.Data.Entity;
     using System.Linq;
+
     using BlogSystem.Data.Common.Models;
     using BlogSystem.Data.Migrations;
     using BlogSystem.Data.Models;
+
     using Microsoft.AspNet.Identity.EntityFramework;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -15,6 +17,20 @@
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
         }
+
+        public IDbSet<BlogPost> BlogPosts { get; set; }
+
+        public IDbSet<Page> Pages { get; set; }
+
+        public IDbSet<Comment> Comments { get; set; }
+
+        public IDbSet<CommentsForBlogPost> CommentsForBlogPosts { get; set; }
+
+        public IDbSet<CommentsForPage> CommentsForPages { get; set; }
+
+        public IDbSet<Tag> Tags { get; set; }
+
+        public IDbSet<SystemSetting> SystemSettings { get; set; }
 
         public static ApplicationDbContext Create()
         {

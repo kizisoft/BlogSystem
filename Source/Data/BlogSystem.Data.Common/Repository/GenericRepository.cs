@@ -35,7 +35,7 @@
             return this.DbSet.Find(id);
         }
 
-        public T GetById(string id)
+        public virtual T GetById(string id)
         {
             return this.DbSet.Find(id.ToString());
         }
