@@ -1,0 +1,55 @@
+﻿@model BlogSystem.Web.Areas.Administration.ViewModels.BlogPost.BlogPostViewModel
+
+@{
+    ViewBag.Title = "Blog Post's Details";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<br />
+
+<dl class="dl-horizontal">
+    <dt>@Html.DisplayNameFor(model => model.Id)</dt>
+    <dd>@Html.DisplayFor(model => model.Id)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.Title)</dt>
+    <dd>@Html.DisplayFor(model => model.Title)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.SubTitle)</dt>
+    <dd>@Html.DisplayFor(model => model.SubTitle)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.ShortContent)</dt>
+    <dd>@Html.DisplayFor(model => model.ShortContent)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.Content)</dt>
+    <dd>@Html.DisplayFor(model => model.Content)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.MetaDescription)</dt>
+    <dd>@Html.DisplayFor(model => model.MetaDescription)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.MetaKeywords)</dt>
+    <dd>@Html.DisplayFor(model => model.MetaKeywords)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.IsCommentsDisabled)</dt>
+    <dd>@Html.DisplayFor(model => model.IsCommentsDisabled)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.CreatedOn)</dt>
+    <dd>@Html.DisplayFor(model => model.CreatedOn)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.ModifiedOn)</dt>
+    <dd>@Html.DisplayFor(model => model.ModifiedOn)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.IsDeleted)</dt>
+    <dd>@Html.DisplayFor(model => model.IsDeleted)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.DeletedOn)</dt>
+    <dd>@Html.DisplayFor(model => model.DeletedOn)</dd>
+</dl>
+<br />
+
+<div class="row">
+    <div class="col-md-4">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default pull-left" })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-success pull-right" })
+    </div>
+</div>

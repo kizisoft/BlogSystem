@@ -20,5 +20,33 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 280px;*/
+}
+
+.adm-link {
+    margin-top: 10px;
+    padding: 10px;
+    display: inline-block;
+    max-width: 150px;
+    font-weight: bold;
+    transition: background-color 0.4s ease-in-out;
+    border-radius: 5px;
+    border-top: 2px solid #f3f3f3;
+    border-left: 2px solid #f3f3f3;
+    border-bottom: 2px solid #c7c7c7;
+    border-right: 2px solid #c7c7c7;
+}
+
+    .adm-link:hover {
+        text-decoration: none;
+        background-color: #ececec;
+    }
+
+dd {
+    margin-bottom: 10px;
+}
+
+.check-box {
+    margin: 0 !important;
+    width: 30px;
 }

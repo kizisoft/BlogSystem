@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BlogSystem.Web.Areas.Administration.ViewModels.BlogPost.BlogPostSimpleViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Blog Posts</h2>
+<hr />
+<br />
+
+@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success pull-right" })
+<br />
+<br />
+<br />
+
+<div class="table-responsive text-center">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr class="info">
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Title)</th>
+                <th>@Html.DisplayNameFor(model => model.SubTitle)</th>
+                <th>@Html.DisplayNameFor(model => model.IsCommentsDisabled)</th>
+                <th>@Html.DisplayNameFor(model => model.CreatedOn)</th>
+                <th>@Html.DisplayNameFor(model => model.ModifiedOn)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                    <td>@Html.DisplayFor(modelItem => item.SubTitle)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IsCommentsDisabled)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CreatedOn)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ModifiedOn)</td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-xs btn-danger" })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-xs btn-primary" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-xs btn-success" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
