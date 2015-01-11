@@ -8,5 +8,9 @@
         [Required]
         [AllowHtml]
         public string ShortContent { get; set; }
+
+        public string AutorId { get; set; }
+
+        public virtual ApplicationUser Autor { get; set; }
     }
 }

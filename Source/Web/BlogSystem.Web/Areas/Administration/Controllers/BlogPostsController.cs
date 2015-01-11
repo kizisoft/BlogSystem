@@ -9,14 +9,17 @@
     using BlogSystem.Data.Common.Repository;
     using BlogSystem.Data.Models;
     using BlogSystem.Web.Areas.Administration.ViewModels.BlogPost;
+    using BlogSystem.Web.Infrastructure.Identity;
 
     public class BlogPostsController : AdminBaseController
     {
         private readonly IRepository<BlogPost> blogPosts;
+        private readonly ICurrentUser currentUser;
 
-        public BlogPostsController(IRepository<BlogPost> blogPosts)
+        public BlogPostsController(IRepository<BlogPost> blogPosts, ICurrentUser currentUser)
         {
             this.blogPosts = blogPosts;
+            this.currentUser = currentUser;
         }
 
         // GET: Administration/BlogPosts
@@ -54,6 +57,8 @@
                 return this.View(blogPost);
             }
 
+            var user = this.currentUser.Get();
+
             this.blogPosts.Add(new BlogPost
             {
                 Title = blogPost.Title,
@@ -62,7 +67,8 @@
                 Content = blogPost.Content,
                 MetaDescription = blogPost.MetaDescription,
                 MetaKeywords = blogPost.MetaKeywords,
-                IsCommentsDisabled = blogPost.IsCommentsDisabled
+                IsCommentsDisabled = blogPost.IsCommentsDisabled,
+                AutorId = user.Id
             });
             this.blogPosts.SaveChanges();
 

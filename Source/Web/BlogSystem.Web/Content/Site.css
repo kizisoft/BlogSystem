@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: #f0f0f0;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -23,12 +24,33 @@ textarea {
     /*max-width: 280px;*/
 }
 
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -150px;
+}
+
+.footer-push, .footer {
+    height: 150px;
+}
+
+.footer {
+    padding: 20px;
+    text-align: center;
+    color: #b0b0b0;
+    background-color: #3F668F;
+}
+
 .adm-link {
     margin-top: 10px;
     padding: 10px;
     display: inline-block;
     max-width: 150px;
     font-weight: bold;
+    -moz-transition: background-color 0.4s ease-in-out;
+    -o-transition: background-color 0.4s ease-in-out;
+    -webkit-transition: background-color 0.4s ease-in-out;
     transition: background-color 0.4s ease-in-out;
     border-radius: 5px;
     border-top: 2px solid #f3f3f3;
@@ -49,4 +71,14 @@ dd {
 .check-box {
     margin: 0 !important;
     width: 30px;
+}
+
+section {
+    margin-top: 15px;
+}
+
+article, aside {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #fff;
 }

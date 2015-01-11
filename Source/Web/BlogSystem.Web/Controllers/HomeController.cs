@@ -1,26 +1,47 @@
 ﻿namespace BlogSystem.Web.Controllers
 {
+    using System;
+    using System.Linq;
     using System.Web.Mvc;
+
+    using AutoMapper.QueryableExtensions;
+
+    using BlogSystem.Data.Common.Repository;
+    using BlogSystem.Data.Models;
+    using BlogSystem.Web.ViewModels.Home;
 
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private const int PostsPerPageDefaultValue = 5;
+
+        private readonly IRepository<BlogPost> blogPosts;
+
+        public HomeController(IRepository<BlogPost> blogPosts)
         {
-            return this.View();
+            this.blogPosts = blogPosts;
         }
 
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult Index(int page = 1, int perPage = PostsPerPageDefaultValue)
         {
-            ViewBag.Message = "Your application description page.";
+            var pagesCount = (int)Math.Ceiling(this.blogPosts.All().Count() / (decimal)perPage);
 
-            return this.View();
-        }
+            var blogPostsDb = this.blogPosts.All()
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip(perPage * (page - 1))
+                .Take(perPage)
+                .Project()
+                .To<BlogPostIndexViewModel>()
+                .ToList();
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            var indexViewModel = new IndexViewModel
+            {
+                BlogPosts = blogPostsDb,
+                CurrentPage = page,
+                PagesCount = pagesCount
+            };
 
-            return this.View();
+            return this.View(indexViewModel);
         }
     }
 }

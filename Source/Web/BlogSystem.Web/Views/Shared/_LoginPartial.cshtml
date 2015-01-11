@@ -16,7 +16,7 @@
                         <li class="divider"></li>
                     }
                     <li>@Html.ActionLink("Edit Profile", "Edit", "Profile")</li>
-                    <li>@Html.ActionLink("Change password", "ChangePassword", "Manage")</li>
+                    <li>@Html.ActionLink("Change password", "ChangePassword", "Manage", new { Area = string.Empty }, null)</li>
                 </ul>
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>

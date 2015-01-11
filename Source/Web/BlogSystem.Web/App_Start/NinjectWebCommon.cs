@@ -5,10 +5,15 @@ namespace BlogSystem.Web.App_Start
 {
     using System;
     using System.Data.Entity;
+    using System.Security.Principal;
     using System.Web;
+
     using BlogSystem.Data;
     using BlogSystem.Data.Common.Repository;
+    using BlogSystem.Web.Infrastructure.Identity;
+
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
+
     using Ninject;
     using Ninject.Web.Common;
 
@@ -65,6 +70,8 @@ namespace BlogSystem.Web.App_Start
             kernel.Bind<DbContext>().To<ApplicationDbContext>();
             kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
             kernel.Bind(typeof(IDeletableEntityRepository<>)).To(typeof(DeletableEntityRepository<>));
+            kernel.Bind<ICurrentUser>().To<CurrentUser>();
+            kernel.Bind<IIdentity>().ToMethod(c => HttpContext.Current.User.Identity);
         }
     }
 }
