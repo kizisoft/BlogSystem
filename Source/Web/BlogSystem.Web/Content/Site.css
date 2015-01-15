@@ -1,6 +1,9 @@
-﻿body {
+﻿html, body {
+    height: 100%;
+}
+
+body {
     padding-top: 50px;
-    padding-bottom: 20px;
     background-color: #f0f0f0;
 }
 
@@ -73,12 +76,149 @@ dd {
     width: 30px;
 }
 
-section {
-    margin-top: 15px;
+.content-root, .content {
+    margin: 15px 0;
 }
 
-article, aside {
-    margin-bottom: 15px;
-    padding: 10px;
+.content {
     background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-top: 1px solid #fff;
+    box-shadow: 3px 3px 5px 0 rgba(90, 90, 90, 0.75);
+}
+
+.article-header, .article-title, .article-body, .article-footer {
+    margin: 0 5% 0 5%;
+}
+
+.article-header {
+    margin-top: 20px;
+}
+
+.article-footer {
+    margin-bottom: 10px;
+}
+
+    .article-footer ul {
+        display: inline-block;
+        position: relative;
+        top: -21px;
+    }
+
+    .article-footer ul, .article-footer li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .article-footer li {
+        margin-right: 10px;
+        width: 110px;
+        height: 80px;
+        text-align: center;
+    }
+
+        .article-footer li div:first-of-type {
+            margin-top: 10px;
+            -moz-transition: all 0.3s ease-out;
+            -o-transition: all 0.3s ease-out;
+            -webkit-transition: all 0.3s ease-out;
+            transition: all 0.3s ease-out;
+        }
+
+        .article-footer li:hover div:first-of-type {
+            font-size: 3em;
+        }
+
+        .article-footer li div:last-of-type {
+            -moz-transition: all 0.3s ease-out;
+            -o-transition: all 0.3s ease-out;
+            -webkit-transition: all 0.3s ease-out;
+            transition: all 0.3s ease-out;
+            font-size: 0.75em;
+        }
+
+        .article-footer li:hover div:last-of-type {
+            color: #fff;
+            background-color: #3F668F;
+            font-size: 1em;
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        .article-footer li span.splitter {
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 0;
+            border-top: 2px solid #3F668F;
+            border-left: 1px solid #3F668F;
+            border-right: 1px solid #3F668F;
+            -moz-transition: height 0.3s ease-out;
+            -o-transition: height 0.3s ease-out;
+            -webkit-transition: height 0.3s ease-out;
+            transition: height 0.3s ease-out;
+        }
+
+        .article-footer li:hover span.splitter {
+            height: 70px;
+        }
+
+@media(min-width: 1200px) {
+    .article-title {
+        margin-left: 2%;
+    }
+}
+
+@media(max-width: 480px) {
+    .article-title {
+        margin-left: 10%;
+    }
+}
+
+.title h2 {
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.title h3 {
+    margin-top: 5px;
+    font-size: 1.2em;
+}
+
+.date-holder {
+    position: absolute;
+    left: -10px;
+    width: 60px;
+    line-height: 16px;
+    color: #c6e1ff;
+    background: radial-gradient(ellipse at center, #3f668f 0,#6b9ed5 0,#6b9ed5 30%,#3f668f 100%);
+    box-shadow: 3px 3px 5px 0 rgba(90, 90, 90, 0.75);
+}
+
+    .date-holder ul {
+        margin: 2px;
+        padding: 3px;
+        list-style: none;
+        text-shadow: 1px 1px 2px #052547;
+        border-top: 1px dashed #87aEdA;
+        border-left: 1px dashed #87aEdA;
+        border-bottom: 1px dashed #87aEdA;
+    }
+
+.date-month, .date-year {
+    font-size: .8em;
+}
+
+.date-day {
+    color: #fff;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    table th:last-of-type {
+        min-width: 160px;
+    }
 }

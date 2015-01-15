@@ -31,25 +31,24 @@
 
         <div class="container body-content">
             <div class="row">
-                <div class="col-md-9">
+                @* Main content *@
+                <div class="col-md-8 col-lg-9">
                     @RenderBody()
                 </div>
 
-                <section>
-                    <aside class="col-md-3">
-                        <div>Right side bar</div>
-                        <iframe src="https://githubbadge.appspot.com/kizisoft?s=1" style="border: 0;height: 142px;width: 200px;overflow: hidden;" frameborder="0"></iframe>
-                    </aside>
-                </section>
+                @* Right sidebar *@
+                <div class="col-md-4 col-lg-3">
+                    @Html.Action("Index", "Sidebar", null)
+                </div>
             </div>
         </div>
 
         <div class="footer-push"></div>
-
-        <footer class="footer">
-            <p>&copy; @DateTime.Now.Year - KiziSoft</p>
-        </footer>
     </div>
+
+    <footer class="footer">
+        <p>&copy; @DateTime.Now.Year - KiziSoft</p>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\GlobalConstants.cs" />
+    <Compile Include="Constants\MonthName.cs" />
     <Compile Include="Identity\CurrentUser.cs" />
     <Compile Include="Identity\ICurrentUser.cs" />
     <Compile Include="Mapping\AutoMapperConfig.cs" />

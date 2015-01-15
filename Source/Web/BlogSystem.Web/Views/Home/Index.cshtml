@@ -2,34 +2,81 @@
 @using BlogSystem.Web.Infrastructure.Constants
 @model BlogSystem.Web.ViewModels.Home.IndexViewModel
 
-@if (Model != null && Model.BlogPosts != null)
-{
-    <section>
-        @foreach (var blogPost in Model.BlogPosts)
+<section class="content-root">
+    @if (Model != null && Model.BlogPosts != null)
+    {
+        foreach (var blogPost in Model.BlogPosts)
         {
-            <article>
-                <header>
-                    <h1>@blogPost.Title</h1>
-                    <h2>@blogPost.SubTitle</h2>
+            <article class="content">
+                <header class="article-header">
+                    <div class="date-holder">
+                        <ul class="text-center">
+                            <li class="date-month">@((MonthName)blogPost.CreatedOn.Month)</li>
+                            <li class="date-day">@blogPost.CreatedOn.Day</li>
+                            <li class="date-year">@blogPost.CreatedOn.Year</li>
+                        </ul>
+                    </div>
+
+                    <div class="title article-title">
+                        <h2>@blogPost.Title</h2>
+                        <h3><i>@blogPost.SubTitle</i></h3>
+                    </div>
                 </header>
 
-                <hr />
-                <div>@Html.Raw(blogPost.ShortContent)</div>
-                <hr />
+                <div class="article-body">
+                    <hr />
+                    @Html.Raw(blogPost.ShortContent)
 
-                <footer>
-                    <span>@blogPost.CreatedOn</span>
-                    <span>@blogPost.Autor.UserName</span>
-                    @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
-                    {
-                        <span>@Html.ActionLink("Edit", "Edit", "BlogPosts", new { Area = "Administration", Id = blogPost.Id }, new { @class = "btn btn-success btn-xs pull-right" })</span>
-                    }
+                    <div class="clearfix">
+                        <br />
+                        <a href="" class="btn btn-primary btn-sm pull-left"><span class="glyphicon glyphicon-plus"></span> Read more</a>
+
+                        @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        {
+                            @Html.ActionLink("Edit", "Edit", "BlogPosts", new { Area = "Administration", Id = blogPost.Id }, new { @class = "btn btn-success btn-sm pull-right" })
+                        }
+                    </div>
+                    <hr />
+                </div>
+
+                <footer class="article-footer">
+                    <ul>
+                        <li class="col-xs-6 col-sm-3">
+                            <span class="splitter split-autor"></span>
+                            <div class="glyphicon glyphicon-user"></div>
+                            <div>@blogPost.Autor.UserName</div>
+                        </li>
+                        <li class="col-xs-6 col-sm-3">
+                            <span class="splitter split-date"></span>
+                            <div class="glyphicon glyphicon-calendar"></div>
+                            <div>@blogPost.CreatedOn.ToShortDateString()</div>
+                        </li>
+                        <li class="clearfix visible-xs-block"></li>
+                        <li class="col-xs-6 col-sm-3">
+                            <span class="splitter split-time"></span>
+                            <div class="glyphicon glyphicon-time"></div>
+                            <div>@blogPost.CreatedOn.ToShortTimeString()</div>
+                        </li>
+                        <li class="col-xs-6 col-sm-3">
+                            <span class="splitter split-comments"></span>
+                            <div class="glyphicon glyphicon-comment"></div>
+                            <div>8965 Comments</div>
+                        </li>
+                    </ul>
                 </footer>
             </article>
         }
-    </section>
-}
-else
-{
-    <h2>Sorry, nothing here.</h2>
+    }
+    else
+    {
+        <h2>Sorry, nothing here.</h2>
+    }
+</section>
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.article-body img').addClass('img-responsive');
+        });
+    </script>
 }
