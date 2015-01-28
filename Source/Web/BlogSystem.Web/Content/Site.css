@@ -105,7 +105,8 @@ dd {
         top: -21px;
     }
 
-    .article-footer ul, .article-footer li {
+    .article-footer ul, .article-footer li,
+    .social, .social li {
         margin: 0;
         padding: 0;
         list-style: none;
@@ -221,4 +222,94 @@ dd {
     table th:last-of-type {
         min-width: 160px;
     }
+}
+
+.aside-header, .aside-body {
+    margin: 15px 10px;
+}
+
+    .aside-header h2 {
+        margin: 0 0 -2px 0;
+        padding-bottom: 5px;
+        display: inline-block;
+        color: #585f69;
+        font-size: 1.3em;
+        border-bottom: 2px solid #e74c3c;
+    }
+
+.aside-title {
+    border-bottom: 1px solid #eee;
+}
+
+.social li {
+    margin: 5px;
+    display: inline-block;
+    width: 44px;
+    height: 46px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 5px;
+    border-top: 1px solid rgba(0,0,0,0);
+    border-left: 1px solid rgba(0,0,0,0);
+    border-bottom: 2px solid rgba(0,0,0,0);
+    border-right: 2px solid rgba(0,0,0,0);
+    overflow: hidden;
+    -moz-transition-duration: 0.8s;
+    -o-transition-duration: 0.8s;
+    -webkit-transition-duration: 0.8s;
+    transition-duration: 0.8s;
+    -moz-transition-property: transform;
+    -o-transition-property: transform;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+}
+
+    .social li:hover {
+        color: #3F668F;
+        rotation: 30deg;
+        background-color: #ececec;
+        border-top: 1px solid #f3f3f3;
+        border-left: 1px solid #f3f3f3;
+        border-bottom: 2px solid #c7c7c7;
+        border-right: 2px solid #c7c7c7;
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+
+    .social li i, .social li {
+        -moz-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
+
+li.github:hover i {
+    color: #4183C4;
+}
+
+li.facebook:hover i {
+    color: #3b5998;
+}
+
+li.google-plus:hover i {
+    color: #DD4B39;
+}
+
+li.rss:hover i {
+    color: #FF6600;
+}
+
+li.stackoverflow:hover i {
+    color: #fe7a15;
+}
+
+li.linkedin:hover i {
+    color: #0976b4; /*007bb6*/
+}
+
+li.skype:hover i {
+    color: #12A5F4;
 }

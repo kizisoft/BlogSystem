@@ -194,6 +194,7 @@
     <Compile Include="Areas\Administration\ViewModels\BlogPost\BlogPostSimpleInputModel.cs" />
     <Compile Include="Areas\Administration\ViewModels\BlogPost\BlogPostViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
@@ -213,7 +214,8 @@
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\Home\BlogPostIndexViewModel.cs" />
+    <Compile Include="ViewModels\BlogPost\BlogPostIndexViewModel.cs" />
+    <Compile Include="ViewModels\BlogPost\BlogPostSimpleViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
@@ -223,6 +225,7 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Sidebar\SidebarViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -231,6 +234,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.spacelab.css" />
     <Content Include="Content\bootstrap.spacelab.min.css" />
+    <Content Include="Content\font-awesome-4.3.0\css\font-awesome.css" />
+    <Content Include="Content\font-awesome-4.3.0\css\font-awesome.min.css" />
+    <Content Include="Content\font-awesome-4.3.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Images\BlogPosts.png" />
     <Content Include="Content\Images\Pages.png" />
     <Content Include="Content\Images\SystemSettings.png" />
@@ -255,6 +261,11 @@
     <Content Include="Areas\Administration\Views\BlogPosts\Create.cshtml" />
     <Content Include="Areas\Administration\Views\BlogPosts\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\BlogPosts\Delete.cshtml" />
+    <Content Include="Content\font-awesome-4.3.0\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\font-awesome-4.3.0\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\font-awesome-4.3.0\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\font-awesome-4.3.0\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\font-awesome-4.3.0\fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -477,6 +488,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\BlogSystem.Common\BlogSystem.Common.csproj">
+      <Project>{4a0d2e47-97dd-436a-99d7-a098df975e9e}</Project>
+      <Name>BlogSystem.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Data\BlogSystem.Data.Common\BlogSystem.Data.Common.csproj">
       <Project>{f1765f0a-f5ab-4d67-b2dd-75c5f2070855}</Project>
       <Name>BlogSystem.Data.Common</Name>

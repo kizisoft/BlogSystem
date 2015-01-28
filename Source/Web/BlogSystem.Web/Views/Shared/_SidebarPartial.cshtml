@@ -1,4 +1,6 @@
-﻿<aside class="content-root">
+﻿@model BlogSystem.Web.ViewModels.Sidebar.SidebarViewModel
+
+<aside class="content-root">
     <section class="content">
         <header class="aside-header">
             <div class="title aside-title">
@@ -6,18 +8,53 @@
             </div>
         </header>
 
-        <div class="aside-body"></div>
+        <div class="aside-body">
+            <ul class="social">
+                <li><i class="fa fa-envelope-square fa-3x"></i></li>
+                <li class="facebook"><i class="fa fa-facebook-square fa-3x"></i></li>
+                <li class="linkedin"><i class="fa fa-linkedin-square fa-3x"></i></li>
+                <li class="github"><i class="fa fa-github-square fa-3x"></i></li>
+                <li class="skype"><i class="fa fa-skype fa-3x"></i></li>
+                <li class="google-plus"><i class="fa fa-google-plus-square fa-3x"></i></li>
+                <li class="rss"><i class="fa fa-rss-square fa-3x"></i></li>
+                <li class="stackoverflow"><i class="fa fa-stack-overflow fa-3x"></i></li>
+            </ul>
+        </div>
     </section>
 
     <section class="content">
         <header class="aside-header">
             <div class="title aside-title">
-                <h2>My GidHub</h2>
+                <h2>Me @@GitHub</h2>
             </div>
         </header>
 
         <div class="aside-body">
-            <iframe src="https://githubbadge.appspot.com/kizisoft?s=1" style="border: 0;height: 142px;width: 200px;overflow: hidden;" frameborder="0"></iframe>
+            <iframe src="https://githubbadge.appspot.com/kizisoft?s=1" style="margin: 5px 0 -15px 0;border: 0;height: 142px;width: 200px;overflow: hidden;" frameborder="0"></iframe>
+        </div>
+    </section>
+
+    <section class="content">
+        <header class="aside-header">
+            <div class="title aside-title">
+                <h2>Recent Posts</h2>
+            </div>
+        </header>
+
+        <div class="aside-body">
+            @if (Model != null && Model.BlogPosts != null)
+            {
+                <ul>
+                    @foreach (var blogPost in Model.BlogPosts)
+                    {
+                        <li><a href="#">@blogPost.Title</a></li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <h2>Sorry, nothing here.</h2>
+            }
         </div>
     </section>
 </aside>

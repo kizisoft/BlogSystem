@@ -10,7 +10,7 @@
     using BlogSystem.Data.Models;
     using BlogSystem.Web.ViewModels.Home;
 
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private const int PostsPerPageDefaultValue = 5;
 
