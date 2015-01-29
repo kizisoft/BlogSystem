@@ -1,0 +1,36 @@
+﻿@model BlogSystem.Data.Models.SystemSetting
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<br />
+
+@using (Html.BeginForm("Edit", "SystemSettings", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+    @Html.HiddenFor(model => model.Name);
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="well">Setting - @Model.Name</h3>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10 pull-left">
+                    @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Value, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+
+            <div>
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default pull-left" })
+                <button type="submit" class="btn btn-success pull-right">Save Changes</button>
+            </div>
+        </div>
+    </div>
+}

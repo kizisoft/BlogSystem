@@ -1,6 +1,33 @@
-﻿@{
-    ViewBag.Title = "Index";
+﻿@model IEnumerable<BlogSystem.Data.Models.Page>
+@{
+    ViewBag.Title = "Pages";
 }
 
-<h2>Pages</h2>
+<h2>@ViewBag.Title</h2>
 <hr />
+<br />
+
+<div class="table-responsive text-center">
+    @if (Model != null)
+    {
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr class="info">
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.ActionLink("Edit", "Edit", new { }, new { @class = "btn btn-xs btn-success" })</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h3>Sorry, nothing here.</h3>
+    }
+</div>

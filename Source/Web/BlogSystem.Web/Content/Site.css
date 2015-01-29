@@ -4,6 +4,9 @@
 
 body {
     padding-top: 50px;
+}
+
+.body-blog {
     background-color: #f0f0f0;
 }
 
@@ -265,7 +268,6 @@ dd {
 }
 
     .social li:hover {
-        color: #3F668F;
         rotation: 30deg;
         background-color: #ececec;
         border-top: 1px solid #f3f3f3;
@@ -279,12 +281,20 @@ dd {
         transform: rotate(360deg);
     }
 
+    .social li a {
+        color: #666;
+    }
+
     .social li i, .social li {
         -moz-transition: all 0.3s ease-in-out;
         -o-transition: all 0.3s ease-in-out;
         -webkit-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
     }
+
+li.mailto:hover i {
+    color: #3F668F;
+}
 
 li.github:hover i {
     color: #4183C4;

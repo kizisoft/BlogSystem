@@ -10,14 +10,14 @@
 
         <div class="aside-body">
             <ul class="social">
-                <li><i class="fa fa-envelope-square fa-3x"></i></li>
-                <li class="facebook"><i class="fa fa-facebook-square fa-3x"></i></li>
-                <li class="linkedin"><i class="fa fa-linkedin-square fa-3x"></i></li>
-                <li class="github"><i class="fa fa-github-square fa-3x"></i></li>
-                <li class="skype"><i class="fa fa-skype fa-3x"></i></li>
-                <li class="google-plus"><i class="fa fa-google-plus-square fa-3x"></i></li>
-                <li class="rss"><i class="fa fa-rss-square fa-3x"></i></li>
-                <li class="stackoverflow"><i class="fa fa-stack-overflow fa-3x"></i></li>
+                <li class="mailto"><a href="@ViewBag.Settings.Get["Contact Email"]" target="_blank"><i class="fa fa-envelope-square fa-3x"></i></a></li>
+                <li class="facebook"><a href="@ViewBag.Settings.Get["Facebook Profile"]" target="_blank"><i class="fa fa-facebook-square fa-3x"></i></a></li>
+                <li class="linkedin"><a href="@ViewBag.Settings.Get["Linked In Profile"]" target="_blank"><i class="fa fa-linkedin-square fa-3x"></i></a></li>
+                <li class="github"><a href="@ViewBag.Settings.Get["GitHub Profile"]" target="_blank"><i class="fa fa-github-square fa-3x"></i></a></li>
+                <li class="skype"><a href="@ViewBag.Settings.Get["Contact Email"]" target="_blank"><i class="fa fa-skype fa-3x"></i></a></li>
+                <li class="google-plus"><a href="@ViewBag.Settings.Get["Google Profile"]" target="_blank"><i class="fa fa-google-plus-square fa-3x"></i></a></li>
+                <li class="rss"><a href="@ViewBag.Settings.Get["RSS Url"]" target="_blank"><i class="fa fa-rss-square fa-3x"></i></a></li>
+                <li class="stackoverflow"><a href="@ViewBag.Settings.Get["Stack Overflow Profile"]" target="_blank"><i class="fa fa-stack-overflow fa-3x"></i></a></li>
             </ul>
         </div>
     </section>
@@ -53,7 +53,7 @@
             }
             else
             {
-                <h2>Sorry, nothing here.</h2>
+                <h3>Sorry, nothing here.</h3>
             }
         </div>
     </section>

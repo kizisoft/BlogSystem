@@ -1,6 +1,9 @@
 ﻿@using Microsoft.AspNet.Identity
 @using BlogSystem.Web.Infrastructure.Constants
 @model BlogSystem.Web.ViewModels.Home.IndexViewModel
+@{
+    ViewBag.Title = "Home";
+}
 
 <section class="content-root">
     @if (Model != null && Model.BlogPosts != null)
@@ -69,7 +72,7 @@
     }
     else
     {
-        <h2>Sorry, nothing here.</h2>
+        <h3>Sorry, nothing here.</h3>
     }
 </section>
 

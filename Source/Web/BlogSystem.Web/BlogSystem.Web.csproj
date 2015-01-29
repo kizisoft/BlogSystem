@@ -266,6 +266,7 @@
     <Content Include="Content\font-awesome-4.3.0\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\font-awesome-4.3.0\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\font-awesome-4.3.0\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Administration\Views\SystemSettings\Edit.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
