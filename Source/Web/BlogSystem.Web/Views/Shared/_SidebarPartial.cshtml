@@ -10,14 +10,14 @@
 
         <div class="aside-body">
             <ul class="social">
-                <li class="mailto"><a href="@ViewBag.Settings.Get["Contact Email"]" target="_blank"><i class="fa fa-envelope-square fa-3x"></i></a></li>
-                <li class="facebook"><a href="@ViewBag.Settings.Get["Facebook Profile"]" target="_blank"><i class="fa fa-facebook-square fa-3x"></i></a></li>
-                <li class="linkedin"><a href="@ViewBag.Settings.Get["Linked In Profile"]" target="_blank"><i class="fa fa-linkedin-square fa-3x"></i></a></li>
-                <li class="github"><a href="@ViewBag.Settings.Get["GitHub Profile"]" target="_blank"><i class="fa fa-github-square fa-3x"></i></a></li>
-                <li class="skype"><a href="@ViewBag.Settings.Get["Contact Email"]" target="_blank"><i class="fa fa-skype fa-3x"></i></a></li>
-                <li class="google-plus"><a href="@ViewBag.Settings.Get["Google Profile"]" target="_blank"><i class="fa fa-google-plus-square fa-3x"></i></a></li>
-                <li class="rss"><a href="@ViewBag.Settings.Get["RSS Url"]" target="_blank"><i class="fa fa-rss-square fa-3x"></i></a></li>
-                <li class="stackoverflow"><a href="@ViewBag.Settings.Get["Stack Overflow Profile"]" target="_blank"><i class="fa fa-stack-overflow fa-3x"></i></a></li>
+                <li class="mailto"><a href="@ViewBag.Settings.Get["Contact Email"]" target="_blank"><i class="fa fa-envelope"></i></a></li>
+                <li class="facebook"><a href="@ViewBag.Settings.Get["Facebook Profile"]" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                <li class="linkedin"><a href="@ViewBag.Settings.Get["Linked In Profile"]" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                <li class="github"><a href="@ViewBag.Settings.Get["GitHub Profile"]" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li class="skype"><a href="@ViewBag.Settings.Get["Contact Email"]" target="_blank"><i class="fa fa-skype"></i></a></li>
+                <li class="google-plus"><a href="@ViewBag.Settings.Get["Google Profile"]" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                <li class="rss"><a href="@ViewBag.Settings.Get["RSS Url"]" target="_blank"><i class="fa fa-rss"></i></a></li>
+                <li class="stackoverflow"><a href="@ViewBag.Settings.Get["Stack Overflow Profile"]" target="_blank"><i class="fa fa-stack-overflow"></i></a></li>
             </ul>
         </div>
     </section>
@@ -44,10 +44,19 @@
         <div class="aside-body">
             @if (Model != null && Model.BlogPosts != null)
             {
-                <ul>
+                <ul class="recent-posts">
                     @foreach (var blogPost in Model.BlogPosts)
                     {
-                        <li><a href="#">@blogPost.Title</a></li>
+                        <li class="clearfix">
+                            <a href="#" class="text-justify">
+                                <div class="pull-left">
+                                    <i class="fa fa-file-text fa-2x"></i>
+                                </div>
+                                <span>
+                                    @blogPost.Title
+                                </span>
+                            </a>
+                        </li>
                     }
                 </ul>
             }

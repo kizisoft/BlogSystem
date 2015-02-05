@@ -195,6 +195,7 @@
     <Compile Include="Areas\Administration\ViewModels\BlogPost\BlogPostViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
@@ -214,8 +215,10 @@
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\BlogPost\BlogPostHomeViewModel.cs" />
     <Compile Include="ViewModels\BlogPost\BlogPostIndexViewModel.cs" />
     <Compile Include="ViewModels\BlogPost\BlogPostSimpleViewModel.cs" />
+    <Compile Include="ViewModels\BlogPost\BlogViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
@@ -236,12 +239,12 @@
     <Content Include="Content\bootstrap.spacelab.min.css" />
     <Content Include="Content\font-awesome-4.3.0\css\font-awesome.css" />
     <Content Include="Content\font-awesome-4.3.0\css\font-awesome.min.css" />
-    <Content Include="Content\font-awesome-4.3.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Images\BlogPosts.png" />
     <Content Include="Content\Images\Pages.png" />
     <Content Include="Content\Images\SystemSettings.png" />
     <Content Include="Content\Images\Users.png" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -261,15 +264,16 @@
     <Content Include="Areas\Administration\Views\BlogPosts\Create.cshtml" />
     <Content Include="Areas\Administration\Views\BlogPosts\Edit.cshtml" />
     <Content Include="Areas\Administration\Views\BlogPosts\Delete.cshtml" />
-    <Content Include="Content\font-awesome-4.3.0\fonts\fontawesome-webfont.eot" />
-    <Content Include="Content\font-awesome-4.3.0\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\font-awesome-4.3.0\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\font-awesome-4.3.0\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\font-awesome-4.3.0\fonts\FontAwesome.otf" />
     <Content Include="Areas\Administration\Views\SystemSettings\Edit.cshtml" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\img-responsive\img-responsive.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
@@ -278,7 +282,6 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -481,6 +484,7 @@
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_full.cshtml" />
     <Content Include="Views\Shared\_SidebarPartial.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Sidebar\" />

@@ -10,6 +10,7 @@ namespace BlogSystem.Web.App_Start
 
     using BlogSystem.Data;
     using BlogSystem.Data.Common.Repository;
+    using BlogSystem.Web.Infrastructure.BlogURL;
     using BlogSystem.Web.Infrastructure.Identity;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
@@ -72,6 +73,7 @@ namespace BlogSystem.Web.App_Start
             kernel.Bind(typeof(IDeletableEntityRepository<>)).To(typeof(DeletableEntityRepository<>));
             kernel.Bind<ICurrentUser>().To<CurrentUser>();
             kernel.Bind<IIdentity>().ToMethod(c => HttpContext.Current.User.Identity);
+            kernel.Bind<IBlogUrlGenerator>().To<BlogUrlGenerator>();
         }
     }
 }

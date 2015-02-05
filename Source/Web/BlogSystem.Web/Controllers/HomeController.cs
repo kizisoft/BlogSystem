@@ -8,6 +8,7 @@
 
     using BlogSystem.Data.Common.Repository;
     using BlogSystem.Data.Models;
+    using BlogSystem.Web.ViewModels.BlogPost;
     using BlogSystem.Web.ViewModels.Home;
 
     public class HomeController : BaseController
@@ -31,7 +32,7 @@
                 .Skip(perPage * (page - 1))
                 .Take(perPage)
                 .Project()
-                .To<BlogPostIndexViewModel>()
+                .To<BlogPostHomeViewModel>()
                 .ToList();
 
             var indexViewModel = new IndexViewModel

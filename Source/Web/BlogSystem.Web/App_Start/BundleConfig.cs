@@ -10,8 +10,6 @@
         {
             //// bundles.UseCdn = true;
 
-            //// BundleTable.EnableOptimizations = true;
-
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
@@ -23,9 +21,11 @@
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.spacelab.css",
-                      "~/Content/font-awesome-4.3.0/css/font-awesome.min.css",
+                      "~/Content/font-awesome-4.3.0/css/font-awesome.css",
+                      "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

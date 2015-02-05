@@ -24,7 +24,7 @@
         // GET: Sidebar
         [HttpGet]
         [ChildActionOnly]
-        [OutputCache(Duration = 10 * 60)]
+        // [OutputCache(Duration = 10 * 60)]
         public ActionResult Index()
         {
             var model = new SidebarViewModel

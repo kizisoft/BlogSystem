@@ -1,10 +1,11 @@
 ﻿namespace BlogSystem.Web.ViewModels.Home
 {
+    using BlogSystem.Web.ViewModels.BlogPost;
     using System.Collections.Generic;
 
     public class IndexViewModel
     {
-        public IEnumerable<BlogPostIndexViewModel> BlogPosts { get; set; }
+        public IEnumerable<BlogPostHomeViewModel> BlogPosts { get; set; }
 
         public int PagesCount { get; set; }
 
