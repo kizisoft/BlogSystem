@@ -1,7 +1,8 @@
 ﻿namespace BlogSystem.Web.ViewModels.Home
 {
-    using BlogSystem.Web.ViewModels.BlogPost;
     using System.Collections.Generic;
+
+    using BlogSystem.Web.ViewModels.BlogPost;
 
     public class IndexViewModel
     {
