@@ -486,9 +486,7 @@
     <Content Include="Views\Shared\_SidebarPartial.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Sidebar\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
