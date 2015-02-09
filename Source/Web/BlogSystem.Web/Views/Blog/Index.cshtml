@@ -20,10 +20,28 @@
                 <h2>@Model.BlogPost.Title</h2>
                 <h3><i>@Model.BlogPost.SubTitle</i></h3>
             </div>
+
+            <ul class="blog-info">
+                <li>
+                    <span class="glyphicon glyphicon-user"></span>
+                    @Model.BlogPost.Autor.UserName
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-calendar"></span>
+                    @Model.BlogPost.CreatedOn.ToShortDateString()
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-time"></span>
+                    @Model.BlogPost.CreatedOn.ToShortTimeString()
+                </li>
+                <li>
+                    <span class="glyphicon glyphicon-comment"></span>
+                    8965 Comments
+                </li>
+            </ul>
         </header>
 
         <div class="article-body">
-            <hr />
             @Html.Raw(Model.BlogPost.Content)
 
             <div class="clearfix">

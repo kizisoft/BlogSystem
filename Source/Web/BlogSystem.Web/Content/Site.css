@@ -110,17 +110,18 @@ article.content:last-of-type {
     .article-footer ul {
         display: inline-block;
         position: relative;
+        height: 70px;
         top: -21px;
     }
 
     .article-footer ul, .article-footer li,
-    .social, .social li {
+    .social, .social li, .blog-info, .blog-info li {
         margin: 0;
         padding: 0;
         list-style: none;
     }
 
-    .article-footer li {
+        /*.article-footer li {
         margin-right: 10px;
         width: 110px;
         height: 80px;
@@ -137,7 +138,6 @@ article.content:last-of-type {
 
         .article-footer li:hover div:first-of-type {
             font-size: 3em;
-            /*transform: scale(3);*/
         }
 
         .article-footer li div:last-of-type {
@@ -173,7 +173,115 @@ article.content:last-of-type {
 
         .article-footer li:hover span.splitter {
             height: 70px;
+        }*/
+
+        .article-footer li,
+        .article-footer li .splitter,
+        .article-footer li .glyphicon,
+        .article-footer li .text-holder {
+            transition: all 0.3s linear;
         }
+
+    .article-footer li {
+        margin-right: 5px;
+        width: 50px;
+        height: 30px;
+        text-align: center;
+        background-color: #efefef;
+        border-left: 1px solid #eee;
+        border-bottom: 1px solid #5a5a5a;
+        border-right: 1px solid #5a5a5a;
+        box-shadow: 3px 3px 5px 0 rgba(90, 90, 90, 0.75);
+    }
+
+        .article-footer li:hover {
+            width: 85px;
+            height: 70px;
+        }
+
+        .article-footer li.autor {
+            border-top: 2px solid #156dd0;
+        }
+
+            .article-footer li.autor:hover .glyphicon {
+                color: #218AFF;
+            }
+
+        .article-footer li.date {
+            border-top: 2px solid #b91d0d;
+        }
+
+            .article-footer li.date:hover .glyphicon {
+                color: #d14233;
+            }
+
+        .article-footer li.time {
+            border-top: 2px solid #0a866e;
+        }
+
+            .article-footer li.time:hover .glyphicon {
+                color: #16a085;
+            }
+
+        .article-footer li.comments {
+            border-top: 2px solid #db6f12;
+        }
+
+            .article-footer li.comments:hover .glyphicon {
+                color: #ff9602;
+            }
+
+        .article-footer li .glyphicon {
+            margin-top: 5px;
+        }
+
+        .article-footer li:hover .glyphicon {
+            top: 20px;
+            transform: scale(3);
+        }
+
+        .article-footer li .text-holder {
+            visibility: hidden;
+            padding-top: 3px;
+            position: relative;
+            top: -45.3px;
+            width: 85px;
+            height: 20px;
+            opacity: 0;
+            font-size: 0.8em;
+        }
+
+        .article-footer li:hover .text-holder {
+            visibility: visible;
+            left: -1px;
+            color: #fff;
+            opacity: 1;
+        }
+
+        .article-footer li:last-of-type,
+        .root div:last-of-type {
+            margin-right: 0;
+        }
+
+.text-autor {
+    left: -100px;
+    background-color: #218AFF;
+}
+
+.text-date {
+    left: -100px;
+    background-color: #d14233;
+}
+
+.text-time {
+    left: -100px;
+    background-color: #16a085;
+}
+
+.text-comments {
+    left: -100px;
+    background-color: #ff9602;
+}
 
 @media(min-width: 1200px) {
     .article-title {
@@ -287,7 +395,7 @@ article.content:last-of-type {
         width: 47px;
         height: 47px;
         background-color: #efefef;
-        border-radius: 5px;
+        /*border-radius: 5px;*/
         border-top: 1px solid #ddd;
         border-left: 1px solid #ddd;
         border-bottom: 1px solid #5a5a5a;
@@ -399,7 +507,7 @@ article.content:last-of-type {
         padding: 5px;
         text-align: center;
         background-color: #efefef;
-        border-radius: 5px;
+        /*border-radius: 5px;*/
         border-top: 1px solid #ddd;
         border-left: 1px solid #ddd;
         border-bottom: 1px solid #5a5a5a;
@@ -420,3 +528,19 @@ article.content:last-of-type {
     border-radius: 5px;
     box-shadow: 3px 3px 5px 0 rgba(90, 90, 90, 0.75);
 }
+
+.blog-info {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding: 5px;
+    border-top: 1px dashed #ddd;
+    border-bottom: 1px dashed #ddd;
+    color: #909090;
+    background-color: #eaf5fb;
+    font-size: 0.8em;
+}
+
+    .blog-info li {
+        margin-right: 10px;
+        display: inline-block;
+    }

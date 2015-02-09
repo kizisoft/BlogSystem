@@ -24,10 +24,28 @@
                         <h2>@blogPost.Title</h2>
                         <h3><i>@blogPost.SubTitle</i></h3>
                     </div>
+
+                    <ul class="blog-info">
+                        <li>
+                            <span class="glyphicon glyphicon-user"></span>
+                            @blogPost.Autor.UserName
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            @blogPost.CreatedOn.ToShortDateString()
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-time"></span>
+                            @blogPost.CreatedOn.ToShortTimeString()
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-comment"></span>
+                            8965 Comments
+                        </li>
+                    </ul>
                 </header>
 
                 <div class="article-body">
-                    <hr />
                     @Html.Raw(blogPost.ShortContent)
 
                     <div class="clearfix">
@@ -39,31 +57,27 @@
                             @Html.ActionLink("Edit", "Edit", "BlogPosts", new { Area = "Administration", Id = blogPost.Id }, new { @class = "btn btn-success btn-sm pull-right" })
                         }
                     </div>
+                    <br />
                     <hr />
                 </div>
 
                 <footer class="article-footer">
                     <ul class="row">
-                        <li class="col-xs-6 col-sm-3">
-                            <span class="splitter split-autor"></span>
+                        <li class="col-xs-6 col-sm-3 autor">
                             <div class="glyphicon glyphicon-user"></div>
-                            <div>@blogPost.Autor.UserName</div>
+                            <div class="text-holder text-autor">@blogPost.Autor.UserName</div>
                         </li>
-                        <li class="col-xs-6 col-sm-3">
-                            <span class="splitter split-date"></span>
+                        <li class="col-xs-6 col-sm-3 date">
                             <div class="glyphicon glyphicon-calendar"></div>
-                            <div>@blogPost.CreatedOn.ToShortDateString()</div>
+                            <div class="text-holder text-date">@blogPost.CreatedOn.ToShortDateString()</div>
                         </li>
-                        <li class="clearfix visible-xs-block"></li>
-                        <li class="col-xs-6 col-sm-3">
-                            <span class="splitter split-time"></span>
+                        <li class="col-xs-6 col-sm-3 time">
                             <div class="glyphicon glyphicon-time"></div>
-                            <div>@blogPost.CreatedOn.ToShortTimeString()</div>
+                            <div class="text-holder text-time">@blogPost.CreatedOn.ToShortTimeString()</div>
                         </li>
-                        <li class="col-xs-6 col-sm-3">
-                            <span class="splitter split-comments"></span>
+                        <li class="col-xs-6 col-sm-3 comments">
                             <div class="glyphicon glyphicon-comment"></div>
-                            <div>8965 Comments</div>
+                            <div class="text-holder text-comments">8965 Comments</div>
                         </li>
                     </ul>
                 </footer>
