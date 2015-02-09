@@ -19,8 +19,10 @@
         [Required]
         public virtual ApplicationUser Autor { get; set; }
 
+        public int BlogPostId { get; set; }
+
         [Required]
-        public virtual CommentForBase CommentFor { get; set; }
+        public virtual BlogPost BlogPost { get; set; }
 
         public bool IsVisible { get; set; }
 

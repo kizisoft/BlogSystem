@@ -1,7 +1,6 @@
 ﻿namespace BlogSystem.Data.Models
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Web.Mvc;
@@ -10,16 +9,6 @@
 
     public class ContentHolder : AuditInfo, IDeletableEntity
     {
-        private ICollection<Tag> tags;
-        private ICollection<Comment> comments;
-
-        public ContentHolder()
-        {
-            this.tags = new HashSet<Tag>();
-            this.comments = new HashSet<Comment>();
-            this.IsCommentsDisabled = true;
-        }
-
         [Key]
         public int Id { get; set; }
 
@@ -37,20 +26,6 @@
         public string MetaDescription { get; set; }
 
         public string MetaKeywords { get; set; }
-
-        public ICollection<Tag> Tags
-        {
-            get { return this.tags; }
-            set { this.tags = value; }
-        }
-
-        public ICollection<Comment> Comments
-        {
-            get { return this.comments; }
-            set { this.comments = value; }
-        }
-
-        public bool IsCommentsDisabled { get; set; }
 
         [Index]
         public bool IsDeleted { get; set; }

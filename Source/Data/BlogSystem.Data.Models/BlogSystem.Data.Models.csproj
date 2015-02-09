@@ -58,9 +58,6 @@
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="BlogPost.cs" />
     <Compile Include="Comment.cs" />
-    <Compile Include="CommentForBase.cs" />
-    <Compile Include="CommentsForBlogPost.cs" />
-    <Compile Include="CommentsForPage.cs" />
     <Compile Include="ContentHolder.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

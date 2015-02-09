@@ -24,10 +24,6 @@
 
         public IDbSet<Comment> Comments { get; set; }
 
-        public IDbSet<CommentsForBlogPost> CommentsForBlogPosts { get; set; }
-
-        public IDbSet<CommentsForPage> CommentsForPages { get; set; }
-
         public IDbSet<Tag> Tags { get; set; }
 
         public IDbSet<SystemSetting> SystemSettings { get; set; }
