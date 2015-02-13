@@ -57,26 +57,23 @@
 
         <footer class="article-footer">
             <ul class="row">
-                <li class="col-xs-6 col-sm-3">
-                    <span class="splitter split-autor"></span>
+                <li class="col-xs-6 col-sm-3 autor">
                     <div class="glyphicon glyphicon-user"></div>
-                    <div>@Model.BlogPost.Autor.UserName</div>
+                    <div class="text-holder text-autor">@Model.BlogPost.Autor.UserName</div>
                 </li>
-                <li class="col-xs-6 col-sm-3">
-                    <span class="splitter split-date"></span>
+                <li class="col-xs-6 col-sm-3 date">
                     <div class="glyphicon glyphicon-calendar"></div>
-                    <div>@Model.BlogPost.CreatedOn.ToShortDateString()</div>
+                    <div class="text-holder text-date">@Model.BlogPost.CreatedOn.ToShortDateString()</div>
                 </li>
-                <li class="clearfix visible-xs-block"></li>
-                <li class="col-xs-6 col-sm-3">
-                    <span class="splitter split-time"></span>
+                <li class="col-xs-6 col-sm-3 time">
                     <div class="glyphicon glyphicon-time"></div>
-                    <div>@Model.BlogPost.CreatedOn.ToShortTimeString()</div>
+                    <div class="text-holder text-time">@Model.BlogPost.CreatedOn.ToShortTimeString()</div>
                 </li>
-                <li class="col-xs-6 col-sm-3">
-                    <span class="splitter split-comments"></span>
-                    <div class="glyphicon glyphicon-comment"></div>
-                    <div>8965 Comments</div>
+                <li class="col-xs-6 col-sm-3 comments">
+                    <a href="">
+                        <div class="glyphicon glyphicon-comment"></div>
+                        <div class="text-holder text-comments">8965 Comments</div>
+                    </a>
                 </li>
             </ul>
         </footer>
@@ -115,6 +112,8 @@
         </li>
     </ul>
 </nav>
+
+@Html.Action("Index", "Comment", new { blogPostId = Model.BlogPost.Id })
 
 @section scripts {
     <script type="text/javascript" src="~/Scripts/img-responsive/img-responsive.js"></script>

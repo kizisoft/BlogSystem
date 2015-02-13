@@ -1,6 +1,7 @@
 ﻿namespace BlogSystem.Web.ViewModels.BlogPost
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
@@ -27,5 +28,7 @@
 
         [Display(Name = "Created On")]
         public DateTime CreatedOn { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

@@ -24,6 +24,20 @@
             this.settings = settings;
         }
 
+        protected JsonResult JsonError(string errorMessage)
+        {
+            this.Response.StatusCode = 400;
+
+            return new JsonResult
+            {
+                Data = new
+                {
+                    Success = false,
+                    ErrorMessage = errorMessage
+                }
+            };
+        }
+
         protected override IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state)
         {
             this.ViewBag.Settings = new SystemSettingsManager(this.GetSettings);

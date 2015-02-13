@@ -17,11 +17,16 @@
         public int Id { get; set; }
 
         [Required]
-        public virtual ApplicationUser Autor { get; set; }
-
-        public int BlogPostId { get; set; }
+        public string Content { get; set; }
 
         [Required]
+        public string AutorId { get; set; }
+
+        public virtual ApplicationUser Autor { get; set; }
+
+        [Required]
+        public int BlogPostId { get; set; }
+
         public virtual BlogPost BlogPost { get; set; }
 
         public bool IsVisible { get; set; }

@@ -42,13 +42,13 @@
         </header>
 
         <div class="aside-body">
-            @if (Model != null && Model.BlogPosts != null)
+            @if (Model != null && Model.BlogPosts.Count() > 0)
             {
                 <ul class="recent-posts">
                     @foreach (var blogPost in Model.BlogPosts)
                     {
                         <li class="clearfix">
-                            <a href="#" class="text-justify">
+                            <a href="@blogPost.Url" class="text-justify">
                                 <div class="pull-left">
                                     <i class="fa fa-file-text fa-2x"></i>
                                 </div>

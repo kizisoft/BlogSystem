@@ -6,7 +6,7 @@
 }
 
 <section class="content-root">
-    @if (Model != null && Model.BlogPosts != null)
+    @if (Model != null && Model.BlogPosts.Count() > 0)
     {
         foreach (var blogPost in Model.BlogPosts)
         {
@@ -83,37 +83,38 @@
                 </footer>
             </article>
         }
+
+        <nav>
+            <ul class="pagination pagination-lg">
+                <li><a href="@Url.Action("Index", new { page = Model.PreviousPage})" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+
+                @{ int count = Model.PagesCount > 5 ? 5 : Model.PagesCount; }
+                @for (int i = 1; i <= count; i++)
+                {
+                    if (i == Model.CurrentPage)
+                    {
+                        <li class="active"><span>@i</span></li>
+                        continue;
+                    }
+
+                    if (count < Model.PagesCount && i == count - 1)
+                    {
+                        <li class="disabled"><span>...</span></li>
+                        continue;
+                    }
+
+                    <li>@Html.ActionLink(i.ToString(), "Index", new { page = i })</li>
+                }
+
+                <li><a href="@Url.Action("Index", new { page = Model.NextPage})" ari aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+            </ul>
+        </nav>
+
     }
     else
     {
         <h3>Sorry, nothing here.</h3>
     }
-
-    <nav>
-        <ul class="pagination pagination-lg">
-            <li><a href="@Url.Action("Index", new { page = Model.PreviousPage})" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-
-            @{ int count = Model.PagesCount > 5 ? 5 : Model.PagesCount; }
-            @for (int i = 1; i <= count; i++)
-            {
-                if (i == Model.CurrentPage)
-                {
-                    <li class="active"><span>@i</span></li>
-                    continue;
-                }
-
-                if (count < Model.PagesCount && i == count - 1)
-                {
-                    <li class="disabled"><span>...</span></li>
-                    continue;
-                }
-
-                <li>@Html.ActionLink(i.ToString(), "Index", new { page = i })</li>
-            }
-
-            <li><a href="@Url.Action("Index", new { page = Model.NextPage})" ari aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
-        </ul>
-    </nav>
 </section>
 
 @section scripts {
