@@ -12,6 +12,7 @@ namespace BlogSystem.Web.App_Start
     using BlogSystem.Data.Common.Repository;
     using BlogSystem.Web.Infrastructure.BlogURL;
     using BlogSystem.Web.Infrastructure.Identity;
+    using BlogSystem.Web.Infrastructure.Sanitizer;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
@@ -74,6 +75,7 @@ namespace BlogSystem.Web.App_Start
             kernel.Bind<ICurrentUser>().To<CurrentUser>();
             kernel.Bind<IIdentity>().ToMethod(c => HttpContext.Current.User.Identity);
             kernel.Bind<IBlogUrlGenerator>().To<BlogUrlGenerator>();
+            kernel.Bind<ISanitizer>().To<HtmlSanitizerAdapter>();
         }
     }
 }

@@ -221,14 +221,14 @@
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\BlogPost\BlogPostHomeViewModel.cs" />
+    <Compile Include="ViewModels\Home\HomeBlogPostViewModel.cs" />
     <Compile Include="ViewModels\BlogPost\BlogPostIndexViewModel.cs" />
     <Compile Include="ViewModels\BlogPost\BlogPostSimpleViewModel.cs" />
     <Compile Include="ViewModels\BlogPost\BlogViewModel.cs" />
     <Compile Include="ViewModels\Comment\CommentIndexViewModel.cs" />
     <Compile Include="ViewModels\Comment\CommentInputModel.cs" />
     <Compile Include="ViewModels\Comment\CommentViewModel.cs" />
-    <Compile Include="ViewModels\Home\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Home\HomeIndexViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
@@ -237,7 +237,8 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
-    <Compile Include="ViewModels\PageableViewModel.cs" />
+    <Compile Include="ViewModels\PageableBaseViewModel.cs" />
+    <Compile Include="ViewModels\SanitizableContentBaseViewModel.cs" />
     <Compile Include="ViewModels\Sidebar\SidebarViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -503,6 +504,7 @@
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Comment\_CommentPartial.cshtml" />
     <Content Include="Views\Comment\_CreateCommentPartial.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\tinymce_small.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

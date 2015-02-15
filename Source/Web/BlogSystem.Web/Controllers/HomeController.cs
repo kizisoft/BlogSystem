@@ -32,10 +32,10 @@
                 .Skip(perPage * (page - 1))
                 .Take(perPage)
                 .Project()
-                .To<BlogPostHomeViewModel>()
+                .To<HomeBlogPostViewModel>()
                 .ToList();
 
-            var indexViewModel = new IndexViewModel
+            var indexViewModel = new HomeIndexViewModel
             {
                 BlogPosts = blogPostsDb,
                 CurrentPage = page,

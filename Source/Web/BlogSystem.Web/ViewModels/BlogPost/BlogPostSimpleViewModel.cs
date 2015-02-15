@@ -8,7 +8,7 @@
     using BlogSystem.Web.Infrastructure.BlogURL;
     using BlogSystem.Web.Infrastructure.Mapping;
 
-    public class BlogPostSimpleViewModel : IMapFrom<BlogPost>
+    public class BlogPostSimpleViewModel : SanitizableContentBaseViewModel, IMapFrom<BlogPost>
     {
         private IBlogUrlGenerator blogUrlGenerator;
 

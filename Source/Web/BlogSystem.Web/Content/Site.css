@@ -121,60 +121,6 @@ article.content:last-of-type {
         list-style: none;
     }
 
-        /*.article-footer li {
-        margin-right: 10px;
-        width: 110px;
-        height: 80px;
-        text-align: center;
-    }
-
-        .article-footer li div:first-of-type {
-            margin-top: 10px;
-            -moz-transition: all 0.3s linear;
-            -o-transition: all 0.3s linear;
-            -webkit-transition: all 0.3s linear;
-            transition: all 0.3s linear;
-        }
-
-        .article-footer li:hover div:first-of-type {
-            font-size: 3em;
-        }
-
-        .article-footer li div:last-of-type {
-            -moz-transition: all 0.3s linear;
-            -o-transition: all 0.3s linear;
-            -webkit-transition: all 0.3s linear;
-            transition: all 0.3s linear;
-            font-size: 0.75em;
-        }
-
-        .article-footer li:hover div:last-of-type {
-            color: #fff;
-            background-color: #3F668F;
-            font-size: 1em;
-            border-bottom-left-radius: 3px;
-            border-bottom-right-radius: 3px;
-        }
-
-        .article-footer li span.splitter {
-            display: inline-block;
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 0;
-            border-top: 2px solid #3F668F;
-            border-left: 1px solid #3F668F;
-            border-right: 1px solid #3F668F;
-            -moz-transition: height 0.3s linear;
-            -o-transition: height 0.3s linear;
-            -webkit-transition: height 0.3s linear;
-            transition: height 0.3s linear;
-        }
-
-        .article-footer li:hover span.splitter {
-            height: 70px;
-        }*/
-
         .article-footer li,
         .article-footer li .splitter,
         .article-footer li .glyphicon,
