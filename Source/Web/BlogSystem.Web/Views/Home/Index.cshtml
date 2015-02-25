@@ -1,122 +1,97 @@
 ﻿@using Microsoft.AspNet.Identity
 @using BlogSystem.Web.Infrastructure.Constants
 @model BlogSystem.Web.ViewModels.Home.HomeIndexViewModel
-    @{
-        ViewBag.Title = "Home";
-    }
+@{
+    ViewBag.Title = "Home";
+}
 
-    <section class="content-root">
-        @if (Model != null && Model.BlogPosts.Count() > 0)
+<section class="blog-posts">
+    @if (Model != null && Model.BlogPosts.Count() > 0)
+    {
+        foreach (var blogPost in Model.BlogPosts)
         {
-            foreach (var blogPost in Model.BlogPosts)
-            {
-                <article class="content">
-                    <header class="article-header">
-                        <div class="date-holder">
-                            <ul class="text-center">
-                                <li class="date-month">@((MonthName)blogPost.CreatedOn.Month)</li>
-                                <li class="date-day">@blogPost.CreatedOn.Day</li>
-                                <li class="date-year">@blogPost.CreatedOn.Year</li>
-                            </ul>
-                        </div>
-
-                        <div class="title article-title">
-                            <h2>@blogPost.Title</h2>
-                            <h3><i>@blogPost.SubTitle</i></h3>
-                        </div>
-
-                        <ul class="blog-info">
-                            <li>
-                                <span class="glyphicon glyphicon-user"></span>
-                                @blogPost.Autor.UserName
-                            </li>
-                            <li>
-                                <span class="glyphicon glyphicon-calendar"></span>
-                                @blogPost.CreatedOn.ToShortDateString()
-                            </li>
-                            <li>
-                                <span class="glyphicon glyphicon-time"></span>
-                                @blogPost.CreatedOn.ToShortTimeString()
-                            </li>
-                            <li>
-                                <span class="glyphicon glyphicon-comment"></span>
-                                8965 Comments
-                            </li>
+            <article class="plate page">
+                <header class="article-header">
+                    <div class="date-holder">
+                        <ul class="text-center">
+                            <li class="date-month">@((MonthName)blogPost.CreatedOn.Month)</li>
+                            <li class="date-day">@blogPost.CreatedOn.Day</li>
+                            <li class="date-year">@blogPost.CreatedOn.Year</li>
                         </ul>
-                    </header>
-
-                    <div class="article-body">
-                        @Html.Raw(blogPost.ShortContent)
-
-                        <div class="clearfix">
-                            <br />
-                            <a href="@blogPost.Url" class="btn btn-primary btn-sm pull-left"><span class="glyphicon glyphicon-plus"></span> Read more</a>
-
-                            @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
-                            {
-                                @Html.ActionLink("Edit", "Edit", "BlogPosts", new { Area = "Administration", Id = blogPost.Id }, new { @class = "btn btn-success btn-sm pull-right" })
-                            }
-                        </div>
-                        <br />
-                        <hr />
                     </div>
 
-                    <footer class="article-footer">
-                        <ul class="row">
-                            <li class="col-xs-6 col-sm-3 autor">
-                                <div class="glyphicon glyphicon-user"></div>
-                                <div class="text-holder text-autor">@blogPost.Autor.UserName</div>
-                            </li>
-                            <li class="col-xs-6 col-sm-3 date">
-                                <div class="glyphicon glyphicon-calendar"></div>
-                                <div class="text-holder text-date">@blogPost.CreatedOn.ToShortDateString()</div>
-                            </li>
-                            <li class="col-xs-6 col-sm-3 time">
-                                <div class="glyphicon glyphicon-time"></div>
-                                <div class="text-holder text-time">@blogPost.CreatedOn.ToShortTimeString()</div>
-                            </li>
-                            <li class="col-xs-6 col-sm-3 comments">
-                                <div class="glyphicon glyphicon-comment"></div>
-                                <div class="text-holder text-comments">8965 Comments</div>
-                            </li>
-                        </ul>
-                    </footer>
-                </article>
-            }
+                    <div class="title article-title">
+                        <h2>@blogPost.Title</h2>
+                        <h3><i>@blogPost.SubTitle</i></h3>
+                    </div>
 
-            <nav>
-                <ul class="pagination pagination-lg">
-                    <li><a href="@Url.Action("Index", new { page = Model.PreviousPage})" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                    <ul class="blog-info">
+                        <li>
+                            <span class="glyphicon glyphicon-user"></span>
+                            @blogPost.Autor.UserName
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-calendar"></span>
+                            @blogPost.CreatedOn.ToShortDateString()
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-time"></span>
+                            @blogPost.CreatedOn.ToShortTimeString()
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-comment"></span>
+                            8965 Comments
+                        </li>
+                    </ul>
+                </header>
 
-                    @{ int count = Model.PagesCount > 5 ? 5 : Model.PagesCount; }
-                    @for (int i = 1; i <= count; i++)
-                    {
-                        if (i == Model.CurrentPage)
+                <div class="article-body raw">
+                    @Html.Raw(blogPost.ShortContent)
+
+                    <div class="clearfix">
+                        <br />
+                        <a href="@blogPost.Url" class="btn btn-primary btn-sm pull-left"><span class="glyphicon glyphicon-plus"></span> Read more</a>
+
+                        @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
                         {
-                            <li class="active"><span>@i</span></li>
-                            continue;
+                            @Html.ActionLink("Edit", "Edit", "BlogPosts", new { Area = "Administration", Id = blogPost.Id }, new { @class = "btn btn-success btn-sm pull-right" })
                         }
+                    </div>
+                    <br />
+                    <hr />
+                </div>
 
-                        if (count < Model.PagesCount && i == count - 1)
-                        {
-                            <li class="disabled"><span>...</span></li>
-                            continue;
-                        }
-
-                        <li>@Html.ActionLink(i.ToString(), "Index", new { page = i })</li>
-                    }
-
-                    <li><a href="@Url.Action("Index", new { page = Model.NextPage})" ari aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
-                </ul>
-            </nav>
-
+                <footer class="article-footer">
+                    <ul class="row">
+                        <li class="col-xs-6 col-sm-3 autor">
+                            <div class="glyphicon glyphicon-user"></div>
+                            <div class="text-holder text-autor">@blogPost.Autor.UserName</div>
+                        </li>
+                        <li class="col-xs-6 col-sm-3 date">
+                            <div class="glyphicon glyphicon-calendar"></div>
+                            <div class="text-holder text-date">@blogPost.CreatedOn.ToShortDateString()</div>
+                        </li>
+                        <li class="col-xs-6 col-sm-3 time">
+                            <div class="glyphicon glyphicon-time"></div>
+                            <div class="text-holder text-time">@blogPost.CreatedOn.ToShortTimeString()</div>
+                        </li>
+                        <li class="col-xs-6 col-sm-3 comments">
+                            <div class="glyphicon glyphicon-comment"></div>
+                            <div class="text-holder text-comments">8965 Comments</div>
+                        </li>
+                    </ul>
+                </footer>
+            </article>
         }
-        else
-        {
-            <h3>Sorry, nothing here.</h3>
-        }
-    </section>
 
-    @section scripts {
-        <script type="text/javascript" src="~/Scripts/img-responsive/img-responsive.js"></script>
+        @Html.Pagination("Index", "Home", Model, new { @class = "blog-posts-nav" }, PaginationSize.Large)
     }
+    else
+    {
+        <h3>Sorry, nothing here.</h3>
+    }
+</section>
+
+@section scripts {
+    <script type="text/javascript" src="~/Scripts/img-responsive/img-responsive.js"></script>
+}

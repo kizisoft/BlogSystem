@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    var $blogPostImg = $('.article-body img');
+    var $blogPostImg = $('.raw img');
     $blogPostImg.addClass('img-responsive img-bordered');
     for (var i = 0, length = $blogPostImg.length; i < length; i++) {
         var float = $($blogPostImg[i]).css("float");

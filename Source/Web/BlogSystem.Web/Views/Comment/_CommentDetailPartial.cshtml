@@ -1,0 +1,45 @@
+﻿@model BlogSystem.Web.ViewModels.Comment.CommentViewModel
+
+@if (Model.IsVisible)
+{
+    <li class="comment clearfix">
+        <div class="comment-header">
+            <div class="user-data-pic">
+
+                @if (Model.Id % 3 == 0)
+                {
+                    <img src="http://id.capital.bg/lgavatars/176/z60_176544.jpg" class="user-data-pic-img" alt="Avatar of @Model.Autor.UserName" width="40" height="40" />
+                    <span class="user-data-pic-glyph fa fa-user hidden"></span>
+                }
+                else
+                {
+                    <img src="http://id.capital.bg/lgavatars/176/z60_176544.jpg" class="user-data-pic-img hidden" alt="Avatar of @Model.Autor.UserName" width="40" height="40" />
+                    <span class="user-data-pic-glyph fa fa-user fa-fw"></span>
+                }
+
+            </div>
+
+            <div class="user-info clearfix">
+                <div class="user-info-name">@Model.Autor.UserName</div>
+                <span class="user-info-points">points: <b>35666</b></span>
+            </div>
+
+            <div class="comment-data">
+                <span class="comment-data-id">@Model.Id</span>
+                <span class="comment-data-time">@Model.CreatedOn.ToShortTimeString()</span>
+                <span class="comment-data-date">@Model.CreatedOn.ToShortDateString()</span>
+            </div>
+        </div>
+
+        <div class="comment-body raw">
+            @Html.Raw(Model.Content)
+        </div>
+    </li>
+}
+else
+{
+    <li>
+        <p>This comment is not visible!</p>
+        <p>@Model.ReasonToHide</p>
+    </li>
+}

@@ -1,8 +1,10 @@
-﻿namespace BlogSystem.Web.ViewModels
+﻿namespace Helpers.Server
 {
-    public abstract class PageableBaseViewModel
+    public class PageableBase : IPageable
     {
         public int PagesCount { get; set; }
+
+        public int MaxVisiblePages { get; set; }
 
         public int CurrentPage { get; set; }
 

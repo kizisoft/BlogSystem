@@ -1,10 +1,21 @@
-﻿html, body {
+﻿ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+html, body {
     height: 100%;
 }
 
 body {
     padding-top: 50px;
     color: #666;
+}
+
+.loader {
+    margin-right: 10px;
+    display: none;
 }
 
 .body-blog {
@@ -80,7 +91,7 @@ dd {
     width: 30px;
 }
 
-.content-root, .content {
+/*.content-root, .content {
     margin: 15px 0;
 }
 
@@ -95,7 +106,7 @@ article.content:last-of-type {
     margin-bottom: 0;
 }
 
-.article-header, .article-title, .article-body, .article-footer, .comments {
+.article-header, .article-title, .article-body, .article-footer {
     margin: 0 5% 0 5%;
 }
 
@@ -105,116 +116,116 @@ article.content:last-of-type {
 
 .article-footer {
     margin-bottom: 10px;
+}*/
+
+.article-footer ul {
+    display: inline-block;
+    position: relative;
+    height: 70px;
+    top: -21px;
 }
 
-    .article-footer ul {
-        display: inline-block;
-        position: relative;
+.article-footer ul, .article-footer li,
+.social, .social li, .blog-info, .blog-info li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+    .article-footer li,
+    .article-footer li .splitter,
+    .article-footer li .glyphicon,
+    .article-footer li .text-holder {
+        -moz-transition: all 0.3s linear;
+        -o-transition: all 0.3s linear;
+        -webkit-transition: all 0.3s linear;
+        transition: all 0.3s linear;
+    }
+
+.article-footer li {
+    margin-right: 5px;
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    background-color: #efefef;
+    border-left: 1px solid #eee;
+    border-bottom: 1px solid #5a5a5a;
+    border-right: 1px solid #5a5a5a;
+    box-shadow: 3px 3px 5px 0 rgba(90, 90, 90, 0.75);
+}
+
+    .article-footer li:hover {
+        width: 85px;
         height: 70px;
-        top: -21px;
     }
 
-    .article-footer ul, .article-footer li,
-    .social, .social li, .blog-info, .blog-info li {
-        margin: 0;
-        padding: 0;
-        list-style: none;
+    .article-footer li.autor {
+        border-top: 2px solid #156dd0;
     }
 
-        .article-footer li,
-        .article-footer li .splitter,
-        .article-footer li .glyphicon,
-        .article-footer li .text-holder {
-            -moz-transition: all 0.3s linear;
-            -o-transition: all 0.3s linear;
-            -webkit-transition: all 0.3s linear;
-            transition: all 0.3s linear;
+        .article-footer li.autor:hover .glyphicon {
+            color: #218AFF;
         }
 
-    .article-footer li {
-        margin-right: 5px;
-        width: 50px;
-        height: 30px;
-        text-align: center;
-        background-color: #efefef;
-        border-left: 1px solid #eee;
-        border-bottom: 1px solid #5a5a5a;
-        border-right: 1px solid #5a5a5a;
-        box-shadow: 3px 3px 5px 0 rgba(90, 90, 90, 0.75);
+    .article-footer li.date {
+        border-top: 2px solid #b91d0d;
     }
 
-        .article-footer li:hover {
-            width: 85px;
-            height: 70px;
+        .article-footer li.date:hover .glyphicon {
+            color: #d14233;
         }
 
-        .article-footer li.autor {
-            border-top: 2px solid #156dd0;
+    .article-footer li.time {
+        border-top: 2px solid #0a866e;
+    }
+
+        .article-footer li.time:hover .glyphicon {
+            color: #16a085;
         }
 
-            .article-footer li.autor:hover .glyphicon {
-                color: #218AFF;
-            }
+    .article-footer li.comments {
+        border-top: 2px solid #db6f12;
+    }
 
-        .article-footer li.date {
-            border-top: 2px solid #b91d0d;
+        .article-footer li.comments:hover .glyphicon {
+            color: #ff9602;
         }
 
-            .article-footer li.date:hover .glyphicon {
-                color: #d14233;
-            }
+    .article-footer li .glyphicon {
+        margin-top: 5px;
+    }
 
-        .article-footer li.time {
-            border-top: 2px solid #0a866e;
-        }
+    .article-footer li:hover .glyphicon {
+        top: 20px;
+        -moz-transform: scale(3);
+        -ms-transform: scale(3);
+        -o-transform: scale(3);
+        -webkit-transform: scale(3);
+        transform: scale(3);
+    }
 
-            .article-footer li.time:hover .glyphicon {
-                color: #16a085;
-            }
+    .article-footer li .text-holder {
+        visibility: hidden;
+        padding-top: 3px;
+        position: relative;
+        top: -45.3px;
+        width: 85px;
+        height: 20px;
+        opacity: 0;
+        font-size: 0.8em;
+    }
 
-        .article-footer li.comments {
-            border-top: 2px solid #db6f12;
-        }
+    .article-footer li:hover .text-holder {
+        visibility: visible;
+        left: -1px;
+        color: #fff;
+        opacity: 1;
+    }
 
-            .article-footer li.comments:hover .glyphicon {
-                color: #ff9602;
-            }
-
-        .article-footer li .glyphicon {
-            margin-top: 5px;
-        }
-
-        .article-footer li:hover .glyphicon {
-            top: 20px;
-            -moz-transform: scale(3);
-            -ms-transform: scale(3);
-            -o-transform: scale(3);
-            -webkit-transform: scale(3);
-            transform: scale(3);
-        }
-
-        .article-footer li .text-holder {
-            visibility: hidden;
-            padding-top: 3px;
-            position: relative;
-            top: -45.3px;
-            width: 85px;
-            height: 20px;
-            opacity: 0;
-            font-size: 0.8em;
-        }
-
-        .article-footer li:hover .text-holder {
-            visibility: visible;
-            left: -1px;
-            color: #fff;
-            opacity: 1;
-        }
-
-        .article-footer li:last-of-type,
-        .root div:last-of-type {
-            margin-right: 0;
-        }
+    .article-footer li:last-of-type,
+    .root div:last-of-type {
+        margin-right: 0;
+    }
 
 .text-autor {
     left: -100px;
@@ -236,9 +247,13 @@ article.content:last-of-type {
     background-color: #ff9602;
 }
 
-@media(min-width: 1200px) {
+.article-title {
+    margin-left: 2%;
+}
+
+@media(max-width: 700px) {
     .article-title {
-        margin-left: 2%;
+        margin-left: 5%;
     }
 }
 
@@ -313,18 +328,22 @@ article.content:last-of-type {
     margin-left: 15px;
 }
 
-.aside-header, .aside-body {
+/*.aside-header, .aside-body {
     margin: 15px 10px;
+}*/
+
+.aside-body {
+    margin-top: 7%;
 }
 
-    .aside-header h2 {
-        margin: 0 0 -2px 0;
-        padding-bottom: 5px;
-        display: inline-block;
-        color: #585f69;
-        font-size: 1.3em;
-        border-bottom: 2px solid #e74c3c;
-    }
+.aside-header h2 {
+    margin: 0 0 -2px 0;
+    padding-bottom: 5px;
+    display: inline-block;
+    color: #585f69;
+    font-size: 1.3em;
+    border-bottom: 2px solid #e74c3c;
+}
 
 .aside-title {
     border-bottom: 1px solid #eee;
@@ -478,12 +497,21 @@ article.content:last-of-type {
     }
 
 .pagination {
+    border-radius: 5px;
     box-shadow: 3px 3px 5px 0 rgba(90, 90, 90, 0.75);
 }
 
-.pager li > a, .pager li > span {
-    border-radius: 5px;
-    box-shadow: 3px 3px 5px 0 rgba(90, 90, 90, 0.75);
+.pager-previous, .pager-next {
+    margin: 0 !important;
+    width: 45%;
+}
+
+.pager-glyph {
+    width: 10%;
+}
+
+.pager-text {
+    width: 89%;
 }
 
 .blog-info {
@@ -502,7 +530,7 @@ article.content:last-of-type {
         display: inline-block;
     }
 
-.create-comment-root {
+.comments-create {
     padding: 1% 2% 2% 2%;
     background-color: #eaf5fb;
     border: 1px solid #cee9f8;
@@ -510,11 +538,130 @@ article.content:last-of-type {
     box-shadow: 3px 3px 5px 0 rgba(90, 90, 90, 0.75);
 }
 
-    .create-comment-root textarea {
-        margin-top: 1%;
-        resize: none;
+.comments-warning {
+    box-shadow: 3px 3px 5px 0 rgba(90, 90, 90, 0.75);
+}
+
+.comment {
+    margin: 0;
+    padding: 1.5%;
+    border-bottom: 1px dotted #aaa;
+    -ms-word-break: break-word;
+    word-break: break-word;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+}
+
+    .comment:nth-of-type(2n+1) {
+        background-color: #f5f5f5;
     }
 
-#load, #comment-error {
-    display: none;
+.comment-header {
+    float: left;
+    width: 30%;
+}
+
+.user-data-pic, .user-data-pic-img, .user-data-pic-glyph, .comment-header {
+    -moz-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+}
+
+.user-data-pic {
+    margin: 0 5px 5px 0;
+    padding: 5px;
+    width: 51px;
+    height: 51px;
+    background-color: #b2b2b2;
+    border: 1px solid #909090;
+}
+
+.comment-header:hover .user-data-pic {
+    padding: 0;
+}
+
+.comment-header:hover .user-data-pic-glyph {
+    font-size: 3em;
+}
+
+.user-data-pic:hover .user-data-pic-img {
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    -webkit-transform: scale(2);
+    transform: scale(2);
+}
+
+.user-data-pic-img, .user-data-pic-glyph {
+    margin-top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    border: 1px dashed #909090;
+    background-color: #fff;
+}
+
+.user-data-pic-glyph {
+    font-size: 2.5em;
+}
+
+.user-info, .user-data-pic, .comment-data-id, .comment-data-time, .comment-data-date {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.user-info-name {
+    color: #4183C4;
+    font-weight: bold;
+}
+
+.user-info-points {
+    color: #aaa;
+    font-size: 0.858em;
+}
+
+.comment-body {
+    float: right;
+    width: 69%;
+}
+
+.comment-data {
+    font-size: 0.72em;
+}
+
+.comment-data-id, .comment-data-time, .comment-data-date {
+    margin: 5px 0 0 0;
+    padding: 0 4px;
+    border-radius: 3px;
+}
+
+.comment-data-id {
+    margin-right: 5px;
+    color: #fff;
+    border: 1px solid #d83a29;
+    background-color: #E74C3C;
+}
+
+.comment-data-time, .comment-data-date {
+    border: 1px solid #efce29;
+    background-color: #FAF78F;
+}
+
+.plate {
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #777;
+    border-right: 1px solid #777;
+    box-shadow: 3px 3px 5px 0 rgba(90, 90, 90, 0.75);
+}
+
+.page {
+    margin: 15px 0;
+    padding: 4% 5%;
 }

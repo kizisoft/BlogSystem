@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
 
-    using BlogSystem.Web.ViewModels.BlogPost;
+    using Helpers.Server;
 
-    public class HomeIndexViewModel : PageableBaseViewModel
+    public class HomeIndexViewModel : PageableBase
     {
         public IEnumerable<HomeBlogPostViewModel> BlogPosts { get; set; }
     }

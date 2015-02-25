@@ -2,6 +2,7 @@
 {
     using BlogSystem.Data.Models;
     using BlogSystem.Web.Infrastructure.Mapping;
+    using System;
 
     public class CommentViewModel : SanitizableContentBaseViewModel, IMapFrom<Comment>
     {
@@ -18,5 +19,7 @@
         public bool IsVisible { get; set; }
 
         public string ReasonToHide { get; set; }
+
+        public DateTime CreatedOn { get; set; }
     }
 }

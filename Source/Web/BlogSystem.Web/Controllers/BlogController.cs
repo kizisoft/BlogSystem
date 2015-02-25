@@ -22,32 +22,34 @@
         [HttpGet]
         public ActionResult Index(int? id, int? page)
         {
-            var blogPost = this.blogPosts.All()
+            var model = this.blogPosts.All()
                 .Where(x => x.Id == id)
                 .Project()
                 .To<BlogPostIndexViewModel>()
                 .FirstOrDefault();
 
-            if (blogPost == null)
+            if (model == null)
             {
                 return this.HttpNotFound("No such Blog Post");
             }
 
-            var blogPostPrev = this.blogPosts.All()
-                .Where(x => x.CreatedOn <= blogPost.CreatedOn && x.Id != blogPost.Id)
+            var prev = this.blogPosts.All()
+                .Where(x => x.CreatedOn <= model.CreatedOn && x.Id != model.Id)
                 .OrderByDescending(x => x.CreatedOn)
+                .Take(1)
                 .Project()
                 .To<BlogPostSimpleViewModel>()
                 .FirstOrDefault();
 
-            var blogPostNext = this.blogPosts.All()
-                .Where(x => x.CreatedOn >= blogPost.CreatedOn && x.Id != blogPost.Id)
+            var next = this.blogPosts.All()
+                .Where(x => x.CreatedOn >= model.CreatedOn && x.Id != model.Id)
                 .OrderBy(x => x.CreatedOn)
+                .Take(1)
                 .Project()
                 .To<BlogPostSimpleViewModel>()
                 .FirstOrDefault();
 
-            var model = new BlogViewModel { BlogPost = blogPost, Previous = blogPostPrev, Next = blogPostNext };
+            model.Pager = new BlogPagerViewModel(prev, next);
 
             return this.View(model);
         }

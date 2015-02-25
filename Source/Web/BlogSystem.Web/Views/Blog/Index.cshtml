@@ -1,38 +1,37 @@
 ﻿@using Microsoft.AspNet.Identity
 @using BlogSystem.Web.Infrastructure.Constants
-@model BlogSystem.Web.ViewModels.BlogPost.BlogViewModel
+@model BlogSystem.Web.ViewModels.BlogPost.BlogPostIndexViewModel
 @{
-    ViewBag.Title = Model.BlogPost.Title;
+    ViewBag.Title = Model.Title;
 }
-
-<section class="content-root">
-    <article class="content">
+<div class="content plate page">
+    <section class="blog-post">
         <header class="article-header">
             <div class="date-holder">
                 <ul class="text-center">
-                    <li class="date-month">@((MonthName)Model.BlogPost.CreatedOn.Month)</li>
-                    <li class="date-day">@Model.BlogPost.CreatedOn.Day</li>
-                    <li class="date-year">@Model.BlogPost.CreatedOn.Year</li>
+                    <li class="date-month">@((MonthName)Model.CreatedOn.Month)</li>
+                    <li class="date-day">@Model.CreatedOn.Day</li>
+                    <li class="date-year">@Model.CreatedOn.Year</li>
                 </ul>
             </div>
 
             <div class="title article-title">
-                <h2>@Model.BlogPost.Title</h2>
-                <h3><i>@Model.BlogPost.SubTitle</i></h3>
+                <h2>@Model.Title</h2>
+                <h3><i>@Model.SubTitle</i></h3>
             </div>
 
             <ul class="blog-info">
                 <li>
                     <span class="glyphicon glyphicon-user"></span>
-                    @Model.BlogPost.Autor.UserName
+                    @Model.Autor.UserName
                 </li>
                 <li>
                     <span class="glyphicon glyphicon-calendar"></span>
-                    @Model.BlogPost.CreatedOn.ToShortDateString()
+                    @Model.CreatedOn.ToShortDateString()
                 </li>
                 <li>
                     <span class="glyphicon glyphicon-time"></span>
-                    @Model.BlogPost.CreatedOn.ToShortTimeString()
+                    @Model.CreatedOn.ToShortTimeString()
                 </li>
                 <li>
                     <span class="glyphicon glyphicon-comment"></span>
@@ -41,85 +40,23 @@
             </ul>
         </header>
 
-        <div class="article-body">
-            @Html.Raw(Model.BlogPost.Content)
-
-            <div class="clearfix">
-                <br />
-
+        <article class="raw">
+            @Html.Raw(Model.Content)
+            <br />
+            <p class="clearfix">
                 @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
                 {
-                    @Html.ActionLink("Edit", "Edit", "BlogPosts", new { Area = "Administration", Id = Model.BlogPost.Id }, new { @class = "btn btn-success btn-sm pull-right" })
+                    @Html.ActionLink("Edit", "Edit", "BlogPosts", new { Area = "Administration", Id = Model.Id }, new { @class = "btn btn-success btn-sm pull-right" })
                 }
-            </div>
-            <hr />
-        </div>
+            </p>
+        </article>
+    </section>
 
-        <footer class="article-footer">
-            <ul class="row">
-                <li class="col-xs-6 col-sm-3 autor">
-                    <div class="glyphicon glyphicon-user"></div>
-                    <div class="text-holder text-autor">@Model.BlogPost.Autor.UserName</div>
-                </li>
-                <li class="col-xs-6 col-sm-3 date">
-                    <div class="glyphicon glyphicon-calendar"></div>
-                    <div class="text-holder text-date">@Model.BlogPost.CreatedOn.ToShortDateString()</div>
-                </li>
-                <li class="col-xs-6 col-sm-3 time">
-                    <div class="glyphicon glyphicon-time"></div>
-                    <div class="text-holder text-time">@Model.BlogPost.CreatedOn.ToShortTimeString()</div>
-                </li>
-                <li class="col-xs-6 col-sm-3 comments">
-                    <a href="">
-                        <div class="glyphicon glyphicon-comment"></div>
-                        <div class="text-holder text-comments">8965 Comments</div>
-                    </a>
-                </li>
-            </ul>
-        </footer>
-    </article>
-</section>
+    @Html.Partial("~/Views/Comment/_CommentsPartial.cshtml", Model.Id)
 
-<nav>
-    <ul class="pager">
-        <li class="previous">
-            @if (Model.Previous != null)
-            {
-                <a href="@Model.Previous.Url" data-toggle="tooltip" data-original-title="@Model.Previous.Title" data-placement="top">
-                    <i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>
-                </a>
-            }
-            else
-            {
-                <span data-toggle="tooltip" data-original-title="Previous article not exist" data-placement="top">
-                    <i class="fa fa-arrow-circle-left fa-2x" aria-hidden="true"></i>
-                </span>
-            }
-        </li>
-        <li class="next">
-            @if (Model.Next != null)
-            {
-                <a href="@Model.Next.Url" dat data-toggle="tooltip" data-original-title="@Model.Next.Title" data-placement="top">
-                    <i class="fa fa-arrow-circle-right fa-2x" aria-hidden="true"></i>
-                </a>
-            }
-            else
-            {
-                <span data-toggle="tooltip" data-original-title="Next article not exist" data-placement="top">
-                    <i class="fa fa-arrow-circle-right fa-2x" aria-hidden="true"></i>
-                </span>
-            }
-        </li>
-    </ul>
-</nav>
-
-@Html.Action("Index", "Comment", new { blogPostId = Model.BlogPost.Id })
+    @Html.Pager(Model.Pager.PreviousPage, Model.Pager.NextPage, new { @class = "blog-info" })
+</div>
 
 @section scripts {
     <script type="text/javascript" src="~/Scripts/img-responsive/img-responsive.js"></script>
-    <script type="text/javascript">
-        $(document).ready($(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        }));
-    </script>
 }

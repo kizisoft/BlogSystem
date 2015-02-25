@@ -6,7 +6,7 @@
     public class CommentInputModel
     {
         [Required]
-        public int BlogPostId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [AllowHtml]

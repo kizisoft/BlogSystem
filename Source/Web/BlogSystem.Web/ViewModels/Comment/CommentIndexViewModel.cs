@@ -1,10 +1,13 @@
 ﻿namespace BlogSystem.Web.ViewModels.Comment
 {
     using System.Collections.Generic;
+    using Helpers.Server;
 
-    public class CommentIndexViewModel : PageableBaseViewModel
+    public class CommentIndexViewModel : PageableBase
     {
-        public CommentInputModel CommentInputModel { get; set; }
+        public bool HasComments { get; set; }
+
+        public int BlogPostId { get; set; }
 
         public IEnumerable<CommentViewModel> Comments { get; set; }
     }

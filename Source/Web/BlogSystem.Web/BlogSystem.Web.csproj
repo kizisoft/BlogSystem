@@ -221,10 +221,10 @@
     <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\BlogPost\BlogPagerViewModel.cs" />
     <Compile Include="ViewModels\Home\HomeBlogPostViewModel.cs" />
     <Compile Include="ViewModels\BlogPost\BlogPostIndexViewModel.cs" />
     <Compile Include="ViewModels\BlogPost\BlogPostSimpleViewModel.cs" />
-    <Compile Include="ViewModels\BlogPost\BlogViewModel.cs" />
     <Compile Include="ViewModels\Comment\CommentIndexViewModel.cs" />
     <Compile Include="ViewModels\Comment\CommentInputModel.cs" />
     <Compile Include="ViewModels\Comment\CommentViewModel.cs" />
@@ -237,7 +237,6 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
-    <Compile Include="ViewModels\PageableBaseViewModel.cs" />
     <Compile Include="ViewModels\SanitizableContentBaseViewModel.cs" />
     <Compile Include="ViewModels\Sidebar\SidebarViewModel.cs" />
   </ItemGroup>
@@ -502,9 +501,11 @@
     <Content Include="Views\Shared\EditorTemplates\tinymce_full.cshtml" />
     <Content Include="Views\Shared\_SidebarPartial.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
-    <Content Include="Views\Comment\_CommentPartial.cshtml" />
+    <Content Include="Views\Comment\_CommentsPartial.cshtml" />
     <Content Include="Views\Comment\_CreateCommentPartial.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_small.cshtml" />
+    <Content Include="Views\Comment\Index.cshtml" />
+    <Content Include="Views\Comment\_CommentDetailPartial.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -526,6 +527,10 @@
     <ProjectReference Include="..\..\Data\BlogSystem.Data\BlogSystem.Data.csproj">
       <Project>{dad4c482-170b-48cf-9682-ab0fa23e3dd4}</Project>
       <Name>BlogSystem.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Helpers\Helpers.csproj">
+      <Project>{5bec66f3-9cb3-48a8-8f8a-a7c7ac448764}</Project>
+      <Name>Helpers</Name>
     </ProjectReference>
     <ProjectReference Include="..\BlogSystem.Web.Infrastructure\BlogSystem.Web.Infrastructure.csproj">
       <Project>{d8f29a77-09ec-445d-ba50-65a83f47dabb}</Project>

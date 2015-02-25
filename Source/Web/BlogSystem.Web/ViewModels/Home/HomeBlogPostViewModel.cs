@@ -1,8 +1,9 @@
-﻿namespace BlogSystem.Web.ViewModels.BlogPost
+﻿namespace BlogSystem.Web.ViewModels.Home
 {
     using System.ComponentModel.DataAnnotations;
 
     using BlogSystem.Data.Models;
+    using BlogSystem.Web.ViewModels.BlogPost;
 
     public class HomeBlogPostViewModel : BlogPostSimpleViewModel
     {

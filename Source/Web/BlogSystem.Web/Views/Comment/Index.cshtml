@@ -1,0 +1,31 @@
+﻿@model BlogSystem.Web.ViewModels.Comment.CommentIndexViewModel
+@{
+    ViewBag.Title = "Comments";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+@Html.Partial("_CreateCommentPartial", new BlogSystem.Web.ViewModels.Comment.CommentInputModel { Id = Model.BlogPostId })
+<hr />
+
+@if (Model.HasComments)
+{
+    <ul>
+        @foreach (var comment in Model.Comments)
+        {
+            @Html.Partial("_CommentDetailPartial", comment);
+        }
+    </ul>
+
+    @Ajax.Pagination("Index", Model,
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "comments"
+        }, new { @class = "comments-nav" });
+}
+else
+{
+    <h4>No comments.</h4>
+}

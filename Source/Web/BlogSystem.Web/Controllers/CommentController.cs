@@ -15,6 +15,7 @@
     public class CommentController : BaseController
     {
         private const int CommentsPerPageDefaultValue = 10;
+        private const int MaxVisiblePagesDefaultValue = 5;
 
         private readonly IRepository<Comment> comments;
 
@@ -25,13 +26,13 @@
 
         // GET: Comment
         [HttpGet]
-        public ActionResult Index(int blogPostId, int page = 1, int perPage = CommentsPerPageDefaultValue)
+        public ActionResult Index(int id, int page = 1, int perPage = CommentsPerPageDefaultValue)
         {
-            var pagesCount = (int)Math.Ceiling(this.comments.All().Count(x => x.BlogPostId == blogPostId) / (decimal)perPage);
+            var pagesCount = (int)Math.Ceiling(this.comments.All().Count(x => x.BlogPostId == id) / (decimal)perPage);
 
             var commentsDb = this.comments.All()
-                .Where(x => x.BlogPostId == blogPostId)
-                .OrderByDescending(x => x.CreatedOn)
+                .Where(x => x.BlogPostId == id)
+                .OrderBy(x => x.CreatedOn)
                 .Skip(perPage * (page - 1))
                 .Take(perPage)
                 .Project()
@@ -40,17 +41,15 @@
 
             var model = new CommentIndexViewModel
             {
-                CommentInputModel = new CommentInputModel
-                {
-                    BlogPostId = blogPostId,
-                    Content = ""
-                },
+                BlogPostId = id,
+                HasComments = commentsDb.Count() > 0,
                 Comments = commentsDb,
+                MaxVisiblePages = MaxVisiblePagesDefaultValue,
                 CurrentPage = page,
                 PagesCount = pagesCount
             };
 
-            return this.PartialView("_CommentPartial", model);
+            return this.PartialView("Index", model);
         }
 
         [HttpPost]
@@ -62,12 +61,14 @@
                 this.comments.Add(new Comment
                 {
                     AutorId = this.User.Identity.GetUserId(),
-                    BlogPostId = model.BlogPostId,
+                    BlogPostId = model.Id,
                     Content = model.Content
                 });
                 this.comments.SaveChanges();
 
-                return this.Index(model.BlogPostId);
+                var pagesCount = (int)Math.Ceiling(this.comments.All().Count(x => x.BlogPostId == model.Id) / (decimal)CommentsPerPageDefaultValue);
+
+                return this.Index(model.Id, pagesCount);
             }
 
             return this.JsonError("Enter your comment!");

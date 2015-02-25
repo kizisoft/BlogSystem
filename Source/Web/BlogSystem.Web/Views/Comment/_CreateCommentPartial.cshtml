@@ -1,9 +1,17 @@
 ﻿@model BlogSystem.Web.ViewModels.Comment.CommentInputModel
 
-<div class="create-comment-root clearfix">
+<div class="create-comment-root">
     @if (User.Identity.IsAuthenticated)
     {
-        using (Ajax.BeginForm("Create", "Comment", new { blogPostId = Model.BlogPostId }, new AjaxOptions { HttpMethod = "Post", InsertionMode = InsertionMode.ReplaceWith, UpdateTargetId = "comments", LoadingElementId = "load", OnFailure = "showCommentsJsonError" }, new { @class = "form-horizontal" }))
+        using (Ajax.BeginForm("Create", "Comment", new { Id = Model.Id },
+            new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.ReplaceWith,
+                UpdateTargetId = "comments",
+                LoadingElementId = "create-comment-load",
+                OnFailure = "showCommentsJsonError"
+            }, new { @class = "form-horizontal comments-create clearfix" }))
         {
             @Html.AntiForgeryToken()
 
@@ -16,17 +24,17 @@
             </div>
 
             <span id="comment-error" class="text-danger pull-left"></span>
-            <button type="submit" id="submit-btn" class="btn btn-success pull-right"><span id="load" class="fa fa-spinner fa-pulse"></span> Submit</button>
+            <button type="submit" id="submit-btn" class="btn btn-success pull-right"><span id="create-comment-load" class="fa fa-spinner fa-pulse loader"></span>Submit</button>
         }
     }
     else
     {
-        ﻿<div class="alert alert-danger" role="alert">
+        ﻿<div class="alert alert-danger comments-warning" role="alert">
             <span class="fa fa-exclamation-triangle fa-5x pull-left"></span>
             <p>Only registered users can comment.</p>
             <br />
             @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-success btn-xs" })
-            @Html.ActionLink("Log in", "Login", "Account", routeValues: new { ReturnUrl = Url.Action() }, htmlAttributes: new { id = "loginLink", @class = "btn btn-primary btn-xs" })
+            @Html.ActionLink("Log in", "Login", "Account", routeValues: new { ReturnUrl = Url.Action("Index", "Blog", new { id = Model.Id }) }, htmlAttributes: new { id = "loginLink", @class = "btn btn-primary btn-xs" })
         </div>
     }
 </div>

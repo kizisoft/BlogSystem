@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using BlogSystem.Data.Models;
+    using Helpers.Server;
 
     public class BlogPostIndexViewModel : BlogPostSimpleViewModel
     {
@@ -21,5 +22,7 @@
         public virtual ApplicationUser Autor { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+
+        public BlogPagerViewModel Pager { get; set; }
     }
 }
