@@ -16,6 +16,10 @@
             this.CreatedOn = DateTime.Now;
         }
 
+        public string AvatarUrl { get; set; }
+
+        public string RealName { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public bool PreserveCreatedOn { get; set; }

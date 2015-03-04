@@ -21,7 +21,7 @@
             this.pageable = pageable;
             this.ajaxOptions = ajaxOptions;
             this.htmlAttributes = htmlAttributes;
-            this.size = SizeToBootstrapClass(size);
+            this.size = this.SizeToBootstrapClass(size);
         }
 
         public string ToHtmlString()

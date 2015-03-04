@@ -18,7 +18,7 @@
             <div class="form-group">
                 <div class="col-md-12">
                     <label for="input-comment" class="control-label">Leave a Comment</label>
-                    @Html.EditorFor(x => x.Content, new { @class = "form-control", id = "input-comment", rows = 5 })
+                    @Html.EditorFor(model => model.Content, new { @class = "form-control", id = "input-comment", rows = 5 })
                     @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
                 </div>
             </div>

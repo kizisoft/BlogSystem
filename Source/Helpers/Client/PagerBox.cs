@@ -52,11 +52,11 @@
 
             if (string.IsNullOrEmpty(this.previous.Url))
             {
-                aOrSpanPrevious = GetAOrSpanHtml("span", "pull-left", "glyphicon-arrow-left", "pull-right", this.previous.Title);
+                aOrSpanPrevious = this.GetAOrSpanHtml("span", "pull-left", "glyphicon-arrow-left", "pull-right", this.previous.Title);
             }
             else
             {
-                aOrSpanPrevious = GetAOrSpanHtml("a", "pull-left", "glyphicon-arrow-left", "pull-right", this.previous.Title);
+                aOrSpanPrevious = this.GetAOrSpanHtml("a", "pull-left", "glyphicon-arrow-left", "pull-right", this.previous.Title);
                 aOrSpanPrevious.Attributes.Add("href", this.previous.Url);
             }
 
@@ -67,11 +67,11 @@
 
             if (string.IsNullOrEmpty(this.next.Url))
             {
-                aOrSpanNext = GetAOrSpanHtml("span", "pull-right", "glyphicon-arrow-right", "pull-left", this.next.Title);
+                aOrSpanNext = this.GetAOrSpanHtml("span", "pull-right", "glyphicon-arrow-right", "pull-left", this.next.Title);
             }
             else
             {
-                aOrSpanNext = GetAOrSpanHtml("a", "pull-right", "glyphicon-arrow-right", "pull-left", this.next.Title);
+                aOrSpanNext = this.GetAOrSpanHtml("a", "pull-right", "glyphicon-arrow-right", "pull-left", this.next.Title);
                 aOrSpanNext.Attributes.Add("href", this.next.Url);
             }
 

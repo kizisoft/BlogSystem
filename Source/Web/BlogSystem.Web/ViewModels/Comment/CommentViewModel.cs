@@ -1,8 +1,9 @@
 ﻿namespace BlogSystem.Web.ViewModels.Comment
 {
+    using System;
+
     using BlogSystem.Data.Models;
     using BlogSystem.Web.Infrastructure.Mapping;
-    using System;
 
     public class CommentViewModel : SanitizableContentBaseViewModel, IMapFrom<Comment>
     {

@@ -9,13 +9,19 @@
 
         public BlogPagerViewModel(BlogPostSimpleViewModel previousPage, BlogPostSimpleViewModel nextPage)
         {
-            this.previousPage = GetPageTo(previousPage);
-            this.nextPage = GetPageTo(nextPage);
+            this.previousPage = this.GetPageTo(previousPage);
+            this.nextPage = this.GetPageTo(nextPage);
         }
 
-        public IPagerTo PreviousPage { get { return this.previousPage; } }
+        public IPagerTo PreviousPage
+        {
+            get { return this.previousPage; }
+        }
 
-        public IPagerTo NextPage { get { return this.nextPage; } }
+        public IPagerTo NextPage
+        {
+            get { return this.nextPage; }
+        }
 
         private IPagerTo GetPageTo(BlogPostSimpleViewModel page)
         {

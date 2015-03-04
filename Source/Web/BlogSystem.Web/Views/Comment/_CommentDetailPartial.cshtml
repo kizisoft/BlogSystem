@@ -5,22 +5,18 @@
     <li class="comment clearfix">
         <div class="comment-header">
             <div class="user-data-pic">
-
-                @if (Model.Id % 3 == 0)
+                @if (Model.Autor.AvatarUrl == null)
                 {
-                    <img src="http://id.capital.bg/lgavatars/176/z60_176544.jpg" class="user-data-pic-img" alt="Avatar of @Model.Autor.UserName" width="40" height="40" />
-                    <span class="user-data-pic-glyph fa fa-user hidden"></span>
+                    <span class="user-data-pic-glyph fa fa-user"></span>
                 }
                 else
                 {
-                    <img src="http://id.capital.bg/lgavatars/176/z60_176544.jpg" class="user-data-pic-img hidden" alt="Avatar of @Model.Autor.UserName" width="40" height="40" />
-                    <span class="user-data-pic-glyph fa fa-user fa-fw"></span>
+                    <img src="@Model.Autor.AvatarUrl" class="user-data-pic-img" alt="Avatar of @Model.Autor.UserName" width="40" height="40" />
                 }
-
             </div>
 
             <div class="user-info clearfix">
-                <div class="user-info-name">@Model.Autor.UserName</div>
+                <div class="user-info-name"><a href="@Url.Action("Info", "Users", new { userName = Model.Autor.UserName })">@Model.Autor.UserName</a></div>
                 <span class="user-info-points">points: <b>35666</b></span>
             </div>
 

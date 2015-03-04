@@ -1,0 +1,66 @@
+﻿@model  BlogSystem.Web.ViewModels.Users.UserInputModel
+@{
+    ViewBag.Title = "User - " + @Model.UserName + " - Edit";
+}
+
+<div class="user-root plate page">
+
+    <h2>@Model.UserName</h2>
+    <hr />
+
+    @using (Html.BeginForm("Edit", "Users", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" });
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.UserName)
+        @Html.HiddenFor(model => model.AvatarUrl)
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="avatar-wrapper">
+                    <div class="user-pic plate">
+                        @if (string.IsNullOrEmpty(Model.AvatarUrl))
+                        {
+                            <span id="user-glyph" class="fa fa-user"></span>
+                            <img id="user-pic" class="hidden img-responsive" src="@Model.AvatarUrl" />
+                        }
+                        else
+                        {
+                            <span id="user-glyph" class="fa fa-user hidden"></span>
+                            <img id="user-pic" class="img-responsive" src="@Model.AvatarUrl" />
+                        }
+                    </div>
+                    <a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#user-popup">Change picture</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RealName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.RealName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.RealName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix">
+            <button class="btn btn-success pull-right" type="submit">Save</button>
+        </div>
+    }
+</div>
+
+@Html.Partial("_UploadPartial", Model.Id)
+
+@section scripts {
+    <script type="text/javascript" src="~/Scripts/upload-user-pic/upload-user-pic.js"></script>
+}

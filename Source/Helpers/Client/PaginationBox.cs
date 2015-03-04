@@ -18,7 +18,7 @@
             this.url = url + "?page=";
             this.pageable = pageable;
             this.htmlAttributes = htmlAttributes;
-            this.size = SizeToBootstrapClass(size);
+            this.size = this.SizeToBootstrapClass(size);
         }
 
         public string ToHtmlString()

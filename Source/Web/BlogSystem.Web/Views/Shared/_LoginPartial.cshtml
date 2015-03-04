@@ -15,7 +15,8 @@
                         <li>@Html.ActionLink("Administration", "Index", "Administration/Home")</li>
                         <li class="divider"></li>
                     }
-                    <li>@Html.ActionLink("Edit Profile", "Edit", "Profile")</li>
+                    <li>@Html.ActionLink("Profile details", "Info", "Users", new { userName = User.Identity.GetUserName(), Area = string.Empty }, null)</li>
+                    <li>@Html.ActionLink("Edit profile", "Edit", "Users", new { userName = User.Identity.GetUserName(), Area = string.Empty }, null)</li>
                     <li>@Html.ActionLink("Change password", "ChangePassword", "Manage", new { Area = string.Empty }, null)</li>
                 </ul>
             </li>

@@ -1,0 +1,55 @@
+﻿@model  BlogSystem.Web.ViewModels.Users.UserViewModel
+@{
+    ViewBag.Title = "User - " + @Model.UserName;
+}
+
+<div class="user-root plate page">
+    <h2>@Model.UserName</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <div class="avatar-wrapper">
+                <div class="user-pic plate">
+                    @if (string.IsNullOrEmpty(Model.AvatarUrl))
+                    {
+                        <span id="user-glyph" class="fa fa-user"></span>
+                        <img id="user-pic" class="hidden img-responsive" src="@Model.AvatarUrl" />
+                    }
+                    else
+                    {
+                        <span id="user-glyph" class="fa fa-user hidden"></span>
+                        <img id="user-pic" class="img-responsive" src="@Model.AvatarUrl" />
+                    }
+                </div>
+            </div>
+        </div>
+        <ul class="col-md-9 user-details">
+            <li>
+                <span>Public information</span>
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.RealName)</dt>
+                    <dd>@Html.DisplayFor(model => model.RealName)</dd>
+
+                    <dt>@Html.DisplayNameFor(model => model.Points)</dt>
+                    <dd>@Html.DisplayFor(model => model.Points)</dd>
+                </dl>
+            </li>
+            @if (User.Identity.Name == Model.UserName)
+            {
+                <li>
+                    <span>Private information</span>
+                    <dl>
+                        <dt>@Html.DisplayNameFor(model => model.Email)</dt>
+                        <dd>@Html.DisplayFor(model => model.Email)</dd>
+                    </dl>
+                </li>
+            }
+        </ul>
+    </div>
+    @if (User.Identity.Name == Model.UserName)
+    {
+        <div class="clearfix">
+            @Html.ActionLink("Edit profile", "Edit", new { userName = Model.UserName }, new { @class = "btn btn-success pull-right" })
+        </div>
+    }
+</div>

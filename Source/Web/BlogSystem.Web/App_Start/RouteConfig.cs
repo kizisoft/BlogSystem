@@ -16,6 +16,24 @@
                 namespaces: new[] { "BlogSystem.Web.Controllers" });
 
             routes.MapRoute(
+                name: "Users info",
+                url: "Users/{userName}",
+                defaults: new { controller = "Users", action = "Info" },
+                namespaces: new[] { "BlogSystem.Web.Controllers" });
+
+            routes.MapRoute(
+                name: "Users upload",
+                url: "Users/Upload/{userName}",
+                defaults: new { controller = "Users", action = "Upload" },
+                namespaces: new[] { "BlogSystem.Web.Controllers" });
+
+            routes.MapRoute(
+                name: "Users edit",
+                url: "Users/{action}/{userName}",
+                defaults: new { controller = "Users", action = "Edit" },
+                namespaces: new[] { "BlogSystem.Web.Controllers" });
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
