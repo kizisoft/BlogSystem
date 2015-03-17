@@ -59,6 +59,35 @@
             return this.PartialView("All", model);
         }
 
+
+        [HttpGet]
+        public ActionResult Items(int id, int page = 1, int perPage = 0)
+        {
+            perPage = perPage > 0 ? perPage : int.Parse(this.ViewBag.Settings.Get["Comments Per Page"]);
+            var totalPages = (int)Math.Ceiling(this.comments.All().Count(x => x.BlogPostId == id) / (decimal)perPage);
+
+            var commentsDb = this.comments.All()
+                .Where(x => x.BlogPostId == id)
+                .OrderBy(x => x.CreatedOn)
+                .Skip(perPage * (page - 1))
+                .Take(perPage)
+                .Project()
+                .To<CommentViewModel>()
+                .ToArray();
+
+            var model = new CommentIndexViewModel
+            {
+                Id = id,
+                HasComments = commentsDb.Count() > 0,
+                Comments = commentsDb,
+                CurrentPage = page,
+                TotalPages = totalPages
+            };
+
+            return this.PartialView("_ItemsPartial", model);
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(int id, CommentInputModel model)
@@ -113,8 +142,9 @@
                     return this.JsonError(HttpStatusCode.Forbidden, "You can not vote for your comment!");
                 }
 
-                userDb.Points += this.DoVote(id, userDb.Id, votes, factor);
-                this.users.Update(userDb);
+                var autorDb = this.users.GetById(commentDb.Autor.Id);
+                autorDb.Points += this.DoVote(id, userDb.Id, votes, factor);
+                this.users.Update(autorDb);
                 this.users.SaveChanges();
 
                 var model = Mapper.Map<Comment, CommentViewModel>(commentDb);

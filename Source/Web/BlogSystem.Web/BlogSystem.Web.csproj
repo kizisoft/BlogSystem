@@ -518,6 +518,7 @@
     <Content Include="Views\Users\Info.cshtml" />
     <Content Include="Views\Comment\_VotePartial.cshtml" />
     <Content Include="Views\Users\_AvatarPartial.cshtml" />
+    <Content Include="Views\Comment\_ItemsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Users\" />

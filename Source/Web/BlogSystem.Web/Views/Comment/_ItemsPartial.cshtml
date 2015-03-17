@@ -1,0 +1,29 @@
+﻿@model BlogSystem.Web.ViewModels.Comment.CommentIndexViewModel
+
+@if (Model.HasComments)
+{
+    @Html.AntiForgeryToken()
+    <ul>
+        @{int i = 1;}
+        @foreach (var comment in Model.Comments)
+        {
+            int perPage = int.Parse(this.ViewBag.Settings.Get["Comments Per Page"]);
+            ViewBag.CommentNumber = i + perPage * (Model.CurrentPage - 1);
+            @Html.Partial("_CommentDetailPartial", comment)
+            i++;
+        }
+    </ul>
+
+    @Ajax.Pagination(Url.Action("Items", new { id = Model.Id }), Model,
+        new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "comments-items",
+            OnFailure = "showJsonError"
+        }, new { @class = "comments-nav" });
+}
+else
+{
+    <h4>No comments.</h4>
+}

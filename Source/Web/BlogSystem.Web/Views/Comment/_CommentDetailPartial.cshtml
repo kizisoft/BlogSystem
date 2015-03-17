@@ -1,42 +1,40 @@
 ﻿@model BlogSystem.Web.ViewModels.Comment.CommentViewModel
 
-@if (Model.IsVisible)
-{
-    <li class="comment clearfix">
-        <div class="comment-header">
-            <div class="user-data-pic">
-                @if (Model.Autor.AvatarUrl == null)
-                {
-                    <span class="user-data-pic-glyph fa fa-user"></span>
-                }
-                else
-                {
-                    <img src="@Model.Autor.AvatarUrl" class="user-data-pic-img" alt="Avatar of @Model.Autor.UserName" width="40" height="40" />
-                }
-            </div>
-
-            <div class="user-info clearfix">
-                <div class="user-info-name"><a href="@Url.Action("Info", "Users", new { userName = Model.Autor.UserName })">@Model.Autor.UserName</a></div>
-                <span class="user-info-points">points: <b>@Model.Autor.Points</b></span>
-            </div>
-
-            <div class="comment-data">
-                <span class="comment-data-id">@ViewBag.CommentNumber</span>
-                <span class="comment-data-time">@Model.CreatedOn.ToShortTimeString()</span>
-                <span class="comment-data-date">@Model.CreatedOn.ToShortDateString()</span>
-            </div>
+<li class="comment clearfix">
+    <div class="comment-header">
+        <div class="user-data-pic">
+            @if (Model.Autor.AvatarUrl == null)
+            {
+                <span class="user-data-pic-glyph fa fa-user"></span>
+            }
+            else
+            {
+                <img src="@Model.Autor.AvatarUrl" class="user-data-pic-img" alt="Avatar of @Model.Autor.UserName" width="40" height="40" />
+            }
         </div>
 
-        <div class="comment-body raw clearfix">
+        <div class="user-info clearfix">
+            <div class="user-info-name"><a href="@Url.Action("Info", "Users", new { userName = Model.Autor.UserName })">@Model.Autor.UserName</a></div>
+            <span class="user-info-points">points: <b>@Model.Autor.Points</b></span>
+        </div>
+
+        <div class="comment-data">
+            <span class="comment-data-id">@ViewBag.CommentNumber</span>
+            <span class="comment-data-time">@Model.CreatedOn.ToShortTimeString()</span>
+            <span class="comment-data-date">@Model.CreatedOn.ToShortDateString()</span>
+        </div>
+    </div>
+
+    <div class="comment-body raw clearfix">
+        @if (Model.IsVisible)
+        {
             @Html.Partial("_VotePartial", Model)
             @Html.Raw(Model.Content)
-        </div>
-    </li>
-}
-else
-{
-    <li>
-        <p>This comment is not visible!</p>
-        <p>@Model.ReasonToHide</p>
-    </li>
-}
+        }
+        else
+        {
+            <p>This comment is not visible!</p>
+            <p>@Model.ReasonToHide</p>
+        }
+    </div>
+</li>

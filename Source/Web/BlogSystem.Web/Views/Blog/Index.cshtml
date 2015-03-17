@@ -69,7 +69,7 @@
                         xhr = new XMLHttpRequest();
 
                     e.preventDefault();
-                    formData.append('__RequestVerificationToken', $('.vote input[name="__RequestVerificationToken"').val());
+                    formData.append('__RequestVerificationToken', $('#comments-items input[name="__RequestVerificationToken"').val());
                     xhr.addEventListener('load', function (data) {
                         if (this.status == 200) {
                             $(vote).replaceWith(data.target.response);
