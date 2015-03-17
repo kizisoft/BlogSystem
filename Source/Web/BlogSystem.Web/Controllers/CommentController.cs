@@ -35,58 +35,16 @@
         [HttpGet]
         public ActionResult All(int id, int page = 1, int perPage = 0)
         {
-            perPage = perPage > 0 ? perPage : int.Parse(this.ViewBag.Settings.Get["Comments Per Page"]);
-            var totalPages = (int)Math.Ceiling(this.comments.All().Count(x => x.BlogPostId == id) / (decimal)perPage);
-
-            var commentsDb = this.comments.All()
-                .Where(x => x.BlogPostId == id)
-                .OrderBy(x => x.CreatedOn)
-                .Skip(perPage * (page - 1))
-                .Take(perPage)
-                .Project()
-                .To<CommentViewModel>()
-                .ToArray();
-
-            var model = new CommentIndexViewModel
-            {
-                Id = id,
-                HasComments = commentsDb.Count() > 0,
-                Comments = commentsDb,
-                CurrentPage = page,
-                TotalPages = totalPages
-            };
-
+            var model = this.GetCommentIndexViewModel(id, page, perPage);
             return this.PartialView("All", model);
         }
-
 
         [HttpGet]
         public ActionResult Items(int id, int page = 1, int perPage = 0)
         {
-            perPage = perPage > 0 ? perPage : int.Parse(this.ViewBag.Settings.Get["Comments Per Page"]);
-            var totalPages = (int)Math.Ceiling(this.comments.All().Count(x => x.BlogPostId == id) / (decimal)perPage);
-
-            var commentsDb = this.comments.All()
-                .Where(x => x.BlogPostId == id)
-                .OrderBy(x => x.CreatedOn)
-                .Skip(perPage * (page - 1))
-                .Take(perPage)
-                .Project()
-                .To<CommentViewModel>()
-                .ToArray();
-
-            var model = new CommentIndexViewModel
-            {
-                Id = id,
-                HasComments = commentsDb.Count() > 0,
-                Comments = commentsDb,
-                CurrentPage = page,
-                TotalPages = totalPages
-            };
-
+            var model = this.GetCommentIndexViewModel(id, page, perPage);
             return this.PartialView("_ItemsPartial", model);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -121,6 +79,31 @@
         public ActionResult VoteDown(int id)
         {
             return this.Vote<VoteDown>(id, this.votesDown, -1);
+        }
+
+        private CommentIndexViewModel GetCommentIndexViewModel(int id, int page, int perPage)
+        {
+            perPage = perPage > 0 ? perPage : int.Parse(this.ViewBag.Settings.Get["Comments Per Page"]);
+            var totalPages = (int)Math.Ceiling(this.comments.All().Count(x => x.BlogPostId == id) / (decimal)perPage);
+
+            var commentsDb = this.comments.All()
+                .Where(x => x.BlogPostId == id)
+                .OrderBy(x => x.CreatedOn)
+                .Skip(perPage * (page - 1))
+                .Take(perPage)
+                .Project()
+                .To<CommentViewModel>()
+                .ToArray();
+
+            var model = new CommentIndexViewModel
+            {
+                Id = id,
+                HasComments = commentsDb.Count() > 0,
+                Comments = commentsDb,
+                CurrentPage = page,
+                TotalPages = totalPages
+            };
+            return model;
         }
 
         private ActionResult Vote<T>(int id, IRepository<T> votes, int factor) where T : Vote, new()
