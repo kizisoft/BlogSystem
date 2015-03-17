@@ -17,17 +17,18 @@
 
             <div class="user-info clearfix">
                 <div class="user-info-name"><a href="@Url.Action("Info", "Users", new { userName = Model.Autor.UserName })">@Model.Autor.UserName</a></div>
-                <span class="user-info-points">points: <b>35666</b></span>
+                <span class="user-info-points">points: <b>@Model.Autor.Points</b></span>
             </div>
 
             <div class="comment-data">
-                <span class="comment-data-id">@Model.Id</span>
+                <span class="comment-data-id">@ViewBag.CommentNumber</span>
                 <span class="comment-data-time">@Model.CreatedOn.ToShortTimeString()</span>
                 <span class="comment-data-date">@Model.CreatedOn.ToShortDateString()</span>
             </div>
         </div>
 
-        <div class="comment-body raw">
+        <div class="comment-body raw clearfix">
+            @Html.Partial("_VotePartial", Model)
             @Html.Raw(Model.Content)
         </div>
     </li>

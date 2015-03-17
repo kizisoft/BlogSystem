@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Web;
     using System.Web.Mvc;
+    using System.Web.Mvc.Ajax;
 
     using Helpers.Server;
 
@@ -10,15 +11,26 @@
     {
         private readonly string url;
         private readonly IPageable pageable;
+        private readonly AjaxOptions ajaxOptions;
         private readonly object htmlAttributes;
         private readonly string size;
+
+        private string urlAttribute;
 
         public PaginationBox(string url, IPageable pageable, object htmlAttributes, PaginationSize size)
         {
             this.url = url + "?page=";
+            this.urlAttribute = "href";
             this.pageable = pageable;
             this.htmlAttributes = htmlAttributes;
             this.size = this.SizeToBootstrapClass(size);
+        }
+
+        public PaginationBox(string url, IPageable pageable, AjaxOptions ajaxOptions, object htmlAttributes, PaginationSize size)
+            : this(url, pageable, htmlAttributes, size)
+        {
+            this.urlAttribute = "data-ajax-url";
+            this.ajaxOptions = ajaxOptions;
         }
 
         public string ToHtmlString()
@@ -43,7 +55,7 @@
 
         private string RenderPagination()
         {
-            if (this.pageable.PagesCount < 1 || this.pageable.MaxVisiblePages < 1 || this.pageable.PagesCount < 1 || this.pageable.PreviousPage < 1 || this.pageable.NextPage < 1)
+            if (this.pageable.CurrentPage < 1 || this.pageable.TotalPages < 1)
             {
                 return string.Empty;
             }
@@ -55,69 +67,94 @@
             var pagination = new TagBuilder("ul");
             pagination.AddCssClass(this.size);
 
-            var liPrevious = new TagBuilder("li");
-
-            var aPrevious = new TagBuilder("a");
-            var urlPrevious = this.url + this.pageable.PreviousPage;
-            aPrevious.Attributes["href"] = urlPrevious;
-            aPrevious.Attributes["aria-label"] = "Previous";
-
-            var spanPrevious = new TagBuilder("span");
-            spanPrevious.Attributes.Add("aria-hidden", "true");
-            spanPrevious.SetInnerText("\u00AB");
-
-            aPrevious.InnerHtml += spanPrevious;
-            liPrevious.InnerHtml += aPrevious;
-            pagination.InnerHtml += liPrevious;
-
-            int count = this.pageable.PagesCount > this.pageable.MaxVisiblePages ? this.pageable.MaxVisiblePages : this.pageable.PagesCount;
-            for (int i = 1; i <= count; i++)
+            if (this.pageable.TotalPages == 1)
             {
-                var li = new TagBuilder("li");
-                if (i == this.pageable.CurrentPage)
+                return string.Empty;
+            }
+
+            if (this.pageable.CurrentPage > 1)
+            {
+                this.AddNavLi(pagination, this.pageable.CurrentPage - 1, "\u00AB");
+            }
+
+            this.CreatePages(pagination, this.pageable.CurrentPage, this.pageable.TotalPages);
+
+            if (this.pageable.CurrentPage < this.pageable.TotalPages)
+            {
+                this.AddNavLi(pagination, this.pageable.CurrentPage + 1, "\u00BB");
+            }
+
+            wrapper.InnerHtml += pagination;
+            return wrapper.ToString();
+        }
+
+        private void CreatePages(TagBuilder pagination, int currentPage, int pagesCount)
+        {
+            bool hasPoints = false;
+            int start = 1;
+            int end = pagesCount - 1;
+
+            if (pagesCount > 5)
+            {
+                this.AddNavLi(pagination, 1, "1");
+
+                if (currentPage < 5)
                 {
-                    var span = new TagBuilder("span");
-                    span.SetInnerText(i.ToString());
-                    li.InnerHtml += span;
-                    li.AddCssClass("active");
-                }
-                else if (count < this.pageable.PagesCount && i == count - 1)
-                {
-                    var span = new TagBuilder("span");
-                    span.SetInnerText("...");
-                    li.InnerHtml += span;
-                    li.AddCssClass("disabled");
+                    start = 2;
                 }
                 else
                 {
-                    var a = new TagBuilder("a");
-                    var url = this.url + i;
-                    a.Attributes["href"] = url;
-                    a.SetInnerText(i.ToString());
-                    li.InnerHtml += a;
+                    this.AddLi(pagination, "...", "disabled");
+                    start = currentPage < pagesCount ? currentPage - 1 : pagesCount - 2;
                 }
 
-                pagination.InnerHtml += li;
+                if (currentPage < pagesCount - 2 && currentPage != pagesCount - 3)
+                {
+                    end = currentPage > 1 ? currentPage + 1 : 3;
+                    hasPoints = true;
+                }
             }
 
-            var liNext = new TagBuilder("li");
+            for (int i = start; i <= end; i++)
+            {
+                this.AddNavLi(pagination, i, i.ToString());
+            }
 
-            var aNext = new TagBuilder("a");
-            var urlNext = this.url + this.pageable.NextPage;
-            aNext.Attributes["href"] = urlNext;
-            aNext.Attributes["aria-label"] = "Next";
+            if (hasPoints)
+            {
+                this.AddLi(pagination, "...", "disabled");
+            }
 
-            var spanNext = new TagBuilder("span");
-            spanNext.Attributes.Add("aria-hidden", "true");
-            spanNext.SetInnerText("\u00BB");
+            this.AddNavLi(pagination, pagesCount, pagesCount.ToString());
+        }
 
-            aNext.InnerHtml += spanNext;
-            liNext.InnerHtml += aNext;
-            pagination.InnerHtml += liNext;
+        private void AddNavLi(TagBuilder ul, int page, string value)
+        {
+            if (page == this.pageable.CurrentPage)
+            {
+                this.AddLi(ul, value, "active");
+                return;
+            }
 
-            wrapper.InnerHtml += pagination;
+            var li = new TagBuilder("li");
+            var a = new TagBuilder("a");
+            var ajaxAttributes = this.ajaxOptions != null ? this.ajaxOptions.ToUnobtrusiveHtmlAttributes() : null;
+            a.MergeAttributes(ajaxAttributes);
+            var url = this.url + page;
+            a.Attributes.Add(this.urlAttribute, url);
+            a.SetInnerText(value);
+            li.InnerHtml += a;
+            ul.InnerHtml += li;
+        }
 
-            return wrapper.ToString();
+        private void AddLi(TagBuilder ul, string value, string cssClass)
+        {
+            var li = new TagBuilder("li");
+            var span = new TagBuilder("span");
+            span.SetInnerText(value);
+            li.InnerHtml += span;
+            li.AddCssClass(cssClass);
+            ul.InnerHtml += li;
         }
     }
 }

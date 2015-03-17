@@ -1,6 +1,7 @@
 ﻿namespace BlogSystem.Data.Models
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -33,6 +34,10 @@
 
         [StringLength(100)]
         public string ReasonToHide { get; set; }
+
+        public virtual ICollection<VoteUp> VotesUp { get; set; }
+
+        public virtual ICollection<VoteDown> VotesDown { get; set; }
 
         [Index]
         public bool IsDeleted { get; set; }

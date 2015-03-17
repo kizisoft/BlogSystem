@@ -55,6 +55,8 @@ namespace BlogSystem.Data.Migrations
             context.SystemSettings.Add(new SystemSetting { Name = "Foursquare Profile", Value = "Foursquare Profile" });
             context.SystemSettings.Add(new SystemSetting { Name = "Google Profile", Value = "Google+ Profile" });
             context.SystemSettings.Add(new SystemSetting { Name = "RSS Url", Value = "RSS Url" });
+            context.SystemSettings.Add(new SystemSetting { Name = "Comments Per Page", Value = "10" });
+
         }
     }
 }

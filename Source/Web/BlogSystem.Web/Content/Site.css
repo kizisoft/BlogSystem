@@ -620,7 +620,6 @@ article.content:last-of-type {
 }
 
 .user-info-name {
-    color: #4183C4;
     font-weight: bold;
 }
 
@@ -670,6 +669,7 @@ article.content:last-of-type {
     padding: 4% 5%;
 }
 
+/*#region Avatar */
 .avatar-wrapper {
     width: 130px;
     text-align: center;
@@ -712,4 +712,138 @@ article.content:last-of-type {
 .user-details dt, .user-details dd {
     margin-bottom: 0;
     display: inline-block;
+}
+/*#endregion Avatar */
+
+/*#region Votes */
+.vote {
+    margin: 0 0 10px 10px;
+    float: right;
+    font-weight: bold;
+    text-align: center;
+}
+
+.vote-up, .vote-down {
+    padding: 0 3px;
+    display: inline-block;
+    width: 30px;
+    font-size: 0.9em;
+    background-color: #888;
+    border: 1px solid #888;
+    -moz-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    transition: all 0.3s linear;
+}
+
+    .vote-up span, .vote-down span {
+        color: #ddd;
+    }
+
+    a.vote-up:hover, .vote-up.active {
+        color: #fff;
+        background-color: #390;
+        border: 1px solid #380;
+    }
+
+    a.vote-down:hover, .vote-down.active {
+        color: #fff;
+        background-color: #d33;
+        border: 1px solid #a33;
+    }
+
+.vote-green {
+    color: #390;
+    background-color: #bfb;
+}
+
+.vote-red {
+    color: #d33;
+    background-color: #fdd;
+}
+
+@-webkit-keyframes slideup {
+    0%, 30%, 60% {
+        top: 0;
+    }
+
+    15%, 45% {
+        top: -3px;
+    }
+}
+
+@-moz-keyframes slideup {
+    0%, 30%, 60% {
+        top: 0;
+    }
+
+    15%, 45% {
+        top: -3px;
+    }
+}
+
+@keyframes slideup {
+    0%, 30%, 60% {
+        top: 0;
+    }
+
+    15%, 45% {
+        top: -3px;
+    }
+}
+
+a.vote-up:hover span {
+    position: relative;
+    -moz-animation: slideup 1s infinite;
+    -o-animation: slideup 1s infinite;
+    -webkit-animation: slideup 1s infinite;
+    animation: slideup 1s infinite;
+}
+
+@-webkit-keyframes slidedown {
+    0%, 30%, 60% {
+        top: 0;
+    }
+
+    15%, 45% {
+        top: 3px;
+    }
+}
+
+@-moz-keyframes slidedown {
+    0%, 30%, 60% {
+        top: 0;
+    }
+
+    15%, 45% {
+        top: 3px;
+    }
+}
+
+@keyframes slidedown {
+    0%, 30%, 60% {
+        top: 0;
+    }
+
+    15%, 45% {
+        top: 3px;
+    }
+}
+
+a.vote-down:hover span {
+    position: relative;
+    -moz-animation: slidedown 1s infinite;
+    -o-animation: slidedown 1s infinite;
+    -webkit-animation: slidedown 1s infinite;
+    animation: slidedown 1s infinite;
+}
+/*#endregion Votes */
+
+.ajax-error {
+    padding: 10px;
+    position: absolute;
+    width: 30%;
+    opacity: 0.5;
+    color: #d33;
+    background-color: #fdd;
 }

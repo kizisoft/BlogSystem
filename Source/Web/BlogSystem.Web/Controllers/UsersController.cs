@@ -31,6 +31,7 @@
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public ActionResult Info(string userName)
         {
             UserViewModel model;

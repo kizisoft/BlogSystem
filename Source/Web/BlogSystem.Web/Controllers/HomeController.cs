@@ -14,7 +14,6 @@
     public class HomeController : BaseController
     {
         private const int PostsPerPageDefaultValue = 5;
-        private const int MaxVisiblePagesDefaultValue = 5;
 
         private readonly IRepository<BlogPost> blogPosts;
 
@@ -39,9 +38,8 @@
             var indexViewModel = new HomeIndexViewModel
             {
                 BlogPosts = blogPostsDb,
-                MaxVisiblePages = MaxVisiblePagesDefaultValue,
                 CurrentPage = page,
-                PagesCount = pagesCount
+                TotalPages = pagesCount
             };
 
             return this.View(indexViewModel);

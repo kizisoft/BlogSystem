@@ -39,6 +39,7 @@
                             @blogPost.CreatedOn.ToShortTimeString()
                         </li>
                         <li>
+                            Html.Pagination
                             <span class="glyphicon glyphicon-comment"></span>
                             8965 Comments
                         </li>
@@ -84,7 +85,7 @@
             </article>
         }
 
-        @Html.Pagination("Index", "Home", Model, new { @class = "blog-posts-nav" }, PaginationSize.Large)
+        @Html.Pagination(Url.Action("Index"), Model, new { @class = "blog-posts-nav" }, PaginationSize.Large)
     }
     else
     {

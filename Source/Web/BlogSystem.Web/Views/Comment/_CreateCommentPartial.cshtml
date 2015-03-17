@@ -7,10 +7,10 @@
             new AjaxOptions
             {
                 HttpMethod = "Post",
-                InsertionMode = InsertionMode.ReplaceWith,
+                InsertionMode = InsertionMode.Replace,
                 UpdateTargetId = "comments",
                 LoadingElementId = "create-comment-load",
-                OnFailure = "showCommentsJsonError"
+                OnFailure = "showJsonError"
             }, new { @class = "form-horizontal comments-create clearfix" }))
         {
             @Html.AntiForgeryToken()
@@ -38,15 +38,3 @@
         </div>
     }
 </div>
-
-<script type="text/javascript">
-    function showCommentsJsonError(data) {
-        $('#comment-error')
-            .text(data.responseJSON.ErrorMessage)
-            .fadeIn()
-            .delay(3000)
-            .fadeOut(function () {
-                this.innerText = '';
-            });
-    }
-</script>

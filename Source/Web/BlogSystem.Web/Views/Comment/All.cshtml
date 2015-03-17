@@ -5,19 +5,23 @@
 
 <h2>@ViewBag.Title</h2>
 <hr />
-@Html.Partial("_CreateCommentPartial", new BlogSystem.Web.ViewModels.Comment.CommentInputModel { Id = Model.BlogPostId })
+@Html.Partial("_CreateCommentPartial", new BlogSystem.Web.ViewModels.Comment.CommentInputModel { Id = Model.Id })
 <hr />
 
 @if (Model.HasComments)
 {
     <ul>
+        @{int i = 1;}
         @foreach (var comment in Model.Comments)
         {
-            @Html.Partial("_CommentDetailPartial", comment);
+            int perPage = int.Parse(this.ViewBag.Settings.Get["Comments Per Page"]);
+            ViewBag.CommentNumber = i + perPage * (Model.CurrentPage - 1);
+            @Html.Partial("_CommentDetailPartial", comment)
+            i++;
         }
     </ul>
 
-    @Ajax.Pagination("Index", Model,
+    @Ajax.Pagination(Url.Action("All", new { id = Model.Id }), Model,
         new AjaxOptions
         {
             HttpMethod = "GET",

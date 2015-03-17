@@ -4,8 +4,12 @@
 
     using Helpers.Server;
 
-    public class HomeIndexViewModel : PageableBase
+    public class HomeIndexViewModel : IPageable
     {
         public IEnumerable<HomeBlogPostViewModel> BlogPosts { get; set; }
+
+        public int TotalPages { get; set; }
+
+        public int CurrentPage { get; set; }
     }
 }

@@ -8,20 +8,7 @@
     <hr />
     <div class="row">
         <div class="col-md-3">
-            <div class="avatar-wrapper">
-                <div class="user-pic plate">
-                    @if (string.IsNullOrEmpty(Model.AvatarUrl))
-                    {
-                        <span id="user-glyph" class="fa fa-user"></span>
-                        <img id="user-pic" class="hidden img-responsive" src="@Model.AvatarUrl" />
-                    }
-                    else
-                    {
-                        <span id="user-glyph" class="fa fa-user hidden"></span>
-                        <img id="user-pic" class="img-responsive" src="@Model.AvatarUrl" />
-                    }
-                </div>
-            </div>
+            @Html.Partial("_AvatarPartial", new BlogSystem.Web.ViewModels.Users.AvatarViewModel { IsUsedForEdit = false, AvatarUrl = Model.AvatarUrl })
         </div>
         <ul class="col-md-9 user-details">
             <li>

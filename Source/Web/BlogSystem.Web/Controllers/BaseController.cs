@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Net;
     using System.Web.Mvc;
     using System.Web.Routing;
 
@@ -24,17 +25,12 @@
             this.settings = settings;
         }
 
-        protected JsonResult JsonError(string errorMessage)
+        protected JsonResult JsonError(HttpStatusCode statusCode, string errorMessage)
         {
-            this.Response.StatusCode = 400;
-
+            this.Response.StatusCode = (int)statusCode;
             return new JsonResult
             {
-                Data = new
-                {
-                    Success = false,
-                    ErrorMessage = errorMessage
-                }
+                Data = new { errorMessage = errorMessage }
             };
         }
 

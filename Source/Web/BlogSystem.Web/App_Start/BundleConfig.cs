@@ -24,7 +24,8 @@
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/font-awesome-4.3.0/css/font-awesome.css",
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/notifier.css"));
 
             BundleTable.EnableOptimizations = false;
         }

@@ -240,6 +240,7 @@
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\SanitizableContentBaseViewModel.cs" />
     <Compile Include="ViewModels\Sidebar\SidebarViewModel.cs" />
+    <Compile Include="ViewModels\Users\AvatarViewModel.cs" />
     <Compile Include="ViewModels\Users\UserInputModel.cs" />
     <Compile Include="ViewModels\Users\UserViewModel.cs" />
   </ItemGroup>
@@ -255,6 +256,7 @@
     <Content Include="Content\Images\Pages.png" />
     <Content Include="Content\Images\SystemSettings.png" />
     <Content Include="Content\Images\Users.png" />
+    <Content Include="Content\notifier.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -301,6 +303,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\notifier\notifier.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -508,11 +511,13 @@
     <Content Include="Views\Comment\_CommentsPartial.cshtml" />
     <Content Include="Views\Comment\_CreateCommentPartial.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\tinymce_small.cshtml" />
-    <Content Include="Views\Comment\Index.cshtml" />
+    <Content Include="Views\Comment\All.cshtml" />
     <Content Include="Views\Comment\_CommentDetailPartial.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\_UploadPartial.cshtml" />
     <Content Include="Views\Users\Info.cshtml" />
+    <Content Include="Views\Comment\_VotePartial.cshtml" />
+    <Content Include="Views\Users\_AvatarPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Users\" />

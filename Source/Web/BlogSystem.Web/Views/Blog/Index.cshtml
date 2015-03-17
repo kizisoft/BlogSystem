@@ -59,4 +59,43 @@
 
 @section scripts {
     <script type="text/javascript" src="~/Scripts/img-responsive/img-responsive.js"></script>
+    <script type="text/javascript" src="~/Scripts/notifier/notifier.js"></script>
+    <script type="text/javascript">
+        function commentsLoaded() {
+            $('#comments').on('click', 'a', function (e) {
+                if ($(e.target).closest('.vote-up').length || $(e.target).closest('.vote-down').length) {
+                    var vote = e.currentTarget.parentElement,
+                        formData = new FormData(),
+                        xhr = new XMLHttpRequest();
+
+                    e.preventDefault();
+                    formData.append('__RequestVerificationToken', $('.vote input[name="__RequestVerificationToken"').val());
+                    xhr.addEventListener('load', function (data) {
+                        if (this.status == 200) {
+                            $(vote).replaceWith(data.target.response);
+                            Notifier.notifyInfo('Thank you for your vote!');
+                        } else {
+                            showJsonError(data.target);
+                        }
+                    });
+                    xhr.addEventListener('error', function (error) {
+                        Notifier.notifyError('Something bad happend. Please try again!');
+                    });
+
+                    xhr.open("POST", this.pathname, true);
+                    xhr.send(formData);
+                }
+            });
+        }
+
+        function showJsonError(data) {
+            if (data.status === 500) {
+                Notifier.notifyError('Something bad happend. Please try again!');
+                return;
+            }
+
+            var response = JSON.parse(data.responseText);
+            Notifier.notifyError(response.errorMessage);
+        }
+    </script>
 }

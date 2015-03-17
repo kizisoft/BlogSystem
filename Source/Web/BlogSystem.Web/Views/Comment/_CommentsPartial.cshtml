@@ -1,8 +1,9 @@
 ﻿@model int
 
-<a href="@Url.Action("Index", "Comment", new { id = Model })" class="btn btn-primary" id="show-comments-btn"
+<a href="@Url.Action("All", "Comment", new { id = Model })" c class="btn btn-primary" id="show-comments-btn"
    data-ajax="true"
-   data-ajax-failure="showCommentsJsonError"
+   data-ajax-failure="showJsonError"
+   data-ajax-success="commentsLoaded"
    data-ajax-method="GET"
    data-ajax-mode="replace"
    data-ajax-update="#comments"

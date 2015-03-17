@@ -93,7 +93,7 @@
 
             var spanArrow = new TagBuilder("span");
             spanArrow.AddCssClass("glyphicon " + spanArrowClass);
-            spanArrow.Attributes.Add("aria-hidden=", "true");
+            spanArrow.Attributes.Add("aria-hidden", "true");
 
             var spanPagerText = new TagBuilder("span");
             spanPagerText.AddCssClass("pager-text " + spanPagerTextClass);

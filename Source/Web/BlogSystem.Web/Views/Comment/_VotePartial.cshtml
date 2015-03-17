@@ -1,0 +1,20 @@
+﻿@model BlogSystem.Web.ViewModels.Comment.CommentViewModel
+@{
+    int votesCount = Model.VotesUp.Count - Model.VotesDown.Count;
+    string voteColor = votesCount < 0 ? "vote-red" : "vote-green";
+}
+
+<div class="vote @voteColor">
+    @Html.AntiForgeryToken()
+    <div class="vote-count">@votesCount</div>
+    @if (Model.User == null || Model.User.Id == Model.Autor.Id)
+    {
+        <span class="vote-up"><span class="fa fa-thumbs-up"></span></span>
+        <span class="vote-down"><span class="fa fa-thumbs-up fa-rotate-180"></span></span>
+    }
+    else
+    {
+        <a href="@Url.Action("VoteUp", new { id = Model.Id })" class="vote-up@(Model.ActiveUp)"><span class="fa fa-thumbs-up"></span></a>
+        <a href="@Url.Action("VoteDown", new { id = Model.Id })" class="vote-down@(Model.ActiveDown)"><span class="fa fa-thumbs-up fa-rotate-180"></span></a>
+    }
+</div>
