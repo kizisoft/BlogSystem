@@ -59,7 +59,6 @@
 
 @section scripts {
     <script type="text/javascript" src="~/Scripts/img-responsive/img-responsive.js"></script>
-    <script type="text/javascript" src="~/Scripts/notifier/notifier.js"></script>
     <script type="text/javascript">
         function commentsLoaded() {
             $('#comments').on('click', 'a', function (e) {
@@ -86,16 +85,6 @@
                     xhr.send(formData);
                 }
             });
-        }
-
-        function showJsonError(data) {
-            if (data.status === 500) {
-                Notifier.notifyError('Something bad happend. Please try again!');
-                return;
-            }
-
-            var response = JSON.parse(data.responseText);
-            Notifier.notifyError(response.errorMessage);
         }
     </script>
 }

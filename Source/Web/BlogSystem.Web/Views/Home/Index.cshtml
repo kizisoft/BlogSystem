@@ -39,7 +39,6 @@
                             @blogPost.CreatedOn.ToShortTimeString()
                         </li>
                         <li>
-                            Html.Pagination
                             <span class="glyphicon glyphicon-comment"></span>
                             8965 Comments
                         </li>
@@ -65,20 +64,28 @@
                 <footer class="article-footer">
                     <ul class="row">
                         <li class="col-xs-6 col-sm-3 autor">
-                            <div class="glyphicon glyphicon-user"></div>
-                            <div class="text-holder text-autor">@blogPost.Autor.UserName</div>
+                            <div class="li-holder">
+                                <div class="glyphicon glyphicon-user"></div>
+                                <div class="text-holder text-autor">@blogPost.Autor.UserName</div>
+                            </div>
                         </li>
                         <li class="col-xs-6 col-sm-3 date">
-                            <div class="glyphicon glyphicon-calendar"></div>
-                            <div class="text-holder text-date">@blogPost.CreatedOn.ToShortDateString()</div>
+                            <div class="li-holder">
+                                <div class="glyphicon glyphicon-calendar"></div>
+                                <div class="text-holder text-date">@blogPost.CreatedOn.ToShortDateString()</div>
+                            </div>
                         </li>
                         <li class="col-xs-6 col-sm-3 time">
-                            <div class="glyphicon glyphicon-time"></div>
-                            <div class="text-holder text-time">@blogPost.CreatedOn.ToShortTimeString()</div>
+                            <div class="li-holder">
+                                <div class="glyphicon glyphicon-time"></div>
+                                <div class="text-holder text-time">@blogPost.CreatedOn.ToShortTimeString()</div>
+                            </div>
                         </li>
                         <li class="col-xs-6 col-sm-3 comments">
-                            <div class="glyphicon glyphicon-comment"></div>
-                            <div class="text-holder text-comments">8965 Comments</div>
+                            <div class="li-holder">
+                                <div class="glyphicon glyphicon-comment"></div>
+                                <div class="text-holder text-comments">8965 Comments</div>
+                            </div>
                         </li>
                     </ul>
                 </footer>
