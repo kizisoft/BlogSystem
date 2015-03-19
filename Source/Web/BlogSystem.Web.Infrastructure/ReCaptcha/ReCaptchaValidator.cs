@@ -1,4 +1,4 @@
-﻿namespace BlogSystem.Common.ReCaptcha
+﻿namespace BlogSystem.Web.Infrastructure.ReCaptcha
 {
     using System.Collections.Generic;
     using System.Net;

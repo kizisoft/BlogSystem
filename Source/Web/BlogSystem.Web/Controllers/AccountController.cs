@@ -5,7 +5,7 @@
     using System.Web;
     using System.Web.Mvc;
 
-    using BlogSystem.Common.ReCaptcha;
+    using BlogSystem.Web.Infrastructure.ReCaptcha;
     using BlogSystem.Data.Models;
     using BlogSystem.Web.ViewModels.Account;
 
