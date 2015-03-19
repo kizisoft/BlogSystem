@@ -5,6 +5,7 @@
     using System.Web;
     using System.Web.Mvc;
 
+    using BlogSystem.Common.ReCaptcha;
     using BlogSystem.Data.Models;
     using BlogSystem.Web.ViewModels.Account;
 
@@ -157,6 +158,13 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            var recaptchaResponse = this.Request["g-recaptcha-response"];
+            var recaptchaValidator = new ReCaptchaValidator(recaptchaResponse, ViewBag.Settings.Get["ReCaptcha secret"]);
+            if (!recaptchaValidator.Success)
+            {
+                ModelState.AddModelError(string.Empty, "The anti-bot verification is not solved.");
+            }
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };

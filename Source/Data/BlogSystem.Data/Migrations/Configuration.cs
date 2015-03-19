@@ -56,6 +56,8 @@ namespace BlogSystem.Data.Migrations
             context.SystemSettings.Add(new SystemSetting { Name = "Google Profile", Value = "Google+ Profile" });
             context.SystemSettings.Add(new SystemSetting { Name = "RSS Url", Value = "RSS Url" });
             context.SystemSettings.Add(new SystemSetting { Name = "Comments Per Page", Value = "10" });
+            context.SystemSettings.Add(new SystemSetting { Name = "ReCaptcha key", Value = "6Ld1eP4SAAAAAIz25clEdLemL8wMPa75LdiIKOPc" });
+            context.SystemSettings.Add(new SystemSetting { Name = "ReCaptcha secret", Value = "6Ld1eP4SAAAAALRG5kUYhhyl2UmyWTw6l6z2r7gi" });
         }
     }
 }
