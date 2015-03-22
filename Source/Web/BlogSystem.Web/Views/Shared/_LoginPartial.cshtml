@@ -17,7 +17,8 @@
                     }
                     <li>@Html.ActionLink("Profile details", "Info", "Users", new { userName = User.Identity.GetUserName(), Area = string.Empty }, null)</li>
                     <li>@Html.ActionLink("Edit profile", "Edit", "Users", new { userName = User.Identity.GetUserName(), Area = string.Empty }, null)</li>
-                    <li>@Html.ActionLink("Change password", "ChangePassword", "Manage", new { Area = string.Empty }, null)</li>
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink("Manage logins", "Index", "Manage", new { Area = string.Empty }, null)</li>
                 </ul>
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>

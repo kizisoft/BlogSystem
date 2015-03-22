@@ -11,6 +11,7 @@
     using BlogSystem.Data.Models;
     using BlogSystem.Web.Infrastructure;
 
+    [RequireHttps]
     public abstract class BaseController : Controller
     {
         private readonly IRepository<SystemSetting> settings;

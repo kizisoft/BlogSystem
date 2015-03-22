@@ -17,7 +17,7 @@ body {
     margin-right: 10px;
 }
 
-.loader, #user-error, #comment-error {
+.loader, #user-error {
     display: none;
 }
 
@@ -703,9 +703,10 @@ a.vote-down:hover span {
 }
 /*#endregion Votes */
 
-.validation-summary-errors {
-    margin-bottom: 15px;
-    padding: 10px 15px;
+.validation-summary-errors, .static-errors, .text-danger > span {
+    margin: 5px 0 15px 0;
+    padding: 5px 10px;
+    display: block;
     color: #d33;
     background-color: #fdd;
     border: 1px solid #a33;

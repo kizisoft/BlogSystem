@@ -1,12 +1,16 @@
 ﻿namespace BlogSystem.Web
 {
     using System;
+
     using BlogSystem.Data;
     using BlogSystem.Data.Models;
+
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin;
     using Microsoft.Owin.Security.Cookies;
+    using Microsoft.Owin.Security.Google;
+
     using Owin;
 
     public partial class Startup
@@ -54,15 +58,17 @@
             //     consumerKey: "",
             //     consumerSecret: "");
 
-            // app.UseFacebookAuthentication(
-            //     appId: "",
-            //     appSecret: "");
 
-            // app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            // {
-            //     ClientId = "",
-            //     ClientSecret = ""
-            // });
+            // ToDo: Remove keys from source code
+            app.UseFacebookAuthentication(
+                appId: "1418898885088552",
+                appSecret: "ad842f8e458bb77d0c18528ae94660b8");
+
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "647148582415-qfqnsnl1q0l05qhdk25qft9u7e1tfg21.apps.googleusercontent.com",
+                ClientSecret = "JWaNRHVwoFRqG7ISxl27fbel"
+            });
         }
     }
 }

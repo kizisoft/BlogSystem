@@ -358,7 +358,8 @@
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return this.View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    var userName = loginInfo.Email == null ? null : loginInfo.Email.Substring(0, loginInfo.Email.IndexOf('@'));
+                    return this.View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = userName, Email = loginInfo.Email });
             }
         }
 
@@ -382,7 +383,7 @@
                     return this.View("ExternalLoginFailure");
                 }
 
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, RealName = info.ExternalIdentity.Name };
                 var result = await this.UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -406,7 +407,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            this.AuthenticationManager.SignOut();
+            this.AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie, DefaultAuthenticationTypes.ExternalCookie);
             return this.RedirectToAction("Index", "Home");
         }
 
