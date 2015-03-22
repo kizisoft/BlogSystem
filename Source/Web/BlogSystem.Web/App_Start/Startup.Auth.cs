@@ -1,6 +1,7 @@
 ﻿namespace BlogSystem.Web
 {
     using System;
+    using System.Configuration;
 
     using BlogSystem.Data;
     using BlogSystem.Data.Models;
@@ -58,16 +59,14 @@
             //     consumerKey: "",
             //     consumerSecret: "");
 
-
-            // ToDo: Remove keys from source code
             app.UseFacebookAuthentication(
-                appId: "1418898885088552",
-                appSecret: "ad842f8e458bb77d0c18528ae94660b8");
+                appId: ConfigurationManager.AppSettings["facebookAppId"],
+                appSecret: ConfigurationManager.AppSettings["facebookAppSecret"]);
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "647148582415-qfqnsnl1q0l05qhdk25qft9u7e1tfg21.apps.googleusercontent.com",
-                ClientSecret = "JWaNRHVwoFRqG7ISxl27fbel"
+                ClientId = ConfigurationManager.AppSettings["googleClientId"],
+                ClientSecret = ConfigurationManager.AppSettings["googleClientSecret"]
             });
         }
     }
