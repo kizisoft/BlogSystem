@@ -4,11 +4,13 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
+    using AutoMapper;
+
     using BlogSystem.Data.Models;
     using BlogSystem.Web.Infrastructure.BlogURL;
     using BlogSystem.Web.Infrastructure.Mapping;
 
-    public class BlogPostSimpleViewModel : SanitizableContentBaseViewModel, IMapFrom<BlogPost>
+    public class BlogPostSimpleViewModel : SanitizableContentBaseViewModel, IMapFrom<BlogPost>, IHaveCustomMappings
     {
         private IBlogUrlGenerator blogUrlGenerator;
 
@@ -38,6 +40,13 @@
             {
                 return this.blogUrlGenerator.GenerateUrl(this.Id, this.Title, this.CreatedOn);
             }
+        }
+
+        public int CommentsCount { get; set; }
+
+        public void CreateMappings(IConfiguration configuration)
+        {
+            configuration.CreateMap<BlogPost, BlogPostSimpleViewModel>().ForMember(m => m.CommentsCount, o => o.MapFrom(x => x.Comments.Count));
         }
     }
 }

@@ -40,7 +40,7 @@
                         </li>
                         <li>
                             <span class="glyphicon glyphicon-comment"></span>
-                            8965 Comments
+                            @blogPost.CommentsCount Comments
                         </li>
                     </ul>
                 </header>
@@ -61,7 +61,10 @@
                     <hr />
                 </div>
 
-                <footer class="article-footer"></footer>
+                <footer class="article-footer">
+                    <div class="g-plusone" data-href="@blogPost.Url"></div>
+                    <div class="g-plus" data-action="share" data-annotation="bubble" data-href="@blogPost.Url"></div>
+                </footer>
             </article>
         }
 
@@ -74,5 +77,6 @@
 </section>
 
 @section scripts {
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script type="text/javascript" src="~/Scripts/img-responsive/img-responsive.js"></script>
 }

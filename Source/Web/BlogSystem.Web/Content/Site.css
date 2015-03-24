@@ -432,7 +432,7 @@ dd {
     width: 30%;
 }
 
-.user-data-pic, .user-data-pic-img, .user-data-pic-glyph, .comment-header {
+.user-data-pic, .user-data-pic-img, .user-data-pic-glyph, .comment-header, .login-btn, .login-btn span:first-of-type::before {
     -moz-transition: all 0.3s linear;
     -o-transition: all 0.3s linear;
     -webkit-transition: all 0.3s linear;
@@ -712,3 +712,77 @@ a.vote-down:hover span {
     border: 1px solid #a33;
     border-radius: 5px;
 }
+
+.static-success {
+    margin: 5px 0 15px 0;
+    padding: 5px 10px;
+    color: #390;
+    background-color: #bfb;
+}
+
+.login-btn {
+    margin-bottom: 10px;
+    width: 100%;
+    opacity: 0.9;
+    color: #ddd;
+    border-radius: 4px;
+}
+
+@media (max-width: 1200px) {
+    .login-btn {
+        min-width: 190px;
+        width: 51%;
+    }
+}
+
+.login-btn span {
+    vertical-align: text-bottom;
+}
+
+    .login-btn span:first-of-type {
+        padding: 5px 0;
+        width: 30px;
+        float: left;
+        font-size: 1.5em;
+    }
+
+    .login-btn span:last-of-type {
+        vertical-align: -5px;
+    }
+
+.login-btn:hover {
+    opacity: 1;
+    color: #fff;
+}
+
+    .login-btn:hover span:first-of-type {
+        opacity: 1;
+        color: #fff;
+    }
+
+        .login-btn:hover span:first-of-type::before {
+            -moz-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            -o-transform: rotate(360deg);
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+
+.google-btn {
+    background-color: #DD4B39;
+    border: 1px solid #a23427;
+}
+
+    .google-btn span:first-of-type {
+        border-right: 1px solid #BE3F2B;
+    }
+
+.facebook-btn {
+    background-color: #3b5998;
+    border: 1px solid #2a4275;
+}
+
+    .facebook-btn span:first-of-type {
+        padding-right: 6px;
+        border-right: 1px solid #304a81;
+    }

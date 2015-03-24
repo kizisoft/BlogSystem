@@ -1,0 +1,20 @@
+﻿@model IEnumerable<AuthenticationDescription>
+@using Microsoft.Owin.Security
+
+<div id="socialLoginList" class="text-center">
+    <p>
+        @foreach (AuthenticationDescription p in Model)
+        {
+            string provider = p.AuthenticationType.ToLower();
+            string providerIconClass;
+            switch (provider)
+            {
+                case "google": providerIconClass = "fa fa-google-plus";
+                    break;
+                default: providerIconClass = "fa fa-" + provider;
+                    break;
+            }
+            <button type="submit" class="login-btn @provider-btn" id="@provider" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"><span class="@providerIconClass"></span><span>Log in with @p.Caption</span></button>
+        }
+    </p>
+</div>
