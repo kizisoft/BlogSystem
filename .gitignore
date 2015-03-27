@@ -183,3 +183,4 @@ UpgradeLog*.htm
 FakesAssemblies/
 Users
 /Source/AppSettingsSecrets.config
+/Source/Web/BlogSystem.Web/Web.Release.config
