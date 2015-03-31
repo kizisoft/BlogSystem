@@ -4,7 +4,7 @@
     string voteColor = votesCount < 0 ? "vote-red" : "vote-green";
 }
 
-<div id="votes" class="vote @voteColor">
+<div class="vote @voteColor">
     <div class="vote-count">@votesCount</div>
     @if (Model.User == null || Model.User.Id == Model.Autor.Id)
     {

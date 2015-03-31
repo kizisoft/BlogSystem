@@ -69,19 +69,22 @@
         function commentsLoaded() {
             $('#comments').on('click', 'a', function (e) {
                 var $target = $(e.target),
-                  $element, type, path, formData, xhr;
+                  $up, $down, $element, type, path, formData, xhr;
 
-                $element = $target.closest('.vote-up') || $target.closest('.vote-down') || [];
-                if ($element != []) {
+                $up = $target.closest('.vote-up');
+                $down = $target.closest('.vote-down');
+
+                if ($up.length || $down.length) {
                     e.preventDefault();
+                    $element = $up.length ? $up : $down;
                     type = $element.data('type');
-                    path = type === 'up' ? '@Url.Action("VoteUp", "Comment", new { id =Model.Id})' : '@Url.Action("VoteDown", "Comment", new { id = Model.Id })';
-                    formData = new FormData(),
+                    path = (type === 'up' ? '@Url.Action("VoteUp", "Comment")' : '@Url.Action("VoteDown", "Comment")') + '/' + $element.data('id');
+                    formData = new FormData();
                     xhr = new XMLHttpRequest();
                     formData.append('__RequestVerificationToken', $('#comments-items input[name="__RequestVerificationToken"').val());
                     xhr.addEventListener('load', function (data) {
                         if (this.status == 200) {
-                            $('#votes').replaceWith(data.target.response);
+                            $target.closest('.vote').replaceWith(data.target.response);
                             Notifier.notifyInfo('Thank you for your vote!');
                         } else {
                             showJsonError(data.target);
