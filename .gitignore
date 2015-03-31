@@ -184,3 +184,4 @@ FakesAssemblies/
 Users
 /Source/AppSettingsSecrets.config
 /Source/Web/BlogSystem.Web/Web.Release.config
+/Source/Web/BlogSystem.Web/Web.Debug.config
