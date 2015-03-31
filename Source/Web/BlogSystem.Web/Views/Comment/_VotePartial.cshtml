@@ -4,7 +4,7 @@
     string voteColor = votesCount < 0 ? "vote-red" : "vote-green";
 }
 
-<div class="vote @voteColor">
+<div id="votes" class="vote @voteColor">
     <div class="vote-count">@votesCount</div>
     @if (Model.User == null || Model.User.Id == Model.Autor.Id)
     {
@@ -13,7 +13,7 @@
     }
     else
     {
-        <a href="@Url.Action("VoteUp", new { id = Model.Id })" class="vote-up@(Model.ActiveUp)"><span class="fa fa-thumbs-up"></span></a>
-        <a href="@Url.Action("VoteDown", new { id = Model.Id })" class="vote-down@(Model.ActiveDown)"><span class="fa fa-thumbs-up fa-rotate-180"></span></a>
+        <a data-id="@Model.Id" data-type="up" class="vote-up@(Model.ActiveUp)"><span class="fa fa-thumbs-up"></span></a>
+        <a data-id="@Model.Id" data-type="down" class="vote-down@(Model.ActiveDown)"><span class="fa fa-thumbs-up fa-rotate-180"></span></a>
     }
 </div>

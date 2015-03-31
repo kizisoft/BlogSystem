@@ -9,8 +9,11 @@ html, body {
 }
 
 body {
-    padding-top: 50px;
     color: #666;
+}
+
+.navbar {
+    border-radius: 0;
 }
 
 .loader {

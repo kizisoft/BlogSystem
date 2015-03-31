@@ -64,19 +64,24 @@
 @section scripts {
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script type="text/javascript" src="~/Scripts/img-responsive/img-responsive.js"></script>
+    <script type="text/javascript" src="~/Scripts/main.js"></script>
     <script type="text/javascript">
         function commentsLoaded() {
             $('#comments').on('click', 'a', function (e) {
-                if ($(e.target).closest('.vote-up').length || $(e.target).closest('.vote-down').length) {
-                    var vote = e.currentTarget.parentElement,
-                        formData = new FormData(),
-                        xhr = new XMLHttpRequest();
+                var $target = $(e.target),
+                  $element, type, path, formData, xhr;
 
+                $element = $target.closest('.vote-up') || $target.closest('.vote-down') || [];
+                if ($element != []) {
                     e.preventDefault();
+                    type = $element.data('type');
+                    path = type === 'up' ? '@Url.Action("VoteUp", "Comment", new { id =Model.Id})' : '@Url.Action("VoteDown", "Comment", new { id = Model.Id })';
+                    formData = new FormData(),
+                    xhr = new XMLHttpRequest();
                     formData.append('__RequestVerificationToken', $('#comments-items input[name="__RequestVerificationToken"').val());
                     xhr.addEventListener('load', function (data) {
                         if (this.status == 200) {
-                            $(vote).replaceWith(data.target.response);
+                            $('#votes').replaceWith(data.target.response);
                             Notifier.notifyInfo('Thank you for your vote!');
                         } else {
                             showJsonError(data.target);
@@ -86,7 +91,7 @@
                         Notifier.notifyError('Something bad happend. Please try again!');
                     });
 
-                    xhr.open("POST", this.pathname, true);
+                    xhr.open("POST", path, true);
                     xhr.send(formData);
                 }
             });
