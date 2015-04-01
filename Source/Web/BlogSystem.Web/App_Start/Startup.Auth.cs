@@ -58,7 +58,6 @@
             // app.UseTwitterAuthentication(
             //     consumerKey: "",
             //     consumerSecret: "");
-
             app.Use(async (context, next) =>
             {
                 if (string.Equals(context.Request.Headers["X-Forwarded-Proto"], "https", StringComparison.InvariantCultureIgnoreCase))
@@ -77,21 +76,22 @@
             {
                 ClientId = ConfigurationManager.AppSettings["googleClientId"],
                 ClientSecret = ConfigurationManager.AppSettings["googleClientSecret"]
-                //Provider = new GoogleOAuth2AuthenticationProvider
-                //{
-                //    OnApplyRedirect = ctx =>
-                //    {
-                //        return;
-                //    },
-                //    OnAuthenticated = ctx =>
-                //    {
-                //        return System.Threading.Tasks.Task.FromResult(0);
-                //    },
-                //    OnReturnEndpoint = ctx =>
-                //    {
-                //        return System.Threading.Tasks.Task.FromResult(0);
-                //    }
-                //}
+
+                // Provider = new GoogleOAuth2AuthenticationProvider
+                // {
+                //     OnApplyRedirect = ctx =>
+                //     {
+                //         return;
+                //     },
+                //     OnAuthenticated = ctx =>
+                //     {
+                //         return System.Threading.Tasks.Task.FromResult(0);
+                //     },
+                //     OnReturnEndpoint = ctx =>
+                //     {
+                //         return System.Threading.Tasks.Task.FromResult(0);
+                //     }
+                // }
             });
         }
     }

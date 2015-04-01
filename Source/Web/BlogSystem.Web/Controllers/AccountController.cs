@@ -5,8 +5,8 @@
     using System.Web;
     using System.Web.Mvc;
 
-    using BlogSystem.Web.Infrastructure.ReCaptcha;
     using BlogSystem.Data.Models;
+    using BlogSystem.Web.Infrastructure.ReCaptcha;
     using BlogSystem.Web.ViewModels.Account;
 
     using Microsoft.AspNet.Identity;

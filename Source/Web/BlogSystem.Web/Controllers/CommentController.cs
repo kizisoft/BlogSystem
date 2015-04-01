@@ -68,14 +68,14 @@
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //// [ValidateAntiForgeryToken]
         public ActionResult VoteUp(int id)
         {
             return this.Vote<VoteUp>(id, this.votesUp, 1);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //// [ValidateAntiForgeryToken]
         public ActionResult VoteDown(int id)
         {
             return this.Vote<VoteDown>(id, this.votesDown, -1);

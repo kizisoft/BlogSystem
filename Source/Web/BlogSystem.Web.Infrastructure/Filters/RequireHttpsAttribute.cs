@@ -19,9 +19,7 @@
                 return;
             }
 
-            if (string.Equals(filterContext.HttpContext.Request.Headers["X-Forwarded-Proto"],
-                "https",
-                StringComparison.InvariantCultureIgnoreCase))
+            if (string.Equals(filterContext.HttpContext.Request.Headers["X-Forwarded-Proto"], "https", StringComparison.InvariantCultureIgnoreCase))
             {
                 return;
             }
@@ -31,7 +29,7 @@
                 return;
             }
 
-            HandleNonHttpsRequest(filterContext);
+            this.HandleNonHttpsRequest(filterContext);
         }
     }
 }
