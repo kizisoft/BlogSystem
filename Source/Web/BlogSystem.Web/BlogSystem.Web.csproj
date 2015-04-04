@@ -252,6 +252,8 @@
     <Compile Include="ViewModels\SanitizableContentBaseViewModel.cs" />
     <Compile Include="ViewModels\Sidebar\SidebarViewModel.cs" />
     <Compile Include="ViewModels\Users\AvatarViewModel.cs" />
+    <Compile Include="ViewModels\Users\ImgurImageDataViewModel.cs" />
+    <Compile Include="ViewModels\Users\ImgurResponseViewModel.cs" />
     <Compile Include="ViewModels\Users\UserInputModel.cs" />
     <Compile Include="ViewModels\Users\UserViewModel.cs" />
   </ItemGroup>
@@ -473,11 +475,13 @@
     <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
+    <Content Include="Scripts\upload-user-pic\ajax-form-submit.js" />
     <Content Include="Scripts\upload-user-pic\upload-user-pic.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>

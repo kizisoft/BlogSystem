@@ -12,6 +12,11 @@
     using BlogSystem.Data.Models;
     using BlogSystem.Web.Infrastructure.Identity;
     using BlogSystem.Web.ViewModels.Users;
+    using System;
+    using System.Collections.Specialized;
+    using System.Text;
+    using Newtonsoft.Json;
+    using System.Threading.Tasks;
 
     [Authorize]
     public class UsersController : BaseController
@@ -87,41 +92,15 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Upload(string id, string source, string url, HttpPostedFileBase file)
+        public async Task<ActionResult> Upload(string id, string source, string url, HttpPostedFileBase file)
         {
             if (id == null || source == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, IncorrectRequestParameter);
             }
 
-            string fileExtention;
-            if (source == "url")
-            {
-                if (url == null)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, IncorrectRequestParameter);
-                }
-
-                var client = new WebClient();
-                try
-                {
-                    client.OpenRead(url);
-                }
-                catch (WebException)
-                {
-                    return new HttpNotFoundResult(InvalidUrlAddress);
-                }
-
-                var contentType = client.ResponseHeaders["content-type"];
-                if (this.IsContentTypeAllowed(contentType) == false)
-                {
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, UnsupportedFileFormat);
-                }
-
-                fileExtention = "." + contentType.Substring(contentType.IndexOf('/') + 1);
-                client.DownloadFile(url, Server.MapPath("~/Content/Users/") + id + fileExtention);
-            }
-            else
+            string image = url;
+            if (source == "file")
             {
                 if (file == null)
                 {
@@ -133,12 +112,80 @@
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest, UnsupportedFileFormat);
                 }
 
-                fileExtention = Path.GetExtension(file.FileName);
-                file.SaveAs(Server.MapPath("~/Content/Users/") + id + fileExtention);
+                using (var binaryReader = new BinaryReader(file.InputStream))
+                {
+                    image = Convert.ToBase64String(binaryReader.ReadBytes(file.ContentLength));
+                }
             }
 
-            return this.Content("/Content/Users/" + id + fileExtention);
+            byte[] response;
+            using (var client = new WebClient())
+            {
+                string clientID = "189a3981f79cc30";
+                client.Headers.Add("Authorization", "Client-ID " + clientID);
+                var values = new NameValueCollection { { "image", image } };
+                response = await client.UploadValuesTaskAsync("https://api.imgur.com/3/upload", values);
+            }
+
+            var result = JsonConvert.DeserializeObject<ImgurResponseViewModel>(Encoding.ASCII.GetString(response));
+
+            return this.Content(result.Data.Link);
         }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Upload(string id, string source, string url, HttpPostedFileBase file)
+        //{
+        //    if (id == null || source == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest, IncorrectRequestParameter);
+        //    }
+
+        //    string fileExtention;
+        //    if (source == "url")
+        //    {
+        //        if (url == null)
+        //        {
+        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, IncorrectRequestParameter);
+        //        }
+
+        //        var client = new WebClient();
+        //        try
+        //        {
+        //            client.OpenRead(url);
+        //        }
+        //        catch (WebException)
+        //        {
+        //            return new HttpNotFoundResult(InvalidUrlAddress);
+        //        }
+
+        //        var contentType = client.ResponseHeaders["content-type"];
+        //        if (this.IsContentTypeAllowed(contentType) == false)
+        //        {
+        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, UnsupportedFileFormat);
+        //        }
+
+        //        fileExtention = "." + contentType.Substring(contentType.IndexOf('/') + 1);
+        //        client.DownloadFile(url, Server.MapPath("~/Content/Users/") + id + fileExtention);
+        //    }
+        //    else
+        //    {
+        //        if (file == null)
+        //        {
+        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, IncorrectRequestParameter);
+        //        }
+
+        //        if (this.IsContentTypeAllowed(file.ContentType) == false)
+        //        {
+        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, UnsupportedFileFormat);
+        //        }
+
+        //        fileExtention = Path.GetExtension(file.FileName);
+        //        file.SaveAs(Server.MapPath("~/Content/Users/") + id + fileExtention);
+        //    }
+
+        //    return this.Content("/Content/Users/" + id + fileExtention);
+        //}
 
         private bool TryParseUser<T>(string userName, out T model)
         {

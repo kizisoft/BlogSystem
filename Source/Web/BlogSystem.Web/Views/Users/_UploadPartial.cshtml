@@ -2,7 +2,7 @@
 <!-- Modal -->
 <div class="modal fade" id="user-popup" tabindex="-1" role="dialog" aria-labelledby="user-popup-label" aria-hidden="true">
     <div class="modal-dialog">
-        @using (Html.BeginForm("Upload", "Users", null, FormMethod.Post, new { id = "uploader", @class = "modal-content form-horizontal clearfix" }))
+        @using (Html.BeginForm("Upload", "Users", null, FormMethod.Post, new { id = "uploader", @class = "modal-content form-horizontal clearfix", enctype = "multipart/form-data" }))
         {
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>

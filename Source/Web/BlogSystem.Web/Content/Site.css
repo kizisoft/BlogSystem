@@ -156,7 +156,15 @@ dd {
     width: 60px;
     line-height: 16px;
     color: #c6e1ff;
+    /*background: radial-gradient(ellipse at center, #3f668f 0,#6b9ed5 0,#6b9ed5 30%,#3f668f 100%);*/
+    background: #3f668f;
+    background: -moz-radial-gradient(center, ellipse cover, #3f668f 0, #6b9ed5 0, #6b9ed5 30%, #3f668f 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0,#3f668f), color-stop(0,#6b9ed5), color-stop(30%,#6b9ed5), color-stop(100%,#3f668f));
+    background: -webkit-radial-gradient(center, ellipse cover, #3f668f 0,#6b9ed5 0,#6b9ed5 30%,#3f668f 100%);
+    background: -o-radial-gradient(center, ellipse cover, #3f668f 0,#6b9ed5 0,#6b9ed5 30%,#3f668f 100%);
+    background: -ms-radial-gradient(center, ellipse cover, #3f668f 0,#6b9ed5 0,#6b9ed5 30%,#3f668f 100%);
     background: radial-gradient(ellipse at center, #3f668f 0,#6b9ed5 0,#6b9ed5 30%,#3f668f 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f668f', endColorstr='#3f668f',GradientType=1 );
     box-shadow: 3px 3px 5px 0 rgba(90, 90, 90, 0.75);
 }
 
