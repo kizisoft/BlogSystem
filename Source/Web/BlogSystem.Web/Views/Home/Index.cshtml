@@ -62,8 +62,13 @@
                 </div>
 
                 <footer class="article-footer">
-                    <div class="g-plusone" data-href="@blogPost.Url"></div>
-                    <div class="g-plus" data-action="share" data-annotation="bubble" data-href="@blogPost.Url"></div>
+                    <div class="social-holder-google">
+                        <div class="g-plusone" data-href="@blogPost.Url"></div>
+                        <div class="g-plus" data-action="share" data-annotation="bubble" data-height="24" data-href="@blogPost.Url"></div>
+                    </div>
+                    <div class="social-holder-fb">
+                        <div class="fb-like" data-href="@blogPost.Url" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+                    </div>
                 </footer>
             </article>
         }

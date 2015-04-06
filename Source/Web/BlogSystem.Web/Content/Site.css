@@ -797,3 +797,15 @@ a.vote-down:hover span {
         padding-right: 6px;
         border-right: 1px solid #304a81;
     }
+
+.social-holder-google, .social-holder-fb {
+    display: inline-block;
+}
+
+.social-holder-google {
+    margin: 0 40px 10px 0;
+}
+
+.social-holder-fb {
+    vertical-align: 39%;
+}
