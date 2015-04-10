@@ -1,22 +1,18 @@
 ﻿namespace BlogSystem.Web.Controllers
 {
-    using System.IO;
     using System.Linq;
     using System.Net;
+    using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
 
     using AutoMapper.QueryableExtensions;
 
+    using BlogSystem.Common.FileUploadServices.ImgurFileUpload;
     using BlogSystem.Data.Common.Repository;
     using BlogSystem.Data.Models;
     using BlogSystem.Web.Infrastructure.Identity;
     using BlogSystem.Web.ViewModels.Users;
-    using System;
-    using System.Collections.Specialized;
-    using System.Text;
-    using Newtonsoft.Json;
-    using System.Threading.Tasks;
 
     [Authorize]
     public class UsersController : BaseController
@@ -26,13 +22,15 @@
         private const string ForbiddenRequest = "Unauthorized request! You can only update your profile.";
         private const string InvalidUrlAddress = "URL address is invalid or not correct!URL address is invalid or not correct!";
 
+        private readonly IRepository<ImgurToken> tokens;
         private readonly IRepository<ApplicationUser> users;
         private readonly ApplicationUser currentUser;
 
-        public UsersController(ICurrentUser currentUser, IRepository<ApplicationUser> users)
+        public UsersController(ICurrentUser currentUser, IRepository<ApplicationUser> users, IRepository<ImgurToken> tokens)
         {
             this.users = users;
             this.currentUser = currentUser.Get();
+            this.tokens = tokens;
         }
 
         [HttpGet]
@@ -99,8 +97,43 @@
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, IncorrectRequestParameter);
             }
 
-            string image = url;
-            if (source == "file")
+            if (!UploadService.IsInitialized)
+            {
+                string clientId = this.ViewBag.Settings.Get["Imgur Client ID"];
+                string clientSecret = this.ViewBag.Settings.Get["Imgur Client Secret"];
+                var token = this.tokens.All().Where(x => x.ClientId == clientId).Project().To<ImgurTokenViewModel>().FirstOrDefault();
+                UploadService.Initialize(clientId, clientSecret, token);
+            }
+
+            var uploader = new UploadService();
+            IImageDataModel response;
+
+            if (source == "url")
+            {
+                if (url == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, IncorrectRequestParameter);
+                }
+
+                var client = new WebClient();
+                try
+                {
+                    client.OpenRead(url);
+                }
+                catch (WebException)
+                {
+                    return new HttpNotFoundResult(InvalidUrlAddress);
+                }
+
+                var contentType = client.ResponseHeaders["content-type"];
+                if (this.IsContentTypeAllowed(contentType) == false)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest, UnsupportedFileFormat);
+                }
+
+                response = await uploader.Upload(url);
+            }
+            else
             {
                 if (file == null)
                 {
@@ -112,80 +145,11 @@
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest, UnsupportedFileFormat);
                 }
 
-                using (var binaryReader = new BinaryReader(file.InputStream))
-                {
-                    image = Convert.ToBase64String(binaryReader.ReadBytes(file.ContentLength));
-                }
+                response = await uploader.Upload(file);
             }
 
-            byte[] response;
-            using (var client = new WebClient())
-            {
-                string clientID = "189a3981f79cc30";
-                client.Headers.Add("Authorization", "Client-ID " + clientID);
-                var values = new NameValueCollection { { "image", image } };
-                response = await client.UploadValuesTaskAsync("https://api.imgur.com/3/upload", values);
-            }
-
-            var result = JsonConvert.DeserializeObject<ImgurResponseViewModel>(Encoding.ASCII.GetString(response));
-
-            return this.Content(result.Data.Link);
+            return this.Content(response.Link);
         }
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Upload(string id, string source, string url, HttpPostedFileBase file)
-        //{
-        //    if (id == null || source == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest, IncorrectRequestParameter);
-        //    }
-
-        //    string fileExtention;
-        //    if (source == "url")
-        //    {
-        //        if (url == null)
-        //        {
-        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, IncorrectRequestParameter);
-        //        }
-
-        //        var client = new WebClient();
-        //        try
-        //        {
-        //            client.OpenRead(url);
-        //        }
-        //        catch (WebException)
-        //        {
-        //            return new HttpNotFoundResult(InvalidUrlAddress);
-        //        }
-
-        //        var contentType = client.ResponseHeaders["content-type"];
-        //        if (this.IsContentTypeAllowed(contentType) == false)
-        //        {
-        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, UnsupportedFileFormat);
-        //        }
-
-        //        fileExtention = "." + contentType.Substring(contentType.IndexOf('/') + 1);
-        //        client.DownloadFile(url, Server.MapPath("~/Content/Users/") + id + fileExtention);
-        //    }
-        //    else
-        //    {
-        //        if (file == null)
-        //        {
-        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, IncorrectRequestParameter);
-        //        }
-
-        //        if (this.IsContentTypeAllowed(file.ContentType) == false)
-        //        {
-        //            return new HttpStatusCodeResult(HttpStatusCode.BadRequest, UnsupportedFileFormat);
-        //        }
-
-        //        fileExtention = Path.GetExtension(file.FileName);
-        //        file.SaveAs(Server.MapPath("~/Content/Users/") + id + fileExtention);
-        //    }
-
-        //    return this.Content("/Content/Users/" + id + fileExtention);
-        //}
 
         private bool TryParseUser<T>(string userName, out T model)
         {

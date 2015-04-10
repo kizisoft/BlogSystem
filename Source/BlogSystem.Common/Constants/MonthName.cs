@@ -1,4 +1,4 @@
-﻿namespace BlogSystem.Web.Infrastructure.Constants
+﻿namespace BlogSystem.Common.Constants
 {
     public enum MonthName
     {

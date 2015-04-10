@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-@using BlogSystem.Web.Infrastructure.Constants
+@using BlogSystem.Common.Constants
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", new { Area = string.Empty }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))

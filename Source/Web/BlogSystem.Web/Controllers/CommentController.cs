@@ -16,8 +16,6 @@
 
     public class CommentController : BaseController
     {
-        private const int CommentsPerPageDefaultValue = 7;
-
         private readonly IRepository<Comment> comments;
         private readonly IRepository<ApplicationUser> users;
         private readonly IRepository<VoteUp> votesUp;

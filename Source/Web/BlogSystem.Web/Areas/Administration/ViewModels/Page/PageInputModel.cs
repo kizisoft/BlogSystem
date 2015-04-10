@@ -1,9 +1,9 @@
-﻿namespace BlogSystem.Web.Areas.Administration.ViewModels.BlogPost
+﻿namespace BlogSystem.Web.Areas.Administration.ViewModels.Page
 {
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class BlogPostInputModel : BlogPostSimpleInputModel
+    public class PageInputModel : PageSimpleInputModel
     {
         [Display(Name = "Id")]
         public int Id { get; set; }

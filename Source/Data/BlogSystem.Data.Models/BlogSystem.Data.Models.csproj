@@ -63,6 +63,7 @@
     <Compile Include="BlogPost.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="ContentHolder.cs" />
+    <Compile Include="ImgurToken.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemSetting.cs" />

@@ -16,9 +16,6 @@
         [StringLength(300, MinimumLength = 5)]
         public string Title { get; set; }
 
-        [StringLength(300, MinimumLength = 5)]
-        public string SubTitle { get; set; }
-
         [Required]
         [AllowHtml]
         public string Content { get; set; }

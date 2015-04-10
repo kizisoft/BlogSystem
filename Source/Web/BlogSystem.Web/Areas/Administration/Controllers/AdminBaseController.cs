@@ -2,8 +2,8 @@
 {
     using System.Web.Mvc;
 
+    using BlogSystem.Common.Constants;
     using BlogSystem.Web.Controllers;
-    using BlogSystem.Web.Infrastructure.Constants;
 
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class AdminBaseController : BaseController

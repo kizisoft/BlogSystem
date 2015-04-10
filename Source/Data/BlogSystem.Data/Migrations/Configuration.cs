@@ -3,8 +3,8 @@ namespace BlogSystem.Data.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
+    using BlogSystem.Common.Constants;
     using BlogSystem.Data.Models;
-    using BlogSystem.Web.Infrastructure.Constants;
 
     using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -58,6 +58,8 @@ namespace BlogSystem.Data.Migrations
             context.SystemSettings.Add(new SystemSetting { Name = "Comments Per Page", Value = "10" });
             context.SystemSettings.Add(new SystemSetting { Name = "ReCaptcha key", Value = "6Ld1eP4SAAAAAIz25clEdLemL8wMPa75LdiIKOPc" });
             context.SystemSettings.Add(new SystemSetting { Name = "ReCaptcha secret", Value = "6Ld1eP4SAAAAALRG5kUYhhyl2UmyWTw6l6z2r7gi" });
+            context.SystemSettings.Add(new SystemSetting { Name = "Imgur Client ID", Value = "189a3981f79cc30" });
+            context.SystemSettings.Add(new SystemSetting { Name = "Imgur Client Secret", Value = "b74594b806c4e8b8e8a93f4be9da84cf2f7a0923" });
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BlogSystem.Data.Models.Page>
+﻿@model IEnumerable<BlogSystem.Web.Areas.Administration.ViewModels.Page.PageSimpleViewModel>
 @{
     ViewBag.Title = "Pages";
 }
@@ -7,12 +7,22 @@
 <hr />
 <br />
 
+@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success pull-right" })
+<br />
+<br />
+<br />
+
 <div class="table-responsive text-center">
-    @if (Model != null)
+    @if (Model != null && Model.Count() > 0)
     {
         <table class="table table-bordered table-striped">
             <thead>
                 <tr class="info">
+                    <th>@Html.DisplayNameFor(model => model.Id)</th>
+                    <th>@Html.DisplayNameFor(model => model.Title)</th>
+                    <th>@Html.DisplayNameFor(model => model.IsDeleted)</th>
+                    <th>@Html.DisplayNameFor(model => model.CreatedOn)</th>
+                    <th>@Html.DisplayNameFor(model => model.ModifiedOn)</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -20,7 +30,16 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@Html.ActionLink("Edit", "Edit", new { }, new { @class = "btn btn-xs btn-success" })</td>
+                        <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                        <td>@Html.DisplayFor(modelItem => item.IsDeleted)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CreatedOn)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ModifiedOn)</td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-xs btn-danger" })
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-xs btn-primary" })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-xs btn-success" })
+                        </td>
                     </tr>
                 }
             </tbody>

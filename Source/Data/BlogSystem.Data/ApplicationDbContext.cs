@@ -28,6 +28,8 @@
 
         public IDbSet<SystemSetting> SystemSettings { get; set; }
 
+        public IDbSet<ImgurToken> ImgurTokens { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
