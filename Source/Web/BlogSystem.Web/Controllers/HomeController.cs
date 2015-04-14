@@ -16,10 +16,12 @@
         private const int PostsPerPageDefaultValue = 5;
 
         private readonly IRepository<BlogPost> blogPosts;
+        private readonly IRepository<Page> pages;
 
-        public HomeController(IRepository<BlogPost> blogPosts)
+        public HomeController(IRepository<BlogPost> blogPosts, IRepository<Page> pages)
         {
             this.blogPosts = blogPosts;
+            this.pages = pages;
         }
 
         [HttpGet]
@@ -43,6 +45,19 @@
             };
 
             return this.View(indexViewModel);
+        }
+
+        [ChildActionOnly]
+        ////[OutputCache(Duration = 6 * 10 * 60)]
+        public ActionResult Menu()
+        {
+            var menuItems = this.pages
+                .All()
+                .Where(p => !p.IsDeleted)
+                .Project().To<MenuItemViewModel>()
+                .ToList();
+
+            return this.PartialView("_Menu", menuItems);
         }
     }
 }

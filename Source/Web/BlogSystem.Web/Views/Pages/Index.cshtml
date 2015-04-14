@@ -1,0 +1,18 @@
+﻿@using BlogSystem.Common.Constants
+@model BlogSystem.Web.ViewModels.Pages.PageIndexViewModel
+@{
+    ViewBag.Title = Model.Title;
+}
+<div class="content plate page">
+    <div class="raw">
+        @Html.Raw(Model.Content)
+    </div>
+    <br />
+
+    <p class="clearfix">
+        @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
+        {
+            @Html.ActionLink("Edit", "Edit", "Pages", new { Area = "Administration", Id = Model.Id }, new { @class = "btn btn-success btn-sm pull-right" })
+        }
+    </p>
+</div>

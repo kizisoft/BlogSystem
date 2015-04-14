@@ -222,6 +222,7 @@
     <Compile Include="Controllers\ManageController.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\SidebarController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -246,6 +247,7 @@
     <Compile Include="ViewModels\Comment\CommentInputModel.cs" />
     <Compile Include="ViewModels\Comment\CommentViewModel.cs" />
     <Compile Include="ViewModels\Home\HomeIndexViewModel.cs" />
+    <Compile Include="ViewModels\Home\MenuItemViewModel.cs" />
     <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
@@ -254,6 +256,7 @@
     <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
     <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+    <Compile Include="ViewModels\Pages\PageIndexViewModel.cs" />
     <Compile Include="ViewModels\SanitizableContentBaseViewModel.cs" />
     <Compile Include="ViewModels\Sidebar\SidebarViewModel.cs" />
     <Compile Include="ViewModels\Users\AvatarViewModel.cs" />
@@ -270,6 +273,7 @@
     <Content Include="Content\font-awesome-4.3.0\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome-4.3.0\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\Images\BlogPosts.png" />
+    <Content Include="Content\Images\imgur.png" />
     <Content Include="Content\Images\Pages.png" />
     <Content Include="Content\Images\SystemSettings.png" />
     <Content Include="Content\Images\Users.png" />
@@ -546,6 +550,8 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
     <Content Include="Scripts\tinymce\langs\readme.md" />
     <Content Include="Views\Shared\_SocialLoginListPartial.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Pages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Users\" />

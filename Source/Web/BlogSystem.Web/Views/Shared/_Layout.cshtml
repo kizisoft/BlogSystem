@@ -34,6 +34,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        @Html.Action("Menu", "Home", routeValues: new { Area = string.Empty })
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>

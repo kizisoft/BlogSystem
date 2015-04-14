@@ -1,0 +1,6 @@
+﻿@model IEnumerable<BlogSystem.Web.ViewModels.Home.MenuItemViewModel>
+
+@foreach (var menuItem in Model)
+{
+    <li>@Html.ActionLink(menuItem.Title, "Index", "Pages", new { permalink = menuItem.Permalink }, null)</li>
+}
