@@ -1,9 +1,11 @@
 ﻿namespace BlogSystem.Web.Areas.Administration.ViewModels.BlogPost
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
     using BlogSystem.Data.Models;
+    using BlogSystem.Web.Areas.Administration.ViewModels.Tag;
     using BlogSystem.Web.Infrastructure.Mapping;
 
     public class BlogPostSimpleInputModel : IMapFrom<BlogPost>
@@ -28,6 +30,11 @@
         [UIHint("tinymce_full")]
         [Display(Name = "Content")]
         public string Content { get; set; }
+
+        [Required]
+        [UIHint("TagsViewModel")]
+        [Display(Name = "Tags")]
+        public ICollection<TagViewModel> Tags { get; set; }
 
         [Display(Name = "Meta Description")]
         public string MetaDescription { get; set; }

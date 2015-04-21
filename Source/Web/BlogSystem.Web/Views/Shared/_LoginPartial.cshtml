@@ -12,7 +12,7 @@
                 <ul class="dropdown-menu">
                     @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
                     {
-                        <li>@Html.ActionLink("Administration", "Index", "Administration/Home")</li>
+                        <li>@Html.ActionLink("Administration", "Index", "Administration/Home", new { Area = string.Empty }, null)</li>
                         <li class="divider"></li>
                     }
                     <li>@Html.ActionLink("Profile details", "Info", "Users", new { userName = User.Identity.GetUserName(), Area = string.Empty }, null)</li>

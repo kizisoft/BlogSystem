@@ -1,6 +1,8 @@
 ﻿namespace BlogSystem.Web.Areas.Administration.Controllers
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -10,15 +12,18 @@
     using BlogSystem.Data.Models;
     using BlogSystem.Web.Areas.Administration.ViewModels.BlogPost;
     using BlogSystem.Web.Infrastructure.Identity;
+    using BlogSystem.Web.Areas.Administration.ViewModels.Tag;
 
     public class BlogPostsController : AdminBaseController
     {
         private readonly IRepository<BlogPost> blogPosts;
+        private readonly IRepository<Tag> tags;
         private readonly ICurrentUser currentUser;
 
-        public BlogPostsController(IRepository<BlogPost> blogPosts, ICurrentUser currentUser)
+        public BlogPostsController(IRepository<BlogPost> blogPosts, IRepository<Tag> tags, ICurrentUser currentUser)
         {
             this.blogPosts = blogPosts;
+            this.tags = tags;
             this.currentUser = currentUser;
         }
 
@@ -96,6 +101,7 @@
                 return this.View(blogPost);
             }
 
+            var tagsDb = this.tags.All().ToList();
             var blogPostDb = this.blogPosts.GetById(blogPost.Id);
             if (blogPostDb == null)
             {
@@ -111,8 +117,10 @@
             blogPostDb.IsCommentsDisabled = blogPost.IsCommentsDisabled;
             blogPostDb.ModifiedOn = DateTime.Now;
 
+            this.ManageTags(blogPostDb, blogPost.Tags);
             this.blogPosts.Update(blogPostDb);
             this.blogPosts.SaveChanges();
+
 
             return this.RedirectToAction("Index");
         }
@@ -143,6 +151,29 @@
             this.blogPosts.SaveChanges();
 
             return this.RedirectToAction("Index");
+        }
+
+        private void ManageTags(BlogPost blogPost, ICollection<TagViewModel> tags)
+        {
+            var tagsDb = this.tags.All().ToList();
+            var tagsDbNames = tagsDb.Select(x => x.Name);
+            var tagsBlogPostNames = blogPost.Tags.Select(x => x.Name);
+            var tagsToAdd = tags.Where(x => !tagsDbNames.Contains(x.Name) || !tagsBlogPostNames.Contains(x.Name))
+                .Select(x => tagsDb.First(t => t.Name == x.Name) != null ? tagsDb.First(t => t.Name == x.Name) : new Tag { Name = x.Name });
+            foreach (var tag in tagsToAdd)
+            {
+                //blogPost.Tags.Add(tag);
+                tag.BlogPosts.Add(blogPost);
+            }
+
+            this.tags.SaveChanges();
+
+            var tagNames = tags.Select(x => x.Name);
+            List<Tag> tagsToRemove = new List<Tag>(blogPost.Tags.Where(x => !tagNames.Contains(x.Name)));
+            for (int i = 0; i < tagsToRemove.Count(); i++)
+            {
+                blogPost.Tags.Remove(tagsToRemove[i]);
+            }
         }
     }
 }

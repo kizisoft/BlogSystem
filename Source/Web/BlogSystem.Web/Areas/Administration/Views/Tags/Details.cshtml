@@ -1,0 +1,24 @@
+﻿@model BlogSystem.Web.Areas.Administration.ViewModels.Tag.TagViewModel
+@{
+    ViewBag.Title = "Tag Details";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<br />
+
+<dl class="dl-horizontal">
+    <dt>@Html.DisplayNameFor(model => model.Id)</dt>
+    <dd>@Html.DisplayFor(model => model.Id)</dd>
+
+    <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+    <dd>@Html.DisplayFor(model => model.Name)</dd>
+</dl>
+<br />
+
+<div class="row">
+    <div class="col-md-4">
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default pull-left" })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-success pull-right" })
+    </div>
+</div>

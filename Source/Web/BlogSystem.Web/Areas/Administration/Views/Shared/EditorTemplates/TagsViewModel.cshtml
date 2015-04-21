@@ -1,0 +1,16 @@
+﻿@model ICollection<BlogSystem.Web.Areas.Administration.ViewModels.Tag.TagViewModel>
+
+<div class="tags-root" contenteditable="true">
+    @if (Model != null && Model.Count > 0)
+    {
+        int i = 0;
+        foreach (var tag in Model)
+        {
+            @Html.DisplayFor(model => tag)
+            <input class="tag-name" type="hidden" name="Tags[@i].Name" value="@tag.Name" />
+            i++;
+        }
+    }
+
+    <input class="tag-input" type="text" name="tag" value="" />
+</div>

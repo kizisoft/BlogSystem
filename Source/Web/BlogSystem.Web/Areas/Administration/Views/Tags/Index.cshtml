@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BlogSystem.Web.Areas.Administration.ViewModels.Tag.TagViewModel>
+@{
+    ViewBag.Title = "Tags";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<br />
+
+@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success pull-right" })
+<br />
+<br />
+<br />
+
+<div class="table-responsive text-center">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr class="info">
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Name)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-xs btn-danger" })
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-xs btn-primary" })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-xs btn-success" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
