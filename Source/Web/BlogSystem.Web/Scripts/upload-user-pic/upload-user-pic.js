@@ -50,7 +50,7 @@
             formData.append('file', $sourceElement[0].files[0]);
         }
 
-        xhr.open("POST", this.action, true);
+        xhr.open('POST', this.action, true);
         xhr.send(formData);
     })
 

@@ -76,6 +76,7 @@ namespace BlogSystem.Web.App_Start
             kernel.Bind<IIdentity>().ToMethod(c => HttpContext.Current.User.Identity);
             kernel.Bind<IBlogUrlGenerator>().To<BlogUrlGenerator>();
             kernel.Bind<ISanitizer>().To<HtmlSanitizerAdapter>();
+            kernel.Bind<IBlogSystemData>().To<BlogSystemData>().WithConstructorArgument("context", c => new ApplicationDbContext());
         }
     }
 }

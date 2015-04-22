@@ -89,6 +89,7 @@
 }
 
 @section scripts {
+    <script type="text/javascript" src="~/Scripts/main.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             var $root = $('.tags-root'),
@@ -134,7 +135,18 @@
             });
 
             $input.on('input', function (e) {
-                console.log('Input');
+                var xhr = new XMLHttpRequest();
+                $(xhr).on('load', function (e) {
+                    if (e.target.status != 200) {
+                        showJsonError(e.target)
+                        return false;
+                    }
+
+                    var tags = JSON.parse(e.target.response);
+                });
+                var path = '@Url.Action("Find", "Tags")' + '?key=' + $input.val();
+                xhr.open('GET', path, true);
+                xhr.send();
             });
         });
     </script>

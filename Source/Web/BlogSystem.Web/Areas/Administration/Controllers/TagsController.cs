@@ -25,6 +25,12 @@
             return this.View(tags);
         }
 
+        public JsonResult Find(string key)
+        {
+            var tags = this.tags.All().Where(x => x.Name.Contains(key)).Project().To<TagViewModel>().ToList();
+            return this.Json(tags, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Details(int? id)
         {
             var tag = this.tags.All().Where(x => x.Id == id).Project().To<TagViewModel>().FirstOrDefault();
@@ -47,7 +53,7 @@
         {
             if (ModelState.IsValid)
             {
-                this.tags.Add(new Tag { Name = tag.Name });
+                this.tags.Add(new Tag { Name = tag.Name.ToLower() });
                 this.tags.SaveChanges();
 
                 return this.RedirectToAction("Index");
@@ -82,7 +88,7 @@
                 return this.HttpNotFound("No such Tag");
             }
 
-            tagDb.Name = tag.Name;
+            tagDb.Name = tag.Name.ToLower();
             this.tags.Update(tagDb);
             this.tags.SaveChanges();
             return this.RedirectToAction("Index");
