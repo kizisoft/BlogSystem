@@ -8,6 +8,7 @@
     using BlogSystem.Data.Common.Repository;
     using BlogSystem.Data.Models;
     using BlogSystem.Web.Areas.Administration.ViewModels.Tag;
+    using System.Collections.Generic;
 
     public class TagsController : AdminBaseController
     {
@@ -27,7 +28,12 @@
 
         public JsonResult Find(string key)
         {
-            var tags = this.tags.All().Where(x => x.Name.Contains(key)).Project().To<TagViewModel>().ToList();
+            var tags = new List<TagViewModel>();
+            if (!string.IsNullOrEmpty(key))
+            {
+                tags = this.tags.All().Where(x => x.Name.Contains(key)).Project().To<TagViewModel>().ToList();
+            }
+
             return this.Json(tags, JsonRequestBehavior.AllowGet);
         }
 

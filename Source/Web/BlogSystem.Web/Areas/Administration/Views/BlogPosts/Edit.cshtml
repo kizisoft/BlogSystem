@@ -51,7 +51,6 @@
         <div class="col-md-10">
             @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
-            <div id="tag-info" class="text-primary hidden">Tip: Input a tag and press Enter to add it.</div>
         </div>
     </div>
 
@@ -83,7 +82,7 @@
     <div class="row">
         <div class="col-md-4">
             @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default pull-left" })
-            <button on type="submit" class="btn btn-success pull-right">Save Changes</button>
+            <button type="submit" class="btn btn-success pull-right">Save Changes</button>
         </div>
     </div>
 }
@@ -93,9 +92,24 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var $root = $('.tags-root'),
-                $input = $('.tag-input');
+                $input = $('.tag-input'),
+                $info = $('#tag-info'),
+                $tags = $('#tags'),
+                isTagOperation = false,
+                isFocusLooseInProgress = false;
 
-            $root.on('keypress', function (e) {
+            $root.on('keypress', onKeypressHandler);
+            $root.on('click', '.glyphicon', removeTagHandler);
+            $root.on('click', takeRootFocusHandler);
+            $root.on('focus', takeRootFocusHandler);
+
+            $input.on('focus', takeFocusHandler);
+            $input.on('blur', looseFocusHandler);
+            $input.on('input', onInputHandler);
+
+            $tags.on('click', 'a', selectTagHandler);
+
+            function onKeypressHandler(e) {
                 if (e.keyCode === 13) {
                     e.preventDefault();
                     var val = $input.val().toLowerCase();
@@ -103,51 +117,91 @@
                         '\n<span class="glyphicon glyphicon-remove"></span></span><input class="tag-name" type="hidden" name="Tags[' +
                         $root.find('.tag-name').length + '].Name" value="' + val + '" />'));
                     $input.val('');
+                    checkInput();
                 }
-            });
+            }
 
-            $root.on('click', '.glyphicon', function (e) {
+            function removeTagHandler(e) {
                 var $span = $(this).parent();
+                isTagOperation = true;
+                checkInput(true);
                 $span.next('input').remove();
                 $span.remove();
                 var $inputs = $root.find('.tag-name');
-                for (var i = 0; i < $inputs.length; i++) {
+                for (var i = 0, length = $inputs.length; i < length; i++) {
                     $inputs[i].name = 'Tags[' + i + '].Name';
                 }
+            }
 
+            function takeRootFocusHandler(e) {
                 $input.focus();
-            });
+                if (isFocusLooseInProgress) {
+                    isTagOperation = true;
+                }
+            }
 
-            $root.on('focus', function (e) {
-                $(this).addClass('focused');
-                $('#tag-info').removeClass('hidden');
-                $input.focus();
-            });
-
-            $input.on('focus', function (e) {
+            function takeFocusHandler(e) {
                 $root.addClass('focused');
-                $('#tag-info').removeClass('hidden');
-            });
+                $info.removeClass('hidden');
+            }
 
-            $input.on('blur', function (e) {
-                $root.removeClass('focused');
-                $('#tag-info').addClass('hidden');
-            });
-
-            $input.on('input', function (e) {
-                var xhr = new XMLHttpRequest();
-                $(xhr).on('load', function (e) {
-                    if (e.target.status != 200) {
-                        showJsonError(e.target)
-                        return false;
+            function looseFocusHandler(e) {
+                isFocusLooseInProgress = true;
+                setTimeout(function () {
+                    if (isTagOperation) {
+                        isTagOperation = false;
+                    } else {
+                        $root.removeClass('focused');
+                        $info.addClass('hidden');
                     }
 
-                    var tags = JSON.parse(e.target.response);
-                });
-                var path = '@Url.Action("Find", "Tags")' + '?key=' + $input.val();
+                    $tags.addClass('hidden');
+                    isFocusLooseInProgress = false;
+                }, 300);
+            }
+
+            function selectTagHandler(e) {
+                var tagName = $(this).data('name');
+                $input.val(tagName);
+                isTagOperation = true;
+            }
+
+            function onInputHandler(e) {
+                var path = '@Url.Action("Find", "Tags")' + '?key=' + $input.val(),
+                    xhr = new XMLHttpRequest();
+                $(xhr).on('load', onLoadHandler);
                 xhr.open('GET', path, true);
                 xhr.send();
-            });
+            }
+
+            function onLoadHandler(e) {
+                if (e.target.status !== 200) {
+                    showJsonError(e.target)
+                    return false;
+                }
+
+                var tags = JSON.parse(e.target.response),
+                    tagsCount = tags.length;
+                $tags.find('li').remove();
+                if (tagsCount > 0) {
+                    $tags.removeClass('hidden');
+                    for (var i = 0; i < tagsCount; i++) {
+                        $tags.append('<li><a data-name="' + tags[i].Name + '"><span class="glyphicon glyphicon-tag"></span>' + tags[i].Name + '</a></li>');
+                    }
+                } else {
+                    $tags.addClass('hidden');
+                }
+            }
+
+            function checkInput(isFocused) {
+                var tagcCount = $root.find('.tag-name').length;
+                if (tagcCount == 3) {
+                    $input.toggleClass('hidden');
+                    if (isFocused) {
+                        $root.find('input.tag-name').focus();
+                    }
+                }
+            }
         });
     </script>
 }

@@ -1,6 +1,7 @@
 ﻿@model ICollection<BlogSystem.Web.Areas.Administration.ViewModels.Tag.TagViewModel>
 
-<div class="tags-root" contenteditable="true">
+<div id="tag-info" class="text-primary hidden">Tip: Input a tag and press Enter to add it. You can add maximum 3 tags.</div>
+<div class="tags-root">
     @if (Model != null && Model.Count > 0)
     {
         int i = 0;
@@ -12,5 +13,18 @@
         }
     }
 
-    <input class="tag-input" type="text" name="tag" value="" />
+    <div class="tags-input-root">
+        @if (Model.Count() < 3)
+        {
+            <input class="tag-input lower" type="text" name="tag" list="tags" autocomplete="off" value="" />
+            <div class="tag-input text-warning hidden">The maximum number of tags is reached.</div>
+        }
+        else
+        {
+            <input class="tag-input lower hidden" type="text" name="tag" list="tags" autocomplete="off" value="" />
+            <div class="tag-input text-warning">The maximum number of tags is reached.</div>
+        }
+
+        <ul id="tags" class="tags-options hidden"></ul>
+    </div>
 </div>

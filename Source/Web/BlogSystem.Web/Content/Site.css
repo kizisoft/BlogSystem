@@ -72,10 +72,6 @@ textarea {
     display: inline-block;
     max-width: 150px;
     font-weight: bold;
-    -moz-transition: background-color 0.4s ease-in-out;
-    -o-transition: background-color 0.4s ease-in-out;
-    -webkit-transition: background-color 0.4s ease-in-out;
-    transition: background-color 0.4s ease-in-out;
     border-radius: 5px;
     border-top: 2px solid #f3f3f3;
     border-left: 2px solid #f3f3f3;
@@ -327,10 +323,6 @@ dd {
 
     .recent-posts li {
         border-bottom: 1px solid #eee;
-        -moz-transition: background-color 0.3s linear;
-        -o-transition: background-color 0.3s linear;
-        -webkit-transition: background-color 0.3s linear;
-        transition: background-color 0.3s linear;
     }
 
         .recent-posts li:hover {
@@ -442,7 +434,19 @@ dd {
     width: 30%;
 }
 
-.user-data-pic, .user-data-pic-img, .user-data-pic-glyph, .comment-header, .login-btn, .login-btn span:first-of-type::before {
+.adm-link,
+.social li,
+.recent-posts li,
+.user-data-pic,
+.user-data-pic-img,
+.user-data-pic-glyph,
+.comment-header,
+.login-btn,
+.login-btn span:first-of-type::before,
+.vote-up,
+.vote-down,
+.tag span,
+.tags-options a {
     -moz-transition: all 0.3s linear;
     -o-transition: all 0.3s linear;
     -webkit-transition: all 0.3s linear;
@@ -604,10 +608,6 @@ dd {
     font-size: 0.9em;
     background-color: #888;
     border: 1px solid #888;
-    -moz-transition: all 0.3s linear;
-    -o-transition: all 0.3s linear;
-    -webkit-transition: all 0.3s linear;
-    transition: all 0.3s linear;
 }
 
     .vote-up span, .vote-down span {
@@ -811,25 +811,31 @@ a.vote-down:hover span {
 
 /*#region Tags */
 .tags-root {
-    padding: 5px 12px;
+    padding: 0 12px;
+    display: flex;
+    align-items: baseline;
     height: 34px;
     font-size: 14px;
     line-height: 1.42857143;
-    color: #555;
     border-radius: 4px;
     border: 1px solid #ccc;
 }
 
-.tag {
-    margin-right: 5px;
-    padding: 3px 5px;
+.tag, .tag-input {
+    margin: 5px 10px 5px 0;
+}
+
+.tag, .tags-options a {
+    padding: 0 5px;
+    display: inline-block;
     border: 1px solid #ddd;
+    border-radius: 2px;
+    color: #555;
     background-color: #eaf5fb;
 }
 
     .tag span {
         padding: 2px;
-        display: inline-block;
         border-radius: 2px;
         font-size: 0.8em;
         color: #ddd;
@@ -839,11 +845,69 @@ a.vote-down:hover span {
         .tag span:hover {
             color: #fff;
             background-color: #d33;
+            cursor: pointer;
         }
 
+.tags-input-root {
+    -ms-flex: 2;
+    flex: 2;
+}
+
 .tag-input {
-    border: none;
+    padding: 0 10px;
     outline: none;
+    width: 100%;
+    height: 22px;
+    resize: none;
+    border: 1px solid #ccc;
+}
+
+input.tag-input:focus {
+    background-color: #eaf5fb;
+}
+
+.tags-options {
+    padding: 10px 10px 0 10px;
+    position: relative;
+    width: 100%;
+    max-height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    z-index: 100;
+    background-color: rgba(249, 245, 173, 1);
+    border: 1px solid #ccc;
+    border-top: 1px dotted #ccc;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    box-shadow: 3px 3px 5px 0 rgba(90, 90, 90, 0.75);
+}
+
+    .tags-options li {
+        margin: 0 10px 10px 0;
+        display: inline-block;
+    }
+
+    .tags-options a:hover {
+        cursor: pointer;
+        color: #337ab7;
+        text-decoration: none;
+    }
+
+    .tags-options span {
+        margin-right: 5px;
+        font-size: 0.75em;
+    }
+
+#tag-info {
+    padding: 10px;
+    position: absolute;
+    bottom: 40px;
+    z-index: 1000;
+    border-radius: 4px;
+    border: 2px solid rgba(70, 184, 218, 0.9);
+    color: #46B8DA;
+    background-color: rgba(51, 51, 51, 0.9);
+    box-shadow: 3px 3px 5px 0 rgba(90, 90, 90, 0.75);
 }
 
 .focused {
