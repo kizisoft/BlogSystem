@@ -136,6 +136,7 @@ dd {
 }
 
 .title h2 {
+    margin-top: 10px;
     color: #222;
     font-size: 1.8em;
     font-weight: bold;
@@ -854,6 +855,7 @@ a.vote-down:hover span {
 }
 
 .tag-input {
+    margin-bottom: 0;
     padding: 0 10px;
     outline: none;
     width: 100%;
@@ -901,7 +903,7 @@ input.tag-input:focus {
 #tag-info {
     padding: 10px;
     position: absolute;
-    bottom: 40px;
+    top: -50px;
     z-index: 1000;
     border-radius: 4px;
     border: 2px solid rgba(70, 184, 218, 0.9);
@@ -919,4 +921,101 @@ input.tag-input:focus {
 .lower {
     text-transform: lowercase !important;
 }
+
+.home {
+    position: absolute !important;
+}
+
+.tags {
+    font-weight: bold;
+    line-height: 100%;
+    text-transform: uppercase;
+}
+
+    .tags span, .tag-articles .glyphicon {
+        color: #FF9900;
+    }
+
+    .tags a {
+        color: #55bff1;
+        color: #1FA2E1;
+    }
+
+        .tags a:hover {
+            color: #1FA2E1;
+            color: #55bff1;
+            text-decoration: none;
+        }
+
+        .tags a::after {
+            margin: 0 5px;
+            content: '//';
+            color: #ccc;
+            font-weight: normal;
+        }
+
+        .tags a:last-of-type::after {
+            content: none;
+        }
+
+.tag-search {
+    padding: 5px 0;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    background: #303030;
+}
+
+    .tag-search input, .tag-search button {
+        border-radius: 4px;
+        border: 1px solid #555;
+        background-color: #222;
+    }
+
+    .tag-search input {
+        margin: 0;
+        padding: 0 5px;
+        width: auto !important;
+        height: auto !important;
+    }
+
+        .tag-search input:focus {
+            outline: none;
+            color: #222;
+            border: 1px solid #bbb;
+            background-color: #aaa;
+        }
+
+    .tag-search button {
+        color: #aaa;
+    }
+
+        .tag-search button:hover {
+            color: #FF9900;
+            background-color: #555;
+            border: 1px solid #666;
+        }
+
+    .tag-search label {
+        color: #FF9900;
+        font-weight: normal;
+    }
+
+.tag-articles {
+    padding: 5px 0;
+    position: absolute;
+    width: 100%;
+    background-color: #222;
+    text-transform: uppercase;
+    border-top: 1px dashed #9d9d9d;
+}
+
+    .tag-articles span {
+        color: #9d9d9d;
+    }
+
+    .tag-articles b {
+        color: #ccc;
+    }
 /*#endregion Tags */

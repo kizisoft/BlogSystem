@@ -1,6 +1,7 @@
 ﻿namespace BlogSystem.Web.ViewModels.BlogPost
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
@@ -41,6 +42,8 @@
                 return this.blogUrlGenerator.GenerateUrl(this.Id, this.Title, this.CreatedOn);
             }
         }
+
+        public IEnumerable<Tag> Tags { get; set; }
 
         public int CommentsCount { get; set; }
 

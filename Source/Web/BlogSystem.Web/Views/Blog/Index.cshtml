@@ -16,6 +16,13 @@
             </div>
 
             <div class="title article-title">
+                <div class="tags">
+                    <span class="glyphicon glyphicon-star"></span>
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <a href="/Tags/@tag.Name">@tag.Name</a>
+                    }
+                </div>
                 <h2>@Model.Title</h2>
                 <h3><i>@Model.SubTitle</i></h3>
             </div>

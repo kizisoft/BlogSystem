@@ -21,6 +21,13 @@
                     </div>
 
                     <div class="title article-title">
+                        <div class="tags">
+                            <span class="glyphicon glyphicon-star"></span>
+                            @foreach (var tag in blogPost.Tags)
+                            {
+                                <a href="/Tags/@tag.Name">@tag.Name</a>
+                            }
+                        </div>
                         <h2>@blogPost.Title</h2>
                         <h3><i>@blogPost.SubTitle</i></h3>
                     </div>
@@ -73,7 +80,7 @@
             </article>
         }
 
-        @Html.Pagination(Url.Action("Index"), Model, new { @class = "blog-posts-nav" }, PaginationSize.Large)
+        @Html.Pagination(Request.Path, Model, new { @class = "blog-posts-nav" }, PaginationSize.Large)
     }
     else
     {
@@ -84,4 +91,6 @@
 @section scripts {
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script type="text/javascript" src="~/Scripts/img-responsive/img-responsive.js"></script>
+    <script type="text/javascript" src="~/Scripts/main.js"></script>
+    <script type="text/javascript" src="~/Scripts/tag-manager/tag-manager.js"></script>
 }

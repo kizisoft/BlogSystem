@@ -137,7 +137,6 @@
             byte[] response;
             using (var client = new WebClient())
             {
-                client.Headers.Add("Content-Type", "multipart/form-data");
                 var values = new NameValueCollection();
                 values.Add("refresh_token", info.RefreshToken);
                 values.Add("client_id", UploadService.clientId);

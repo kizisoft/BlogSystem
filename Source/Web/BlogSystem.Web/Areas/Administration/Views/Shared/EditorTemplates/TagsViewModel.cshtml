@@ -14,7 +14,7 @@
     }
 
     <div class="tags-input-root">
-        @if (Model.Count() < 3)
+        @if (Model == null || Model.Count() < 3)
         {
             <input class="tag-input lower" type="text" name="tag" list="tags" autocomplete="off" value="" />
             <div class="tag-input text-warning hidden">The maximum number of tags is reached.</div>

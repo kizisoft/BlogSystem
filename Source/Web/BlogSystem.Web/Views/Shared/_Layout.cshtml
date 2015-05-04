@@ -38,6 +38,22 @@
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>
+                <div class="tag-search">
+                    <form id="tag-form" action="/Tags/" method="POST">
+                        <label for="tag-search">Search by tag</label>
+                        <input id="tag-search" class="lower" type="text" name="tagName" autocomplete="off" value="" />
+                        <button id="tag-submit" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                        <ul id="tags" class="tags-options home hidden"></ul>
+                    </form>
+
+                    @if (this.ViewBag.ArticlesForTag != null)
+                    {
+                        <div class="tag-articles">
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span>Articles for: <b>@this.ViewBag.ArticlesForTag</b></span>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
 
