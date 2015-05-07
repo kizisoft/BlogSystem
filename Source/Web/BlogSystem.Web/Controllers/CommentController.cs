@@ -20,13 +20,15 @@
         private readonly IRepository<ApplicationUser> users;
         private readonly IRepository<VoteUp> votesUp;
         private readonly IRepository<VoteDown> votesDown;
+        private readonly IRepository<BlogPost> blogPosts;
 
-        public CommentController(IRepository<Comment> comments, IRepository<ApplicationUser> users, IRepository<VoteUp> votesUp, IRepository<VoteDown> votesDown)
+        public CommentController(IRepository<Comment> comments, IRepository<ApplicationUser> users, IRepository<VoteUp> votesUp, IRepository<VoteDown> votesDown, IRepository<BlogPost> blogPosts)
         {
             this.comments = comments;
             this.users = users;
             this.votesUp = votesUp;
             this.votesDown = votesDown;
+            this.blogPosts = blogPosts;
         }
 
         // GET: Comment
@@ -81,6 +83,12 @@
 
         private CommentIndexViewModel GetCommentIndexViewModel(int id, int page, int perPage)
         {
+            var blogPostDb = this.blogPosts.GetById(id);
+            if (blogPostDb == null)
+            {
+                return null;
+            }
+
             perPage = perPage > 0 ? perPage : int.Parse(this.ViewBag.Settings.Get["Comments Per Page"]);
             var totalPages = (int)Math.Ceiling(this.comments.All().Count(x => x.BlogPostId == id) / (decimal)perPage);
 
@@ -99,7 +107,8 @@
                 HasComments = commentsDb.Count() > 0,
                 Comments = commentsDb,
                 CurrentPage = page,
-                TotalPages = totalPages
+                TotalPages = totalPages,
+                IsCommentsDisabled = blogPostDb.IsCommentsDisabled
             };
             return model;
         }

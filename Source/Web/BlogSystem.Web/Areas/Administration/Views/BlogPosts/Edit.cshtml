@@ -77,6 +77,13 @@
             @Html.ValidationMessageFor(model => model.IsCommentsDisabled, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CommentsCount, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.ActionLink("Edit (" + Model.CommentsCount + ") comments", "Index", "Comments", new { id = Model.Id }, new { @class = "btn btn-warning" })
+        </div>
+    </div>
     <br />
 
     <div class="row">

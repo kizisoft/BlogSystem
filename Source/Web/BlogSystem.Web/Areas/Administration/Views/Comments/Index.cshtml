@@ -1,0 +1,53 @@
+﻿@model BlogSystem.Web.Areas.Administration.ViewModels.Comments.CommentsIndexViewModel
+@{
+    ViewBag.Title = "Comments";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div class="post-details">
+    <h3>BlogPost Details</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.BlogPost.Id)</dt>
+        <dd>@Html.DisplayFor(model => model.BlogPost.Id)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.BlogPost.Title)</dt>
+        <dd>@Html.DisplayFor(model => model.BlogPost.Title)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.BlogPost.SubTitle)</dt>
+        <dd>@Html.DisplayFor(model => model.BlogPost.SubTitle)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.BlogPost.IsCommentsDisabled)</dt>
+        <dd>@Html.DisplayFor(model => model.BlogPost.IsCommentsDisabled)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.BlogPost.CreatedOn)</dt>
+        <dd>@Html.DisplayFor(model => model.BlogPost.CreatedOn)</dd>
+
+        <dt>@Html.DisplayNameFor(model => model.BlogPost.ModifiedOn)</dt>
+        <dd>@Html.DisplayFor(model => model.BlogPost.ModifiedOn)</dd>
+    </dl>
+</div>
+<br />
+
+<div id="comments-items">
+    @if (Model.Comments.Count > 0)
+    {
+        <ul>
+            @{int i = 1;}
+            @foreach (var comment in Model.Comments)
+            {
+                int perPage = int.Parse(this.ViewBag.Settings.Get["Comments Per Page"]);
+                ViewBag.CommentNumber = i + perPage * (Model.CurrentPage - 1);
+                @Html.Partial("_CommentDetailPartial", comment)
+                i++;
+            }
+        </ul>
+
+        @Html.Pagination(Url.Action("Index", new { id = Model.BlogPost.Id }), Model, new { @class = "comments-nav" });
+    }
+    else
+    {
+        <h4>No comments.</h4>
+    }
+</div>

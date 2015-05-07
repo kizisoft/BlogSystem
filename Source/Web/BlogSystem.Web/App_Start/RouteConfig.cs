@@ -36,7 +36,6 @@
             routes.MapRoute(
                 name: "Users upload",
                 url: "Users/Upload/{userName}",
-
                 defaults: new { controller = "Users", action = "Upload" },
                 namespaces: new[] { "BlogSystem.Web.Controllers" });
 

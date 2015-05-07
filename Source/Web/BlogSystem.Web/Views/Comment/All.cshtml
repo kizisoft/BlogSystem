@@ -5,7 +5,14 @@
 
 <h2>@ViewBag.Title</h2>
 <hr />
-@Html.Partial("_CreateCommentPartial", new BlogSystem.Web.ViewModels.Comment.CommentInputModel { Id = Model.Id })
+@if (Model.IsCommentsDisabled)
+{
+    <h3 class="text-warning">The comments have been disabled!</h3>
+}
+else
+{
+    @Html.Partial("_CreateCommentPartial", new BlogSystem.Web.ViewModels.Comment.CommentInputModel { Id = Model.Id })
+}
 <hr />
 
 <div id="comments-items">

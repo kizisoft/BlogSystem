@@ -1,6 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-@using BlogSystem.Common.Constants
-@model BlogSystem.Web.ViewModels.Comment.CommentViewModel
+﻿@model BlogSystem.Web.Areas.Administration.ViewModels.Comments.CommentSimpleViewModel
 
 <li class="comment clearfix">
     <div class="comment-header">
@@ -16,7 +14,7 @@
         </div>
 
         <div class="user-info clearfix">
-            <div class="user-info-name"><a href="@Url.Action("Info", "Users", new { userName = Model.Autor.UserName })">@Model.Autor.UserName</a></div>
+            <div class="user-info-name"><a href="@Url.Action("Info", "Users", new { userName = Model.Autor.UserName, area = "" })">@Model.Autor.UserName</a></div>
             <span class="user-info-points">points: <b>@Model.Autor.Points</b></span>
         </div>
 
@@ -28,21 +26,20 @@
     </div>
 
     <div class="comment-body raw clearfix">
-        @if (Model.IsVisible)
-        {
-            @Html.Partial("_VotePartial", Model)
+        <div comment-content>
             @Html.Raw(Model.Content)
-        }
-        else
-        {
-            <p>This comment is not visible!</p>
-            <p>@Model.ReasonToHide</p>
-        }
-
-        @if (User.IsInRole(GlobalConstants.AdministratorRoleName))
-        {
-            <hr />
-            @Html.ActionLink("Edit comment", "Edit", "Comments", new { id = Model.Id, area = "Administration" }, new { @class = "btn btn-success btn-xs pull-right" })
-        }
+        </div>
+        <hr />
+        <div class="comment-edit">
+            @Html.LabelFor(x => x.IsVisible, new { @class = "text-info" })
+            @Html.DisplayFor(x => x.IsVisible)
+            @if (!Model.IsVisible)
+            {
+                <p><b>@Html.LabelFor(model => model.ReasonToHide): </b> @Model.ReasonToHide</p>
+            }
+        </div>
+        <div class="comment-btn">
+            @Html.ActionLink("Edit comment", "Edit", "Comments", new { id = Model.Id }, new { @class = "btn btn-success btn-xs" })
+        </div>
     </div>
 </li>

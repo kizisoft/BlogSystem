@@ -1019,3 +1019,27 @@ input.tag-input:focus {
         color: #ccc;
     }
 /*#endregion Tags */
+
+.comment-edit {
+    float: left;
+}
+
+.comment-btn {
+    float: right;
+}
+
+.post-details {
+    padding: 10px 5%;
+    background-color: #eaf5fb;
+    border-top: 1px dashed #ddd;
+    border-bottom: 1px dashed #ddd;
+}
+
+    .post-details h3 {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .post-details hr {
+        border-top: 1px solid #e0e0e0;
+    }
